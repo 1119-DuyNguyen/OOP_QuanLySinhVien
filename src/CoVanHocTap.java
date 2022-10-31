@@ -2,17 +2,17 @@
 
 import java.util.Scanner;
 
-public class GiaoVien extends Nguoi {
+public class CoVanHocTap extends Nguoi {
 	public Scanner sc1 = new Scanner(System.in);
 	private String maGV;
 	private String Khoa;
 
-	public GiaoVien() {
+	public CoVanHocTap() {
 		super("Khoa", "Khoa", "Khoa", "maGV", "Khoa");
 		// none
 	}
 
-	public GiaoVien(String maGV, String hoTen, String ngaySinh, String diaChi, String gioiTinh, String soDt,
+	public CoVanHocTap(String maGV, String hoTen, String ngaySinh, String diaChi, String gioiTinh, String soDt,
 			String Khoa) {
 		super(hoTen, ngaySinh, diaChi, soDt, gioiTinh);
 		this.maGV = maGV;
@@ -36,7 +36,7 @@ public class GiaoVien extends Nguoi {
 	}
 
 	@Override
-	void nhapTT() {
+	public void nhapTT() {
 		System.out.print("Nhập mã GV: ");
 		this.maGV = sc1.nextLine();
 		System.out.print("Nhập Khoa: ");

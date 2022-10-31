@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -7,32 +5,32 @@ import java.util.Scanner;
 public class SceneManager {
 	public static ArrayList<Diem> Diem1 = new ArrayList<>();
 	public static ArrayList<DangKiMonHoc> DK1 = new ArrayList<>();
-	public static ArrayList<GiaoVien> GV1 = new ArrayList<>();
+	public static ArrayList<CoVanHocTap> GV1 = new ArrayList<>();
 	public static ArrayList<DanhSachSV> SV1 = new ArrayList<>();
 	public static ArrayList<MonHoc> taoMon = new ArrayList<>();
 	public static Scanner sc = new Scanner(System.in);
 	public static Scanner sc1 = new Scanner(System.in);
 	public static DanhSachSV danhSachSV = new DanhSachSV();
-	public static GiaoVien gv1 = new GiaoVien();
+	public static CoVanHocTap gv1 = new CoVanHocTap();
 	public static Diem diem1 = new Diem();
 	public static MonHoc m1 = new MonHoc();
 
 	public static void showMenu() {
 		System.out.println("\n-----------MENU------------");
 		System.out.println("1. Thêm sinh viên");
-		System.out.println("2. Thêm giáo viên.");
+		System.out.println("2. Thêm cô vấn học tập.");
 		System.out.println("3. Sửa thông tin theo mã SV.");
 		System.out.println("4. Xoá thông tin theo mã SV.");
 		System.out.println("5. Xem danh sách sinh viên.");
-		System.out.println("6. Xem danh sách giáo viên.");
-		System.out.println("7. Thêm điểm theo mã SV");
-		System.out.println("8. Xem điểm theo Mã SV");
-		System.out.println("9. Xem điểm theo mã MH");
-		System.out.println("10. Lọc trượt/qua");
-		System.out.println("11. Học bổng (GPA>7.5) ");
-		System.out.println("12. Tạo Môn Học");
+		System.out.println("6. Sửa thông tin theo mã cố vấn học tập.");
+		System.out.println("7. Xoá thông tin theo mã cố vấn học tập.");
+		System.out.println("8. Xem danh sách cố vấn học tập.");
+		System.out.println("9.Lọc trượt/qua môn");
+		System.out.println("10.Thống kê sinh viên theo khoa");
+		System.out.println("11.	Xem điểm theo Mã SV ");
+		System.out.println("12. Thêm điểm theo mã SV");
 		System.out.println("13. Đăng Kí Học ");
-		System.out.println("14. Danh Sách Các Môn Đã ĐK theo mã SV) ");
+		System.out.println("14. Xem lớp quản lý theo mã cố vấn học tập ");
 		System.out.println("Press 0 to exit!!");
 		System.out.println("---------------------------");
 	}
@@ -41,19 +39,21 @@ public class SceneManager {
 		// TODO Auto-generated method stub
 		boolean con = true;
 		while (con) {
-		
+
 			showMenu();
 			System.out.print("Nhập lựa chọn: ");
 			int choice = sc.nextInt();
 			switch (choice) {
 			case 1:
-				AddNewStudentorGiaoVien();
+				AddNewStudent();
 				break;
+			case 2:
+				addNewTeacher();
 			case 3:
-				EditProfile();
+				suaSV();
 				break;
 			case 4:
-				Delete();
+				xoaSV();
 				break;
 			case 5:
 				danhSachSV.show();
@@ -77,7 +77,7 @@ public class SceneManager {
 				CheckHocBong();
 				break;
 			case 12:
-				InsertSubject();
+				nhapDiem();
 				break;
 			case 13:
 				DangKiMonHoc();
@@ -88,10 +88,28 @@ public class SceneManager {
 			default:
 				con = false;
 			}
-			if(con) {
+			if (con) {
 				clearConsole();
 			}
 		}
+	}
+
+	public static void addNewTeacher() {
+		System.out.println("\n-----------MENU------------");
+		System.out.println("1. Nhập mới n giáo viên");
+		System.out.println("2. Thêm 1 giáo viên");
+		System.out.println("3. Thêm n giáo viên");
+		System.out.println("---------------------------");
+
+	}
+
+	public static void AddNewStudent() {
+		System.out.println("\n-----------MENU------------");
+		System.out.println("1. Nhập mới n sinh viên");
+		System.out.println("2. Thêm 1 sinh viên");
+		System.out.println("3. Thêm n sinh viên");
+		System.out.println("---------------------------");
+
 	}
 
 	public static void AddNewStudentorGiaoVien() {
@@ -108,12 +126,12 @@ public class SceneManager {
 		}
 	}
 
-	public static void EditProfile() {
+	public static void suaSV() {
 		String maSV = danhSachSV.nhapMaSV();
 		danhSachSV.edit(maSV);
 	}
 
-	public static void Delete() {
+	public static void xoaSV() {
 		String maSV = danhSachSV.nhapMaSV();
 		danhSachSV.delete(maSV);
 	}
@@ -122,7 +140,7 @@ public class SceneManager {
 		String header = String.format("%-12s%-12s%-15s%-15s%-15s%-15s%-15s", "Mã GV", "Họ Tên", "Giới tính",
 				"Ngày sinh", "Địa chỉ", "SĐT", "Khoa");
 		System.out.println(header);
-		for (GiaoVien gv1 : GV1) {
+		for (CoVanHocTap gv1 : GV1) {
 			String row = String.format("%-12s%-12s%-15S%-15s%-15s%-15s%-15s", gv1.getMaGV(), gv1.getHoTen(),
 					gv1.getGioiTinh(), gv1.getNgaySinh(), gv1.getDiaChi(), gv1.getSoDt(), gv1.getKhoa());
 			System.out.println(row);
@@ -136,7 +154,7 @@ public class SceneManager {
 		}
 	}
 
-	public static void InsertSubject() {
+	public static void nhapDiem() {
 		m1.nhapTTMon();
 		taoMon.add(m1);
 	}
@@ -188,9 +206,9 @@ public class SceneManager {
 	}
 
 	public static String show2(String MaGV) {
-		for (GiaoVien gv1 : GV1) {
+		for (CoVanHocTap gv1 : GV1) {
 			if ((MaGV.equals(gv1.getMaGV()))) {
-				return gv1.hoTen;
+				return gv1.getHoTen();
 			}
 		}
 		return null;

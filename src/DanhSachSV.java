@@ -1,35 +1,14 @@
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DanhSachSV {
+public class DanhSachSV implements DanhSach {
 	// private static SinhVien sVien[] = new SinhVien[100];
 	public static Scanner scanner = new Scanner(System.in);
 	private ArrayList<SinhVien> arrSinhVien = new ArrayList<>();
 
 	public DanhSachSV() {
 		//
-	}
-
-	public void search() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void add(int usr) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void delete() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void update() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void add() {
@@ -140,6 +119,48 @@ public class DanhSachSV {
 
 	public ArrayList<SinhVien> getArrSinhVien() {
 		return arrSinhVien;
+	}
+
+	@Override
+	public void them1PhanTu() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void themKPhanTu(int k) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void xoaPhanTu(String maSo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void xoaKPhanTu(int k) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void xuatDanhSach() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void suaPhanTu(String maSo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void nhapNPhanTu(int n) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
