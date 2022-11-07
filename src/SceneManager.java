@@ -3,35 +3,26 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class SceneManager {
-	public static ArrayList<Diem> Diem1 = new ArrayList<>();
-	public static ArrayList<DangKiMonHoc> DK1 = new ArrayList<>();
-	public static ArrayList<CoVanHocTap> GV1 = new ArrayList<>();
-	public static ArrayList<DanhSachSV> SV1 = new ArrayList<>();
-	public static ArrayList<MonHoc> taoMon = new ArrayList<>();
-	public static Scanner sc = new Scanner(System.in);
-	public static Scanner sc1 = new Scanner(System.in);
-	public static DanhSachSV danhSachSV = new DanhSachSV();
-	public static CoVanHocTap gv1 = new CoVanHocTap();
-	public static Diem diem1 = new Diem();
-	public static MonHoc m1 = new MonHoc();
+//	public static ArrayList<Diem> Diem1 = new ArrayList<>();
+//	public static ArrayList<DangKiMonHoc> DK1 = new ArrayList<>();
+//	public static ArrayList<CoVanHocTap> GV1 = new ArrayList<>();
+//	public static ArrayList<DanhSachSV> SV1 = new ArrayList<>();
+//	public static ArrayList<MonHoc> taoMon = new ArrayList<>();
+//	public static Scanner sc = new Scanner(System.in);
+//	public static Scanner sc1 = new Scanner(System.in);
+//	public static DanhSachSV danhSachSV = new DanhSachSV();
+//	public static CoVanHocTap gv1 = new CoVanHocTap();
+//	public static Diem diem1 = new Diem();
+//	public static MonHoc m1 = new MonHoc();
 
 	public static void showMenu() {
 		System.out.println("\n-----------MENU------------");
-		System.out.println("1. Thêm sinh viên");
-		System.out.println("2. Thêm cô vấn học tập.");
-		System.out.println("3. Sửa thông tin theo mã SV.");
-		System.out.println("4. Xoá thông tin theo mã SV.");
-		System.out.println("5. Xem danh sách sinh viên.");
-		System.out.println("6. Sửa thông tin theo mã cố vấn học tập.");
-		System.out.println("7. Xoá thông tin theo mã cố vấn học tập.");
-		System.out.println("8. Xem danh sách cố vấn học tập.");
-		System.out.println("9.Lọc trượt/qua môn");
-		System.out.println("10.Thống kê sinh viên theo khoa");
-		System.out.println("11.	Xem điểm theo Mã SV ");
-		System.out.println("12. Thêm điểm theo mã SV");
-		System.out.println("13. Đăng Kí Học ");
-		System.out.println("14. Xem lớp quản lý theo mã cố vấn học tập ");
-		System.out.println("Press 0 to exit!!");
+		System.out.println("1. Thao tác với DSSV.");
+		System.out.println("2. Thao tác với DS cố vấn học tập.");
+		System.out.println("3. Xem DS Khoa.");
+		System.out.println("4. Xem DS Ngành.");
+		System.out.println("5. Xem DS Môn.");
+		System.out.println("Nhấn phím 0 để thoát!!");
 		System.out.println("---------------------------");
 	}
 
@@ -39,79 +30,158 @@ public class SceneManager {
 		// TODO Auto-generated method stub
 		boolean con = true;
 		while (con) {
-
 			showMenu();
 			System.out.print("Nhập lựa chọn: ");
 			int choice = sc.nextInt();
 			switch (choice) {
 			case 1:
-				AddNewStudent();
+				showMenuSV();
 				break;
 			case 2:
-				addNewTeacher();
+				showMenuTeacher();
 			case 3:
-				suaSV();
+				showFaculty();
 				break;
 			case 4:
-				xoaSV();
+				showMajor();
 				break;
 			case 5:
-				danhSachSV.show();
+				showSubject();
 				break;
-			case 6:
-				ShowProfileGiaoVien();
-				break;
-			case 7:
-				InsertMark();
-				break;
-			case 8:
-				CheckbyIDStudent();
-				break;
-			case 9:
-				CheckbyIDSubject();
-				break;
-			case 10:
-				ListPassorFail();
-				break;
-			case 11:
-				CheckHocBong();
-				break;
-			case 12:
-				nhapDiem();
-				break;
-			case 13:
-				DangKiMonHoc();
-				break;
-			case 14:
-				inTTDangKi();
-				break;
-			default:
+			default:{
 				con = false;
+				System.exit(0);
+			}
 			}
 			if (con) {
 				clearConsole();
 			}
 		}
 	}
-
-	public static void addNewTeacher() {
-		System.out.println("\n-----------MENU------------");
-		System.out.println("1. Nhập mới n giáo viên");
-		System.out.println("2. Thêm 1 giáo viên");
-		System.out.println("3. Thêm n giáo viên");
-		System.out.println("---------------------------");
-
-	}
-
-	public static void AddNewStudent() {
-		System.out.println("\n-----------MENU------------");
-		System.out.println("1. Nhập mới n sinh viên");
+	
+	public static void showMenuSV() {
+		System.out.println("\n--------SINH VIÊN---------");
+		System.out.println("1. Xem DS sinh viên");
 		System.out.println("2. Thêm 1 sinh viên");
 		System.out.println("3. Thêm n sinh viên");
+		System.out.println("4. Sửa n sinh viên");
+		System.out.println("5. Xoá n sinh viên");
+		System.out.println("6. Thống kê sinh viên qua môn");
+		System.out.println("7. Thống kê sinh viên nợ môn");
+		System.out.println("8. Thống kê sinh viên theo khoa");
+		System.out.println("9. Tìm kiếm sinh viên (theo họ tên)");
+		System.out.println("10. Tìm kiếm sinh viên (theo MSSV)");
+		System.out.println("11. Quay về trang chủ");
 		System.out.println("---------------------------");
+
+		System.out.print("Nhập lựa chọn: ");
+		int choiceSV = sc.nextInt();
+		switch (choiceSV) {
+		case 1:
+			System.out.println("Hàm xem");
+			break;
+		case 2:
+			System.out.println("Hàm thêm 1");
+			break;
+		case 3:
+			System.out.println("Hàm thêm n");
+			break;
+		case 4:
+			System.out.println("Hàm sửa");
+			break;
+		case 5:
+			System.out.println("Hàm xoá");
+			break;
+		case 6:
+			System.out.println("Hàm thống kê qua môn");
+			break;
+		case 7:
+			System.out.println("Hàm thống kê nợ môn");
+			break;
+		case 8:
+			System.out.println("Hàm thống kê theo khoa");
+			break;
+		case 9:
+			System.out.println("Hàm tìm kiếm theo tên");
+			break;
+		case 10:
+			System.out.println("Hàm tìm kiếm theo mssv");
+			break;
+		case 11:
+			showMenu();
+			break;
+		default:
+			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+		}
 
 	}
 
+	public static void showMenuTeacher() {
+		System.out.println("\n-----------CỐ VẤN------------");
+		System.out.println("1. Xem DS cố vấn học tập");
+		System.out.println("2. Thêm 1 cố vấn học tập");
+		System.out.println("3. Thêm n cố vấn học tập");
+		System.out.println("4. Sửa n cố vấn học tập");
+		System.out.println("5. Xoá n cố vấn học tập");
+		System.out.println("6. Tìm kiếm cố vấn học tập (theo họ tên)");;
+		System.out.println("7. Tìm kiếm cố vấn học tập (theo mã cố vấn)");;
+		System.out.println("8. Xem lớp quản lý của cố vấn");
+		System.out.println("9. Quay về trang chủ");
+		System.out.println("---------------------------");
+
+		System.out.print("Nhập lựa chọn: ");
+		int choiceCV = sc.nextInt();
+		switch (choiceCV) {
+		case 1:
+			showMenuSV();
+			break;
+		case 2:
+			System.out.println("Hàm thêm 1");
+			break;
+		case 3:
+			System.out.println("Hàm thêm n");
+			break;
+		case 4:
+			System.out.println("Hàm sửa");
+			break;
+		case 5:
+			System.out.println("Hàm xoá");
+			break;
+		case 6:
+			System.out.println("Hàm tìm theo họ tên");
+			break;
+		case 7:
+			System.out.println("Hàm tìm theo mã cố vấn");
+			break;
+		case 8:
+			System.out.println("Hàm xem lớp quản lý");
+			break;
+		case 9:
+			showMenu();
+			break;
+		default:
+			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+		}
+
+	}
+	
+	public static void showFaculty() {
+		System.out.println("Hiển thị danh sách khoa");
+	}
+	
+	public static void showMajor() {
+		System.out.println("Hiển thị danh sách ngành");
+	}
+	
+	public static void showSubject() {
+		System.out.println("Hiển thị danh sách môn");
+	}
+
+	
+	//toàn bộ phần phía trên sẽ là menu chính
+	
+	
+	
 	public static void AddNewStudentorGiaoVien() {
 		System.out.println("1.Thêm SV");
 		System.out.println("2.Thêm GV");
