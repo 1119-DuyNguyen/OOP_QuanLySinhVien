@@ -48,11 +48,10 @@ public class SceneManager {
 			case 5:
 				showSubject();
 				break;
-			case 6:
-				System.exit(0);
-				break;
-			default:
+			default:{
 				con = false;
+				System.exit(0);
+			}
 			}
 			if (con) {
 				clearConsole();
