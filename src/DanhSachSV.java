@@ -28,52 +28,52 @@ public class DanhSachSV implements DanhSach {
 
 	}
 
-	public void edit(String maSV) {
-		boolean tonTai = false;
-		for (int i = 0; i < arrSinhVien.size(); i++) {
-			if (arrSinhVien.get(i).getMaSV() == maSV) {
-				tonTai = true;
-				arrSinhVien.get(i).setHoTen(nhapHoTen());
-				arrSinhVien.get(i).setLop(nhapLop());
-				arrSinhVien.get(i).setNgaySinh(nhapNgaySinh());
-				arrSinhVien.get(i).setDiaChi(nhapDiaChi());
-				arrSinhVien.get(i).setGioiTinh(nhapGioiTinh());
-				arrSinhVien.get(i).setSoDt(nhapSoDt());
-				break;
-			}
-			if (!tonTai) {
-				System.out.println(maSV + " không tồn tại!");
-			}
+//	public void edit(String maSV) {
+//		boolean tonTai = false;
+//		for (int i = 0; i < arrSinhVien.size(); i++) {
+//			if (arrSinhVien.get(i).getMaSV() == maSV) {
+//				tonTai = true;
+//				arrSinhVien.get(i).setHoTen(nhapHoTen());
+//				arrSinhVien.get(i).setLop(nhapLop());
+//				arrSinhVien.get(i).setNgaySinh(nhapNgaySinh());
+//				arrSinhVien.get(i).setDiaChi(nhapDiaChi());
+//				arrSinhVien.get(i).setGioiTinh(nhapGioiTinh());
+//				arrSinhVien.get(i).setSoDt(nhapSoDt());
+//				break;
+//			}
+//			if (!tonTai) {
+//				System.out.println(maSV + " không tồn tại!");
+//			}
+//
+//		}
+//	}
 
-		}
-	}
+//	public void delete(String maSV) {
+//		SinhVien sinhVien = null;
+//		for (int i = 0; i < arrSinhVien.size(); i++) {
+//			if (arrSinhVien.get(i).getMaSV() == maSV) {
+//				sinhVien = arrSinhVien.get(i);
+//				break;
+//			}
+//		}
+//		if (sinhVien != null) {
+//			arrSinhVien.remove(sinhVien);
+//		} else
+//			System.out.println(maSV + " không tồn tại!");
+//	}
 
-	public void delete(String maSV) {
-		SinhVien sinhVien = null;
-		for (int i = 0; i < arrSinhVien.size(); i++) {
-			if (arrSinhVien.get(i).getMaSV() == maSV) {
-				sinhVien = arrSinhVien.get(i);
-				break;
-			}
-		}
-		if (sinhVien != null) {
-			arrSinhVien.remove(sinhVien);
-		} else
-			System.out.println(maSV + " không tồn tại!");
-	}
-
-	public void show() {
-		for (SinhVien sinhVien : arrSinhVien) {
-			System.out.format("%5s | ", sinhVien.getMaSV());
-			System.out.format("%20s | ", sinhVien.getHoTen());
-			System.out.format("%5s | ", sinhVien.getNgaySinh());
-			System.out.format("%20s | ", sinhVien.getDiaChi());
-			System.out.format("%20s | ", sinhVien.getGioiTinh());
-			System.out.format("%20s | ", sinhVien.getSoDt());
-			System.out.println();
-		}
-
-	}
+//	public void show() {
+//		for (SinhVien sinhVien : arrSinhVien) {
+//			System.out.format("%5s | ", sinhVien.getMaSV());
+//			System.out.format("%20s | ", sinhVien.getHoTen());
+//			System.out.format("%5s | ", sinhVien.getNgaySinh());
+//			System.out.format("%20s | ", sinhVien.getDiaChi());
+//			System.out.format("%20s | ", sinhVien.getGioiTinh());
+//			System.out.format("%20s | ", sinhVien.getSoDt());
+//			System.out.println();
+//		}
+//
+//	}
 
 	public String nhapSoDt() {
 		System.out.print("Nhập số ĐT: ");

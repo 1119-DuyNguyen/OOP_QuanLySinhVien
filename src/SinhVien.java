@@ -1,46 +1,59 @@
+import java.util.Scanner;
 
+public class SinhVien {
+	private static final Lop Lop = null;
+	private String maSinhVien;
+	private Lop lop;
 
-public class SinhVien extends Nguoi {
-	private String maSV;
-	private String lop;
+	public SinhVien() {
 
-	public SinhVien(String maSV, String hoTen, String lop, String ngaySinh, String diaChi, String soDt,
+	}
+
+	public SinhVien(String maSinhVien, Lop lop) {
+		this.maSinhVien = maSinhVien;
+		this.lop = Lop;
+
+	}
+
+	public SinhVien(String maSV, String hoTen, String lop2, String ngaySinh, String diaChi, String soDt,
 			String gioiTinh) {
-		super(hoTen, ngaySinh, diaChi, soDt, gioiTinh);
-		this.maSV = maSV;
-		this.lop = lop;
+		// TODO Auto-generated constructor stub
 	}
 
-	public String getMaSV() {
-		return maSV;
+	public void CapNhatThongTin(Scanner scan) {
+		System.out.println("Nhap ma sinh vien: ");
+		this.maSinhVien = scan.nextLine();
 	}
 
-	public void setMaSV(String maSV) {
-		this.maSV = maSV;
+	public void DanhSachMH() {
+
 	}
 
-	public String getLop() {
+	public String timMonHoc(String maMH) {
+		return maMH;
+
+	}
+
+	public void XuatThongTinCaNhan() {
+		System.out.println("MSSV cua ban la:" + this.maSinhVien);
+		System.out.println("Lop cua ban la:" + this.lop);
+
+	}
+
+	public String getMaSinhVien() {
+		return maSinhVien;
+	}
+
+	public void setMaSinhVien(String maSinhVien) {
+		this.maSinhVien = maSinhVien;
+	}
+
+	public Lop getLop() {
 		return lop;
 	}
 
-	public void setLop(String lop) {
+	public void setLop(Lop lop) {
 		this.lop = lop;
 	}
-
-//	public void nhapThongTin() {
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.print("Nhập họ tên học sinh: ");
-//		hoTen = scanner.nextLine();
-//		System.out.print("Nhập giới tính: ");
-//		gioiTinh = scanner.nextLine();
-//		System.out.print("Nhập quê quán: ");
-//		queQuan = scanner.nextLine();
-//	}
-//
-//	public void hienThiThongTin() {
-//		System.out.println("Họ tên: " + hoTen);
-//		System.out.println("Giới tính: " + gioiTinh);
-//		System.out.println("Quê quán: " + queQuan);
-//	}
 
 }

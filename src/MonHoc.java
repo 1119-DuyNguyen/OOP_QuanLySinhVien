@@ -1,54 +1,103 @@
 
-
 import java.util.Scanner;
 
-public class MonHoc extends HocPhan {
-	public Scanner sc1 = new Scanner(System.in);
-	public Scanner sc2 = new Scanner(System.in);
-	String maMH;
-	String tenMh;
-	float Diem;
-	String tinhTrang;
-	int soTC;
+public class MonHoc {
+	public String maMH;
+	public String tenMH;
+	public int SoTinChi;
+	public int namHoc;
+	public int HocKi;
 
-	public MonHoc() {
+	public String getMaMH() {
+		return maMH;
 	}
 
-	public MonHoc(String maMH, String tenMh, int soTC, float Diem, String tinhTrang) {
-		super(maMH, tenMh, soTC);
-		this.Diem = Diem;
-		this.tinhTrang = tinhTrang;
+	public String getTenMH() {
+		return tenMH;
 	}
 
-	public void setDiem(float diem) {
-		Diem = diem;
+	public int getSoTinChi() {
+		return SoTinChi;
 	}
 
-	public void setTinhTrang(String tinhTrang) {
-		this.tinhTrang = tinhTrang;
+	public int getNamHoc() {
+		return namHoc;
 	}
 
-	public float getDiem() {
-		return Diem;
+	public int getHocKi() {
+		return HocKi;
 	}
 
-	public String getTinhTrang() {
-		return tinhTrang;
+	public MonHoc(String maMH, String tenMH, int soTinChi, int namHoc, int hocKi) {
+
+		this.maMH = maMH;
+		this.tenMH = tenMH;
+		SoTinChi = soTinChi;
+		this.namHoc = namHoc;
+		HocKi = hocKi;
 	}
 
-	void nhapTT() {
-		System.out.print("Nhập mã MH: ");
-		this.maMH = sc2.nextLine();
-		System.out.print("Nhập tên MH: ");
-		this.tenMh = sc2.nextLine();
-		System.out.print("Nhập số TC: ");
-		this.soTC = sc1.nextInt();
-		System.out.print("Nhập Điểm: ");
-		this.Diem = sc1.nextFloat();
-		if (this.Diem <= 4) {
-			this.tinhTrang = "Thi Lại";
-		} else {
-			this.tinhTrang = "Qua Môn";
+	public void nhap() {
+
+	}
+
+	public void xuat() {
+		// System.out.print(toString());
+	}
+
+	public class DanhSachMH {
+		private int n;
+		static MonHoc ds[];
+
+		public int getN() {
+			return n;
 		}
+
+		public void setN(int n) {
+			this.n = n;
+		}
+
+		public static MonHoc[] getDs() {
+			return ds;
+		}
+
+		public static void setDs(MonHoc[] ds) {
+			DanhSachMH.ds = ds;
+		}
+
+		public void NhapDS() {
+			System.out.println("Moi Nhap So Mon:");
+			Scanner sc = new Scanner(System.in);
+			n = Integer.parseInt(sc.nextLine());
+			ds = new MonHoc[n];
+			for (int i = 0; i < ds.length; i++) {
+				ds[i] = new MonHoc(maMH, tenMH, SoTinChi, namHoc, HocKi);
+				ds[i].nhap();
+			}
+		}
+
+		public void xuatDS() {
+			for (MonHoc i : ds)
+				i.xuat();
+		}
+
+		public void timMonHoc(String maMH) {
+			for (MonHoc i : ds) {
+				if (maMH.equals(i.getMaMH())) {
+					i.xuat();
+				}
+			}
+		}
+
+	}
+
+	public void setTenMon(String string) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setMaMon(String string) {
+		// TODO Auto-generated method stub
+
 	}
 }

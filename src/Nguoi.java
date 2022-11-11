@@ -1,8 +1,7 @@
 
-
 import java.util.Scanner;
 
-public class Nguoi {
+public abstract class Nguoi {
 	public Scanner sc1 = new Scanner(System.in);
 	public Scanner sc2 = new Scanner(System.in);
 	String hoTen;
@@ -17,6 +16,10 @@ public class Nguoi {
 		this.ngaySinh = ngaySinh;
 		this.gioiTinh = gioiTinh;
 		this.soDt = soDt;
+	}
+
+	public Nguoi(String string, String string2, String string3) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public void setHoTen(String hoTen) {
@@ -70,5 +73,15 @@ public class Nguoi {
 		this.gioiTinh = sc1.nextLine();
 		System.out.print("Nhập SĐT: ");
 		this.soDt = sc1.nextLine();
+	}
+
+	public void nhapThongTin() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void xuatThongTin() {
+		// TODO Auto-generated method stub
+
 	}
 }
