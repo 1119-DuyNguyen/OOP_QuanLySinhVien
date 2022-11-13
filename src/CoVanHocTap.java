@@ -9,12 +9,11 @@ public class CoVanHocTap extends Nguoi {
 	private String Khoa;
 
 	public CoVanHocTap() {
-		super("Khoa", "Khoa", "Khoa");
+		super();
 		// none
 	}
 
 	CoVanHocTap(String maGV, String hoTen, String diaChi, String soDt, String Khoa) {
-		super(hoTen, soDt, diaChi);
 		this.maGV = maGV;
 		this.Khoa = Khoa;
 	}
@@ -41,15 +40,6 @@ public class CoVanHocTap extends Nguoi {
 	}
 
 	@Override
-	public void nhapThongTin() {
-//		super.nhapTT();
-		System.out.print("Nhập mã GV: ");
-		this.maGV = sc1.nextLine();
-		System.out.print("Nhập Khoa: ");
-		this.Khoa = sc1.nextLine();
-	}
-
-	@Override
 	public void xuatThongTin() {
 		System.out.println();
 		System.out.println("Cố vấn học tập");
@@ -57,5 +47,11 @@ public class CoVanHocTap extends Nguoi {
 		System.out.println("Mã giáo viên: " + maGV);
 		System.out.println("Khoa dạy: " + Khoa);
 		xemLopQuanLy();
+	}
+
+	@Override
+	public void xemLop() {
+		// TODO Auto-generated method stub
+
 	}
 }

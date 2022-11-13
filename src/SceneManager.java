@@ -11,7 +11,7 @@ public class SceneManager {
 //	public static CoVanHocTap gv1 = new CoVanHocTap();
 //	public static Diem diem1 = new Diem();
 //	public static MonHoc m1 = new MonHoc();
-
+	private static DSNganh dsNganh;
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void showMenu() {
@@ -22,12 +22,13 @@ public class SceneManager {
 		System.out.println("4. Xem DS Khoa.");
 		System.out.println("5. Xem DS Ngành.");
 		System.out.println("6. Xem DS Môn.");
-
 		System.out.println("Nhấn phím 0 để thoát!!");
 		System.out.println("---------------------------");
 	}
 
 	public static void main(String[] args) {
+		dsNganh = new DSNganh();
+		dsNganh.xemDS();
 		// TODO Auto-generated method stub
 		boolean con = true;
 		while (con) {

@@ -1,148 +1,124 @@
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DanhSachSV implements DanhSach {
 	// private static SinhVien sVien[] = new SinhVien[100];
 	public static Scanner scanner = new Scanner(System.in);
-	private ArrayList<SinhVien> arrSinhVien = new ArrayList<>();
+
+	private int size = 0; // phần tử thực tế của array
+	private SinhVien dsSV[] = new SinhVien[20];
 
 	public DanhSachSV() {
 		//
 	}
 
 	public void add() {
-		String maSV = nhapMaSV();
-		String hoTen = nhapHoTen();
-		String lop = nhapLop();
-		String ngaySinh = nhapNgaySinh();
-		String diaChi = nhapDiaChi();
-		String soDt = nhapSoDt();
-		String gioiTinh = nhapGioiTinh();
-		SinhVien sinhVien = new SinhVien(maSV, hoTen, lop, ngaySinh, diaChi, soDt, gioiTinh);
-		try {
-			arrSinhVien.add(sinhVien);
-		} catch (NullPointerException e) {
-			System.out.println("Đang có 1 lỗi gì đấy");
+//		String maSV = nhapMaSV();
+//		String hoTen = nhapHoTen();
+//		String lop = nhapLop();
+//		String ngaySinh = nhapNgaySinh();
+//		String diaChi = nhapDiaChi();
+//		String soDt = nhapSoDt();
+//		String gioiTinh = nhapGioiTinh();
+//		SinhVien sinhVien = new SinhVien(maSV, hoTen, lop, ngaySinh, diaChi, soDt, gioiTinh);
+//		try {
+//			arrSinhVien.add(sinhVien);
+//		} catch (NullPointerException e) {
+//			System.out.println("Đang có 1 lỗi gì đấy");
+//		}
+
+	}
+
+	public int timKiemSVTheoHoTen(String hoTen) {
+		for (int i = 0; i < dsSV.length; ++i) {
+
+			if (dsSV[i].getHoTen().equals(hoTen)) {
+				return i;
+			}
+
 		}
-
+		return -1;
 	}
 
-//	public void edit(String maSV) {
-//		boolean tonTai = false;
-//		for (int i = 0; i < arrSinhVien.size(); i++) {
-//			if (arrSinhVien.get(i).getMaSV() == maSV) {
-//				tonTai = true;
-//				arrSinhVien.get(i).setHoTen(nhapHoTen());
-//				arrSinhVien.get(i).setLop(nhapLop());
-//				arrSinhVien.get(i).setNgaySinh(nhapNgaySinh());
-//				arrSinhVien.get(i).setDiaChi(nhapDiaChi());
-//				arrSinhVien.get(i).setGioiTinh(nhapGioiTinh());
-//				arrSinhVien.get(i).setSoDt(nhapSoDt());
-//				break;
-//			}
-//			if (!tonTai) {
-//				System.out.println(maSV + " không tồn tại!");
-//			}
-//
-//		}
-//	}
-
-//	public void delete(String maSV) {
-//		SinhVien sinhVien = null;
-//		for (int i = 0; i < arrSinhVien.size(); i++) {
-//			if (arrSinhVien.get(i).getMaSV() == maSV) {
-//				sinhVien = arrSinhVien.get(i);
-//				break;
-//			}
-//		}
-//		if (sinhVien != null) {
-//			arrSinhVien.remove(sinhVien);
-//		} else
-//			System.out.println(maSV + " không tồn tại!");
-//	}
-
-//	public void show() {
-//		for (SinhVien sinhVien : arrSinhVien) {
-//			System.out.format("%5s | ", sinhVien.getMaSV());
-//			System.out.format("%20s | ", sinhVien.getHoTen());
-//			System.out.format("%5s | ", sinhVien.getNgaySinh());
-//			System.out.format("%20s | ", sinhVien.getDiaChi());
-//			System.out.format("%20s | ", sinhVien.getGioiTinh());
-//			System.out.format("%20s | ", sinhVien.getSoDt());
-//			System.out.println();
-//		}
-//
-//	}
-
-	public String nhapSoDt() {
-		System.out.print("Nhập số ĐT: ");
-		return scanner.nextLine();
+	public SinhVien getSV(int index) {
+		return dsSV[index];
 	}
 
-	public String nhapGioiTinh() {
-		System.out.print("Nhập giới tính: ");
-		return scanner.nextLine();
-	}
+	public int timKiemSVTheoMaSo(String maSo) {
 
-	public String nhapMaSV() {
-		System.out.print("Nhập mã sinh viên: ");
-		return scanner.nextLine();
-	}
+		for (int i = 0; i < dsSV.length; ++i) {
 
-	public String nhapHoTen() {
-		System.out.print("Nhập họ tên: ");
-		return scanner.nextLine();
-	}
+			if (dsSV[i].getMaSV().equals(maSo)) {
+				// sắp xếp lại thứ tự mảng
+				return i;
+			}
 
-	public String nhapLop() {
-		System.out.print("Nhập lớp: ");
-		return scanner.nextLine();
-	}
-
-	public String nhapDiaChi() {
-		System.out.print("Nhập địa chỉ: ");
-		return scanner.nextLine();
-	}
-
-	public String nhapNgaySinh() {
-		while (true) {
-			System.out.print("Nhập ngày sinh (dd/MM/yyyy): ");
-			return scanner.nextLine();
 		}
-
-	}
-
-	public void setArrSinhVien(ArrayList<SinhVien> arrSinhVien) {
-		this.arrSinhVien = arrSinhVien;
-	}
-
-	public ArrayList<SinhVien> getArrSinhVien() {
-		return arrSinhVien;
+		return -1;
 	}
 
 	@Override
 	public void them1PhanTu() {
+		boolean isRebuild = false;
+		int length = dsSV.length;
+		while (size + 1 >= length) {
+			length *= 2;
+			isRebuild = true;
+		}
+		if (isRebuild) {
+			dsSV = Arrays.copyOf(dsSV, length * 2);
+		}
+		dsSV[size++] = new SinhVien();
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void themKPhanTu(int k) {
 		// TODO Auto-generated method stub
-
+//		boolean isRebuild = false;
+//		int length = dsSV.length;
+//		while (size + k >= length) {
+//			length *= 2;
+//			isRebuild = true;
+//		}
+//		if (isRebuild) {
+//			dsSV = Arrays.copyOf(dsSV, length * 2);
+//		}
 	}
 
 	@Override
 	public void xoaPhanTu(String maSo) {
 		// TODO Auto-generated method stub
 
+		// sắp xếp lại thứ tự mảng
+		int index = timKiemSVTheoMaSo(maSo);
+		if (index >= 0) {
+			for (int j = index + 1; j < dsSV.length; ++j) {
+				dsSV[j - 1] = dsSV[j];
+			}
+			dsSV[--size] = null;
+		} else
+			System.out.println(maSo + " không tồn tại!");
 	}
 
 	@Override
 	public void xoaKPhanTu(int k) {
-		// TODO Auto-generated method stub
 
+		// TODO Auto-generated method stub
+		// System.out.println("Bạn muốn xóa bao nhiêu phần tử ? \n ");
+		// int n = new Scanner(System.in).nextInt();
+//		for (int i = 0; i < k; ++i) {
+//			int oriSize = size;
+//			System.out.println("Nhập mã số cần xóa :\n");
+//			String maSV = new Scanner(System.in).nextLine();
+//			xoaPhanTu(maSV);
+//			if (size != oriSize) {
+//				// có bug
+//				System.out.println("nhập sai vui lòng nhập lại \n");
+//
+//			}
+//		}
 	}
 
 	@Override
@@ -153,8 +129,14 @@ public class DanhSachSV implements DanhSach {
 
 	@Override
 	public void suaPhanTu(String maSo) {
+		// menu ra 8 thong tin rồi sửa nào thì set đó
 		// TODO Auto-generated method stub
-
+		int index = timKiemSVTheoMaSo(maSo);
+		if (index >= 0) {
+			dsSV[index] = new SinhVien();
+		} else
+			System.out.println(maSo + " không tồn tại!");
+		///
 	}
 
 	@Override
