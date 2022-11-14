@@ -2,24 +2,28 @@
 import java.util.Scanner;
 
 public abstract class Nguoi {
-	public Scanner sc1 = new Scanner(System.in);
-	public Scanner sc2 = new Scanner(System.in);
-	String hoTen;
-	String ngaySinh;
-	String diaChi;
-	String soDt;
-	String gioiTinh;
+	protected static Scanner sc = new Scanner(System.in);
+	private String hoTen;
+	private String gioiTinh;
+	private String soDt;
+	private String diaChi;
 
-	public Nguoi(String hoTen, String ngaySinh, String diaChi, String soDt, String gioiTinh) {
+	public Nguoi(String hoTen, String diaChi, String soDt, String gioiTinh) {
 		this.hoTen = hoTen;
 		this.diaChi = diaChi;
-		this.ngaySinh = ngaySinh;
-		this.gioiTinh = gioiTinh;
 		this.soDt = soDt;
+		this.gioiTinh = gioiTinh;
 	}
 
-	public Nguoi(String string, String string2, String string3) {
-		// TODO Auto-generated constructor stub
+	public Nguoi() {
+		System.out.print("Nhập họ tên: ");
+		this.hoTen = sc.nextLine();
+		System.out.print("Nhập địa chỉ: ");
+		this.diaChi = sc.nextLine();
+		System.out.print("Nhập giới tính: ");
+		this.gioiTinh = sc.nextLine();
+		System.out.print("Nhập SĐT: ");
+		this.soDt = sc.nextLine();
 	}
 
 	public void setHoTen(String hoTen) {
@@ -42,10 +46,6 @@ public abstract class Nguoi {
 		return gioiTinh;
 	}
 
-	public String getNgaySinh() {
-		return ngaySinh;
-	}
-
 	public String getSoDt() {
 		return soDt;
 	}
@@ -54,34 +54,18 @@ public abstract class Nguoi {
 		this.gioiTinh = gioiTinh;
 	}
 
-	public void setNgaySinh(String ngaySinh) {
-		this.ngaySinh = ngaySinh;
-	}
-
 	public void setSoDt(String soDt) {
 		this.soDt = soDt;
 	}
 
-	void nhapTT() {
-		System.out.print("Nhập họ tên: ");
-		this.hoTen = sc1.nextLine();
-		System.out.print("Nhập ngày sinh: ");
-		this.ngaySinh = sc1.nextLine();
-		System.out.print("Nhập địa chỉ: ");
-		this.diaChi = sc1.nextLine();
-		System.out.print("Nhập giới tính: ");
-		this.gioiTinh = sc1.nextLine();
-		System.out.print("Nhập SĐT: ");
-		this.soDt = sc1.nextLine();
-	}
-
-	public void nhapThongTin() {
+	@Override
+	public String toString() {
 		// TODO Auto-generated method stub
 
+		return String.format("%-20s |%-5s |%-10s |%-20s ", this.hoTen, this.gioiTinh, this.soDt, this.diaChi);
 	}
 
-	public void xuatThongTin() {
-		// TODO Auto-generated method stub
+	abstract public void xemLop();
 
-	}
+	abstract public void xuatThongTin();
 }
