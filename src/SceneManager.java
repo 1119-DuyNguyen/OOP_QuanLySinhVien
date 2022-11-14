@@ -11,7 +11,10 @@ public class SceneManager {
 //	public static CoVanHocTap gv1 = new CoVanHocTap();
 //	public static Diem diem1 = new Diem();
 //	public static MonHoc m1 = new MonHoc();
-	private static DSNganh dsNganh;
+	private static DSMon dsMon = new DSMon();
+	private static DSNganh dsNganh = new DSNganh();
+	private static DSKhoa dsKhoa = new DSKhoa();
+	private static DanhSachSV dsSV;
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void showMenu() {
@@ -27,8 +30,6 @@ public class SceneManager {
 	}
 
 	public static void main(String[] args) {
-		dsNganh = new DSNganh();
-		dsNganh.xemDS();
 		// TODO Auto-generated method stub
 		boolean con = true;
 		while (con) {
@@ -62,9 +63,6 @@ public class SceneManager {
 			default: {
 				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 			}
-			}
-			if (con) {
-				clearConsole();
 			}
 		}
 	}
@@ -177,20 +175,41 @@ public class SceneManager {
 		int choiceSV = sc.nextInt();
 		switch (choiceSV) {
 		case 1:
-			System.out.println("Hàm xem");
+			dsSV.xuatDanhSach();
 			break;
 		case 2:
-			System.out.println("Hàm thêm 1");
+			dsSV.them1PhanTu();
 			break;
-		case 3:
+		case 3: {
 			System.out.println("Hàm thêm n");
+			System.out.println("nhập số lượng cần thêm");
+			int n = sc.nextInt();
+			for (int i = 0; i < n; ++i) {
+				dsSV.them1PhanTu();
+			}
 			break;
-		case 4:
+		}
+		case 4: {
 			System.out.println("Hàm sửa");
+			System.out.println("nhập số lượng cần sửa");
+			int n = Integer.parseInt(sc.nextLine());
+			for (int i = 0; i < n; ++i) {
+				System.out.println("Nhập mã số cần sửa :");
+				dsSV.suaPhanTu(sc.nextLine());
+			}
 			break;
-		case 5:
+		}
+		case 5: {
 			System.out.println("Hàm xoá");
+			System.out.println("nhập số lượng cần sửa");
+			int n = Integer.parseInt(sc.nextLine());
+			for (int i = 0; i < n; ++i) {
+				System.out.println("Nhập mã số cần xóa:");
+				dsSV.xoaPhanTu(sc.nextLine());
+			}
 			break;
+		}
+
 		case 6:
 			System.out.println("Hàm thống kê qua môn");
 			break;
@@ -221,14 +240,17 @@ public class SceneManager {
 
 	public static void showFaculty() {
 		System.out.println("Hiển thị danh sách khoa");
+		dsKhoa.xuatDanhSach();
 	}
 
 	public static void showMajor() {
 		System.out.println("Hiển thị danh sách ngành");
+		dsNganh.xuatDanhSach();
 	}
 
 	public static void showSubject() {
 		System.out.println("Hiển thị danh sách môn");
+		dsMon.xuatDanhSach();
 	}
 
 	// toàn bộ phần phía trên sẽ là menu chính
@@ -415,7 +437,7 @@ public class SceneManager {
 //	}
 
 	public final static void clearConsole() {
-		for (int i = 0; i < 50; ++i)
+		for (int i = 0; i < 30; ++i)
 			System.out.println();
 	}
 

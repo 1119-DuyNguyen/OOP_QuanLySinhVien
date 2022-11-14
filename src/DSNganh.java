@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class DSNganh {
+public class DSNganh implements DanhSach {
 
 //	private String[] stringTenNganh = {"kỹ thuật phần mềm", "kế toán" };
 //	private String[] stringMaNganh = { "KTPM", "KT" };
@@ -16,13 +16,17 @@ public class DSNganh {
 
 	public DSNganh() {
 //		System.out.println("%-20");
-//		for (int i = 0; i < stringTenNganh.length; i++) {
-//			dsNganh[i] = new Nganh(stringMaNganh[i], stringTenNganh[i]);
-//		}
-		File file = new File("data", "nganh.txt");
+
+		File file = new File("data/nganh.txt");
 		if (!file.exists()) {
 			try {
+				// khởi tạo mẫu
 				file.createNewFile();
+				for (int i = 0; i < stringTenNganh.length; i++) {
+					if (dsNganh[i] == null)
+						dsNganh[i] = new Nganh(stringMaNganh[i], stringTenNganh[i]);
+				}
+				ghiFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -62,18 +66,57 @@ public class DSNganh {
 
 		BufferedWriter writer = new BufferedWriter(fw);
 		for (Nganh n : dsNganh) {
-			writer.write(n + "\n");
+			if (n != null)
+				writer.write(n + "\n");
 
 		}
 		writer.close();
 
 	}
 
-	public void xemDS() {
+	@Override
+	public void them1PhanTu() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void themKPhanTu(int k) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void xoaPhanTu(String maSo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void xoaKPhanTu(int k) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void xuatDanhSach() {
+		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã ngành", "Tên Ngành");
 		for (Nganh n : dsNganh) {
 			System.out.println(n);
 
 		}
+	}
+
+	@Override
+	public void suaPhanTu(String maSo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void nhapNPhanTu(int n) {
+		// TODO Auto-generated method stub
+
 	}
 }
