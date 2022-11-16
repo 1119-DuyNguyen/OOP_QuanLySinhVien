@@ -124,7 +124,11 @@ public class DanhSachSV implements DanhSach {
 	@Override
 	public void xuatDanhSach() {
 		// TODO Auto-generated method stub
+		for (SinhVien k : dsSV) {
+			if (k != null)
+				System.out.println(k);
 
+		}
 	}
 
 	@Override

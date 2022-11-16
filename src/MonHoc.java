@@ -1,6 +1,16 @@
+import java.util.Scanner;
+
 public class MonHoc {
+	private static Scanner sc = new Scanner(System.in);
 	public String maMH;
 	public String tenMH;
+
+	public MonHoc() {
+		System.out.print("Nhập mã môn: ");
+		this.maMH = sc.nextLine();
+		System.out.print("Nhập tên môn: ");
+		this.tenMH = sc.nextLine();
+	}
 
 	public MonHoc(String maMH, String tenMH) {
 		this.maMH = maMH;

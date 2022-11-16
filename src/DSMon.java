@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class DSMon implements DanhSach {
 	private String[] stringTenMon = { "hệ điều hành", "cơ sở dữ liệu", "đại số tuyến tính", "giải tích số" };
 	private String[] stringMaMon = { "HDH", "CSDL", "DSTT", "GTS" };
 	private MonHoc[] dsMonHoc = new MonHoc[4];
 	private static final String urlFile = "data/Mon.txt";
+	private int size = 4;
 
 	public DSMon() {
 //		System.out.println("%-20");
@@ -28,14 +30,15 @@ public class DSMon implements DanhSach {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		try {
-			// ghiFile();
-			docFile();
+		} else {
+			try {
+				// ghiFile();
+				docFile();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -71,8 +74,32 @@ public class DSMon implements DanhSach {
 
 	}
 
+	public int timKiemMHTheoMaSo(String maMH) {
+
+		for (int i = 0; i < size; ++i) {
+
+			if (dsMonHoc[i].getMaMH().equals(maMH)) {
+				System.out.println(dsMonHoc[i].maMH);
+				// sắp xếp lại thứ tự mảng
+				return i;
+			}
+
+		}
+		return -1;
+	}
+
 	@Override
 	public void them1PhanTu() {
+		boolean isRebuild = false;
+		int length = dsMonHoc.length;
+		while (size + 1 >= length) {
+			length += 1;
+			isRebuild = true;
+		}
+		if (isRebuild) {
+			dsMonHoc = Arrays.copyOf(dsMonHoc, length);
+		}
+		dsMonHoc[size++] = new MonHoc();
 		// TODO Auto-generated method stub
 
 	}
@@ -84,9 +111,17 @@ public class DSMon implements DanhSach {
 	}
 
 	@Override
-	public void xoaPhanTu(String maSo) {
+	public void xoaPhanTu(String maMH) {
 		// TODO Auto-generated method stub
-
+		int index = timKiemMHTheoMaSo(maMH);
+		if (index >= 0) {
+			for (int j = index + 1; j < dsMonHoc.length; ++j) {
+				dsMonHoc[j - 1] = dsMonHoc[j];
+			}
+			dsMonHoc[--size] = null;
+		} else
+			System.out.println(maMH + " không tồn tại!");
+		System.out.println(index);
 	}
 
 	@Override
@@ -106,9 +141,13 @@ public class DSMon implements DanhSach {
 	}
 
 	@Override
-	public void suaPhanTu(String maSo) {
+	public void suaPhanTu(String maMH) {
 		// TODO Auto-generated method stub
-
+		int index = timKiemMHTheoMaSo(maMH);
+		if (index >= 0) {
+			dsMonHoc[index] = new MonHoc();
+		} else
+			System.out.println(maMH + " không tồn tại!");
 	}
 
 	@Override

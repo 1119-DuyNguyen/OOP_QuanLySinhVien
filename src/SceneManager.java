@@ -1,20 +1,11 @@
 import java.util.Scanner;
 
 public class SceneManager {
-//	public static ArrayList<Diem> Diem1 = new ArrayList<>();
-//	public static ArrayList<DangKiMonHoc> DK1 = new ArrayList<>();
-//	public static ArrayList<CoVanHocTap> GV1 = new ArrayList<>();
-//	public static ArrayList<DanhSachSV> SV1 = new ArrayList<>();
-//	public static ArrayList<MonHoc> taoMon = new ArrayList<>();
-//	public static Scanner sc1 = new Scanner(System.in);
-//	public static DanhSachSV danhSachSV = new DanhSachSV();
-//	public static CoVanHocTap gv1 = new CoVanHocTap();
-//	public static Diem diem1 = new Diem();
-//	public static MonHoc m1 = new MonHoc();
 	private static DSMon dsMon = new DSMon();
 	private static DSNganh dsNganh = new DSNganh();
 	private static DSKhoa dsKhoa = new DSKhoa();
-	private static DanhSachSV dsSV;
+	private static DanhSachSV dsSV = new DanhSachSV();
+
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void showMenu() {
@@ -24,7 +15,7 @@ public class SceneManager {
 		System.out.println("3. Thao tác với lớp.");
 		System.out.println("4. Xem DS Khoa.");
 		System.out.println("5. Xem DS Ngành.");
-		System.out.println("6. Xem DS Môn.");
+		System.out.println("6. Thao tác với DS Môn.");
 		System.out.println("Nhấn phím 0 để thoát!!");
 		System.out.println("---------------------------");
 	}
@@ -114,9 +105,7 @@ public class SceneManager {
 		System.out.println("4. Sửa n cố vấn học tập");
 		System.out.println("5. Xoá n cố vấn học tập");
 		System.out.println("6. Tìm kiếm cố vấn học tập (theo họ tên)");
-		;
 		System.out.println("7. Tìm kiếm cố vấn học tập (theo mã cố vấn)");
-		;
 		System.out.println("8. Xem lớp quản lý của cố vấn");
 		System.out.println("9. Quay về trang chủ");
 		System.out.println("---------------------------");
@@ -221,6 +210,7 @@ public class SceneManager {
 			break;
 		case 9:
 			System.out.println("Hàm tìm kiếm theo tên");
+
 			break;
 		case 10:
 			System.out.println("Hàm tìm kiếm theo mssv");
@@ -249,8 +239,71 @@ public class SceneManager {
 	}
 
 	public static void showSubject() {
-		System.out.println("Hiển thị danh sách môn");
-		dsMon.xuatDanhSach();
+		System.out.println("\n-----------MÔN------------");
+		System.out.println("1. Xem DS môn");
+		System.out.println("2. Thêm 1 môn");
+		System.out.println("3. Thêm n môn");
+		System.out.println("4. Sửa n môn");
+		System.out.println("5. Xoá n môn");
+		System.out.println("6. Quay về trang chủ");
+		System.out.println("---------------------------");
+
+		System.out.print("Nhập lựa chọn: ");
+		int choiceCV = sc.nextInt();
+		switch (choiceCV) {
+		case 1:
+			System.out.println("Hiển thị danh sách môn");
+			dsMon.xuatDanhSach();
+			break;
+		case 2:
+			dsMon.them1PhanTu();
+			break;
+		case 3: {
+			System.out.println("Hàm thêm n");
+			System.out.println("nhập số lượng cần thêm");
+			int n = sc.nextInt();
+			for (int i = 0; i < n; ++i) {
+				dsMon.them1PhanTu();
+			}
+			break;
+		}
+		case 4: {
+			System.out.println("Danh sách môn trước khi sửa: ");
+			dsMon.xuatDanhSach();
+			System.out.println("Hàm sửa");
+			System.out.println("Nhập số lượng cần sửa: ");
+			int n = sc.nextInt();
+			for (int i = 0; i < n; ++i) {
+				System.out.println("Chọn môn muốn sửa:");
+				String input = sc.nextLine();
+				dsMon.suaPhanTu(input);
+				System.out.println("Danh sách môn mới sau khi sửa: ");
+				dsMon.xuatDanhSach();
+			}
+			break;
+		}
+		case 5: {
+			System.out.println("Danh sách môn trước khi xoá: ");
+			dsMon.xuatDanhSach();
+			System.out.println("Hàm xoá");
+			System.out.println("Nhập số lượng cần xoá: ");
+			int n = sc.nextInt();
+			for (int i = 0; i < n; ++i) {
+				System.out.println("Chọn môn muốn xoá:");
+				String input = sc.nextLine();
+				dsMon.xoaPhanTu(input);
+				System.out.println("Danh sách môn mới sau khi xoá: ");
+				dsMon.xuatDanhSach();
+			}
+			break;
+		}
+		case 6:
+			showMenu();
+			break;
+		default:
+			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+		}
+
 	}
 
 	// toàn bộ phần phía trên sẽ là menu chính
