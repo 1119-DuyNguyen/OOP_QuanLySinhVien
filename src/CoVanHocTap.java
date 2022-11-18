@@ -3,19 +3,29 @@ import java.util.Scanner;
 
 public class CoVanHocTap extends Nguoi {
 	public Scanner sc1 = new Scanner(System.in);
-	private String[] tenCV = { "A", "B" };
-	private String[] maLop = { "DKP1211", "DKP1212" };
+	public String tenCV;
+	public String maLop;
 	private String maGV;
 	private String Khoa;
 
 	public CoVanHocTap() {
-		super();
+		// super();
+		System.out.print("Nhập tên cố vấn: ");
+		this.tenCV = sc1.nextLine();
+		System.out.print("Nhập lớp cố vấn: ");
+		this.maLop = sc1.nextLine();
+
 		// none
 	}
 
-	CoVanHocTap(String maGV, String hoTen, String diaChi, String soDt, String Khoa) {
+	public CoVanHocTap(String maGV, String hoTen, String diaChi, String soDt, String Khoa) {
 		this.maGV = maGV;
 		this.Khoa = Khoa;
+	}
+
+	public CoVanHocTap(String tenGV, String maLop) {
+		this.tenCV = tenGV;
+		this.maLop = maLop;
 	}
 
 	public void setKhoa(String khoa) {
@@ -30,15 +40,6 @@ public class CoVanHocTap extends Nguoi {
 		return maGV;
 	}
 
-	public void xemLopQuanLy() {
-		Lop[] lop = new Lop[2];
-		for (int i = 0; i < lop.length; i++) {
-			lop[i].setMaLop(maLop[i]);
-			System.out.println("Ten Co Van: " + tenCV[i]);
-			System.out.println("Ma lop day: " + maLop[i]);
-		}
-	}
-
 	@Override
 	public void xuatThongTin() {
 		System.out.println();
@@ -46,7 +47,6 @@ public class CoVanHocTap extends Nguoi {
 //		super.xuatTT();
 		System.out.println("Mã giáo viên: " + maGV);
 		System.out.println("Khoa dạy: " + Khoa);
-		xemLopQuanLy();
 	}
 
 	@Override

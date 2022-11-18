@@ -14,6 +14,10 @@ public class Lop {
 		this.soLuong = soLuong;
 	}
 
+	public Lop(String maLop) {
+		this.maLop = maLop;
+	}
+
 	public String getMaLop() {
 		return maLop;
 	}

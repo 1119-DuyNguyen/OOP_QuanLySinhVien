@@ -55,6 +55,10 @@ public class DSMon implements DanhSach {
 //			for (String d : data) {
 //				System.out.println(d);
 //			}
+			// xóa khoảng trắng
+			for (int index = 0; index < data.length; ++index) {
+				data[index] = data[index].trim();
+			}
 			dsMonHoc[i++] = new MonHoc(data[0], data[1]);
 			line = bufferreader.readLine();
 		}
@@ -74,11 +78,12 @@ public class DSMon implements DanhSach {
 
 	}
 
-	public int timKiemMHTheoMaSo(String maMH) {
+	public int timKiemMHTheoMaSo(String MaMH) {
 
 		for (int i = 0; i < size; ++i) {
+			System.out.println(dsMonHoc[i].getMaMH().length());
+			if (dsMonHoc[i].getMaMH().equals(MaMH)) {
 
-			if (dsMonHoc[i].getMaMH().equals(maMH)) {
 				System.out.println(dsMonHoc[i].maMH);
 				// sắp xếp lại thứ tự mảng
 				return i;
@@ -111,16 +116,17 @@ public class DSMon implements DanhSach {
 	}
 
 	@Override
-	public void xoaPhanTu(String maMH) {
+	public void xoaPhanTu(String MaMH) {
+		System.out.println(MaMH.length());
 		// TODO Auto-generated method stub
-		int index = timKiemMHTheoMaSo(maMH);
+		int index = timKiemMHTheoMaSo(MaMH);
 		if (index >= 0) {
 			for (int j = index + 1; j < dsMonHoc.length; ++j) {
 				dsMonHoc[j - 1] = dsMonHoc[j];
 			}
 			dsMonHoc[--size] = null;
 		} else
-			System.out.println(maMH + " không tồn tại!");
+			System.out.println(MaMH + " không tồn tại!");
 		System.out.println(index);
 	}
 
