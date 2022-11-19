@@ -105,6 +105,12 @@ public class DSMon implements DanhSach {
 			dsMonHoc = Arrays.copyOf(dsMonHoc, length);
 		}
 		dsMonHoc[size++] = new MonHoc();
+		try {
+			ghiFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
 
 	}
@@ -127,7 +133,12 @@ public class DSMon implements DanhSach {
 			dsMonHoc[--size] = null;
 		} else
 			System.out.println(MaMH + " không tồn tại!");
-		System.out.println(index);
+		try {
+			ghiFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -154,6 +165,12 @@ public class DSMon implements DanhSach {
 			dsMonHoc[index] = new MonHoc();
 		} else
 			System.out.println(maMH + " không tồn tại!");
+		try {
+			ghiFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
