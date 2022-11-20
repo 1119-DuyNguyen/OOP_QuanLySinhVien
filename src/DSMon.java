@@ -59,6 +59,9 @@ public class DSMon implements DanhSach {
 			for (int index = 0; index < data.length; ++index) {
 				data[index] = data[index].trim();
 			}
+			if (i > dsMonHoc.length) {
+				dsMonHoc = Arrays.copyOf(dsMonHoc, i * 2);
+			}
 			dsMonHoc[i++] = new MonHoc(data[0], data[1]);
 			line = bufferreader.readLine();
 		}
