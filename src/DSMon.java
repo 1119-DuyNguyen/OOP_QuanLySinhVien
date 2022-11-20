@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class DSMon implements DanhSach {
 	private String[] stringTenMon = { "hệ điều hành", "cơ sở dữ liệu", "đại số tuyến tính", "giải tích số" };
 	private String[] stringMaMon = { "HDH", "CSDL", "DSTT", "GTS" };
-	private MonHoc[] dsMonHoc = new MonHoc[4];
+	private MonHoc[] dsMonHoc = new MonHoc[20];
 	private static final String urlFile = "data/Mon.txt";
 	private int size = 4;
 
@@ -59,13 +59,16 @@ public class DSMon implements DanhSach {
 			for (int index = 0; index < data.length; ++index) {
 				data[index] = data[index].trim();
 			}
-			if (i > dsMonHoc.length) {
-				dsMonHoc = Arrays.copyOf(dsMonHoc, i * 2);
+			if (i + 1 > dsMonHoc.length) {
+				dsMonHoc = Arrays.copyOf(dsMonHoc, (i + 1) * 2);
 			}
+
 			dsMonHoc[i++] = new MonHoc(data[0], data[1]);
 			line = bufferreader.readLine();
 		}
 		bufferreader.close();
+		size = i;
+
 	}
 
 	public void ghiFile() throws IOException {
@@ -155,7 +158,8 @@ public class DSMon implements DanhSach {
 		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã môn", "Tên môn");
 		for (MonHoc n : dsMonHoc) {
-			System.out.println(n);
+			if (n != null)
+				System.out.println(n);
 
 		}
 	}

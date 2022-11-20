@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class DSNganh implements DanhSach {
 
@@ -55,6 +56,14 @@ public class DSNganh implements DanhSach {
 //			for (String d : data) {
 //				System.out.println(d);
 //			}
+			// xóa khoảng trắng
+			for (int index = 0; index < data.length; ++index) {
+				data[index] = data[index].trim();
+			}
+			if (i + 1 > dsNganh.length) {
+				dsNganh = Arrays.copyOf(dsNganh, (i + 1) * 2);
+			}
+
 			dsNganh[i++] = new Nganh(data[0], data[1]);
 			line = bufferreader.readLine();
 		}
@@ -103,7 +112,8 @@ public class DSNganh implements DanhSach {
 		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã ngành", "Tên Ngành");
 		for (Nganh n : dsNganh) {
-			System.out.println(n);
+			if (n != null)
+				System.out.println(n);
 
 		}
 	}

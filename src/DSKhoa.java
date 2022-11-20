@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class DSKhoa implements DanhSach {
 //	private String[] stringTenKhoa = { "Công nghệ thông tin",
@@ -56,6 +57,12 @@ public class DSKhoa implements DanhSach {
 //			for (String d : data) {
 //				System.out.println(d);
 //			}
+			for (int index = 0; index < data.length; ++index) {
+				data[index] = data[index].trim();
+			}
+			if (i + 1 > dsKhoa.length) {
+				dsKhoa = Arrays.copyOf(dsKhoa, (i + 1) * 2);
+			}
 			dsKhoa[i++] = new Khoa(data[0], data[1]);
 			line = bufferreader.readLine();
 		}
