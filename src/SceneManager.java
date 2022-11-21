@@ -255,12 +255,111 @@ public class SceneManager {
 
 	public static void showFaculty() {
 		System.out.println("Hiển thị danh sách khoa");
-		dsKhoa.xuatDanhSach();
+//		//dsKhoa.xuatDanhSach();
+		System.out.println("\n-----------Khoa------------");
+		System.out.println("1. Xem DS Khoa");
+		System.out.println("2. Them 1 Khoa");
+		// System.out.println("3. Them n Khoa ");
+		System.out.println("4. Xoa 1 Khoa");
+		// System.out.println("5. Xoá n Khoa");
+		System.out.println("6. Quay về trang chủ");
+		System.out.println("---------------------------");
+
+//		System.out.print("Nhập lựa chọn: ");
+//		int choiceKhoa = sc.nextInt();
+//		switch (choiceKhoa) {
+//		case 1:
+//			dsKhoa.xuatDanhSach();
+//			break;
+//		case 2:
+//			dsKhoa.them1PhanTu();
+//			break;
+//		//case 3: {
+//			//System.out.println("Hàm thêm n Khoa");
+//			//System.out.println("nhập số lượng cần thêm");
+//			//int n = sc.nextInt();
+//			//for (int i = 0; i < n; ++i) {
+//				//dsKhoa.them1PhanTu();
+//			//}
+//			break;
+//		}
+//		case 4: {
+//			System.out.println("Hàm xoa 1 khoa");
+//			for (int i = 0; i < n; ++i) {
+//				System.out.println("Nhập mã số Khoa cần xoa :");
+//				dsKhoa.xoaPhanTu();
+//			}
+//			break;
+//		}
+//		/*case 5: {
+//			System.out.println("Hàm xoá n khoa");
+//			System.out.println("nhập số lượng cần xoa");
+//			int n = Integer.parseInt(sc.nextLine());
+//			for (int i = 0; i < n; ++i) {
+//				System.out.println("Nhập mã Khoa cần xóa:");
+//				dsKhoa.xoaKPhanTu(sc.nextLine());
+//			}
+//			break;
+//		}*/
+//		case 6:
+//			showMenu();
+//			break;
+//		default:
+//			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+//		}
+
 	}
 
 	public static void showMajor() {
 		System.out.println("Hiển thị danh sách ngành");
 		dsNganh.xuatDanhSach();
+		System.out.println("\n-----------Nganh------------");
+		System.out.println("1. Xem DS nganh");
+		System.out.println("2. Thêm 1 nganh vào danh sách");
+		System.out.println("3. Thêm n nganh vào danh sách");
+		System.out.println("4. Sửa n nganh");
+		System.out.println("5. Xoá n nganh");
+		System.out.println("6. Quay về trang chủ");
+		System.out.println("---------------------------");
+
+		System.out.print("Nhập lựa chọn: ");
+//		int choiceCV = sc.nextInt();
+//		switch (choiceCV) {
+//		case 1:
+//			dsNganh.xuatDanhSach();
+//			break;
+//		case 2:
+//			System.out.println("Hàm thêm 1");
+//			dsNganh.them1PhanTu();
+//			break;
+//		case 3:
+//			System.out.println("Hàm thêm n");
+//			dsNganh.themKPhanTu(choiceCV);
+//			break;
+//		case 4:
+//			System.out.println("Hàm sửa");
+//			dsNganh.suaPhanTu(null);
+//			break;
+//		case 5:
+//			System.out.println("Hàm xoá");
+//			dsNganh.xoaPhanTu(null);
+//			break;
+////		case 6:
+////			System.out.println("Hàm tìm theo họ tên");
+////			break;
+////		case 7:
+////			System.out.println("Hàm tìm theo mã cố vấn");
+////			break;
+////		case 8:
+////			System.out.println("Hàm xem lớp quản lý");
+////			break;
+//		case 6:
+//			showMenu();
+//			break;
+//		default:
+//			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+//		}
+//		;
 	}
 
 	public static void showSubject() {
