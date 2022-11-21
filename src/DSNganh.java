@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class DSNganh implements DanhSach {
 
@@ -14,6 +15,8 @@ public class DSNganh implements DanhSach {
 	private String[] stringMaNganh = { "KTPM", "CNTT" };
 	private Nganh[] dsNganh = new Nganh[2];
 	private static final String urlFile = "data/nganh.txt";
+	private int size = 0; // phần tử thực tế của array//tao theem
+	private Scanner sc = new Scanner(System.in);// tao them
 
 	public DSNganh() {
 //		System.out.println("%-20");
@@ -83,10 +86,33 @@ public class DSNganh implements DanhSach {
 
 	}
 
+	public int timKiemNganhTheoMaNganh(String maNganh) {
+
+		for (int i = 0; i < dsNganh.length; ++i) {
+
+			if (dsNganh[i].getMaNganh().equals(maNganh)) {
+				// sắp xếp lại thứ tự mảng
+				return i;
+			}
+
+		}
+		return -1;
+	}
+
 	@Override
 	public void them1PhanTu() {
 		// TODO Auto-generated method stub
-
+		boolean isRebuild = false;
+		int length = dsNganh.length;
+		while (size + 1 >= length) {
+			length *= 2;
+			isRebuild = true;
+		}
+		if (isRebuild) {
+			dsNganh = Arrays.copyOf(dsNganh, length + 1);
+		}
+		dsNganh[size++] = new Nganh();
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -98,6 +124,18 @@ public class DSNganh implements DanhSach {
 	@Override
 	public void xoaPhanTu(String maSo) {
 		// TODO Auto-generated method stub
+		// sắp xếp lại thứ tự mảng
+		String string;
+		System.out.print("Nhập mã Nganh muốn xóa:");
+		string = sc.nextLine();
+		int index = timKiemNganhTheoMaNganh(string);
+		if (index >= 0) {
+			for (int j = index + 1; j < dsNganh.length; ++j) {
+				dsNganh[j - 1] = dsNganh[j];
+			}
+			dsNganh[--size] = null;
+		} else
+			System.out.println(string + " không tồn tại!");
 
 	}
 
@@ -112,8 +150,7 @@ public class DSNganh implements DanhSach {
 		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã ngành", "Tên Ngành");
 		for (Nganh n : dsNganh) {
-			if (n != null)
-				System.out.println(n);
+			System.out.println(n);
 
 		}
 	}
@@ -121,7 +158,61 @@ public class DSNganh implements DanhSach {
 	@Override
 	public void suaPhanTu(String maSo) {
 		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub
+		String string;// 1,2
+		String string2;// option1
+		String string3;// option2
+		String string4;// option2
+		// nhập tên muốn tìm để thay(2 option)
+		// phần này là phần option:
+		System.out.println("\n-----------SỬA Nganh------------");
+		System.out.println("1. Sửa tên Nganh");
+		System.out.println("2. Nhập Nganh mới");
+		System.out.println("---------------------------");
+		System.out.print("Nhập lựa chọn: ");
+		int choiceCV = sc.nextInt();
+		switch (choiceCV) {
+		case 1:
+			// chỉ sửa tên Nganh, quy trình lấy string ở trên rồi tìm, nếu tìm
+			// thấy thì thay cái tên đó bằng string2
+			System.out.println("Hàm sửa tên Nganh");
+			System.out.println("Nhập mã Nganh bạn muốn tìm để sửa:");
+			string = sc.nextLine();
+			System.out.println("Nhập tên Nganh mới:");
+			string2 = sc.nextLine();
+			int index = timKiemNganhTheoMaNganh(string);
+			if (index >= 0) {
+				dsNganh[index].setTenNganh(string2);
+				System.out.println(
+						"đã được thay đổi tên Nganh" + dsNganh[index].getTenNganh() + "bằng ten Nganh" + string2);
+			} else
+				System.out.println(string + " không tồn tại!");
+			System.out.println("Hãy nhập tên Nganh mới");
+			break;
+		case 2:
+			System.out.println("Hàm nhập mới Nganh");
+			System.out.println("Nhập mã Nganh bạn muốn tìm để thay đổi:");
+			string = sc.nextLine();
+			// nhập tên và mã Nganh mới
+			System.out.println("Hãy nhập tên Nganh mới");
+			string3 = sc.nextLine();// tên mới
+			System.out.println("Hãy nhập mã Nganh mới");
+			string4 = sc.nextLine();// mã mới
+			// thay đổi dữ liệu
+			int index2 = timKiemNganhTheoMaNganh(string);
+			if (index2 >= 0) {
+				dsNganh[index2] = null;
+				dsNganh[index2] = new Nganh();
+				dsNganh[index2].setTenNganh(string3);
+				dsNganh[index2].setMaNganh(string4);
+				System.out.println("thông tin Nganh" + dsNganh[index2].getTenNganh() + "đã được thay đổi bằng Nganh"
+						+ string3);
+			} else
+				System.out.println(string + " không tồn tại!");
+			break;
+		default:
+			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+		}
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class DSKhoa implements DanhSach {
 //	private String[] stringTenKhoa = { "Công nghệ thông tin",
@@ -12,7 +13,7 @@ public class DSKhoa implements DanhSach {
 //	private String[] stringMaKhoa = { "CNTT", "Toan"};
 	private String[] stringTenKhoa = { "Công nghệ thông tin" };
 	private String[] stringMaKhoa = { "CNTT" };
-	Khoa[] dsKhoa = new Khoa[1];
+	static Khoa[] dsKhoa = new Khoa[1];
 
 	private static final String urlFile = "data/khoa.txt";
 
@@ -83,20 +84,83 @@ public class DSKhoa implements DanhSach {
 
 	@Override
 	public void them1PhanTu() {
-		// TODO Auto-generated method stub
-
+//		// TODO Auto-generated method stub
+//		private int n;
+//		static Khoa ds[];
+//		
+//	    public int getN() {
+//			return n;
+//		}
+//		public void setN(int n) {
+//			this.n = n;
+//		}
+//		public static Khoa[] getDs() {
+//			return ds;
+//		}
+//		public static void setDs(Khoa[] ds) {
+//			DsKhoa.ds = ds;
+//		}
+//		    
+//			n=Integer.parseInt(sc.nextLine());
+//			ds = new Khoa [n];
+//			for (int i=0;i<ds.length;i++) {
+//				ds[i]= new Khoa(maKhoa,tenKhoa);
+//				ds[i].docFile();
+//			}
+//
+//			Scanner sc = new Scanner(System.in);
+//
+//		    for(int i = ds.length - 1 ; i > 0 ; i--)
+//		    {
+//		        System.out.println("\nNhap ma khoa muon them:");
+//			    maKhoa = sc.nextLine();
+//				ds[i]=ds[i-1];
+//				n++;
+//				
+//			}
+//		    System.out.println("\nDanh sach Khoa sau khi them la:\n");
+//		    ghiFile();
 	}
 
 	@Override
 	public void themKPhanTu(int k) {
 		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\nNhap so khoa muon them:\n");
+		k = sc.nextInt();
+
+		System.out.println("\nDanh sach Khoa sau khi them la:\n");
+		try {
+			ghiFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void xoaPhanTu(String maSo) {
 		// TODO Auto-generated method stub
-
+		int found = 0;
+//		for (int i = 0; i < ds.length; i++) {
+//			if (ds[i] == maKhoa) {
+//				found = 1;
+//
+//				for (int j = i; j < ds.length; j++) {
+//					ds[j] = ds[j + 1];
+//				}
+//				System.out.println("\n Da xoa Khoa = " + maKhoa);
+//
+//				break;
+//			}
+//		}
+//		if (found == 0) {
+//			System.out.println("\n Khoa khong ton tai." + maKhoa);
+//			return 0;
+//		} else {
+//			return 1;
+//		}
 	}
 
 	@Override
@@ -127,4 +191,5 @@ public class DSKhoa implements DanhSach {
 		// TODO Auto-generated method stub
 
 	}
+
 }
