@@ -90,7 +90,7 @@ public class DSMon implements DanhSach {
 			System.out.println(dsMonHoc[i].getMaMH().length());
 			if (dsMonHoc[i].getMaMH().equals(MaMH)) {
 
-				System.out.println(dsMonHoc[i].maMH);
+				System.out.println(dsMonHoc[i].getMaMH());
 				// sắp xếp lại thứ tự mảng
 				return i;
 			}

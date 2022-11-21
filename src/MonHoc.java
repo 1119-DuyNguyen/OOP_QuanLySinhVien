@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class MonHoc {
 	private static Scanner sc = new Scanner(System.in);
-	public String maMH;
-	public String tenMH;
+	private String maMH;
+	private String tenMH;
+	private float diem;
 
 	public MonHoc() {
 		System.out.print("Nhập mã môn: ");
@@ -12,9 +13,19 @@ public class MonHoc {
 		this.tenMH = sc.nextLine();
 	}
 
-	public MonHoc(String maMH, String tenMH) {
+	public MonHoc(String maMh, String tenMH) {
+		this.maMH = maMh;
+		this.tenMH = tenMH;
+	}
+
+	public MonHoc(String maMH, String tenMH, float diem) {
 		this.maMH = maMH;
 		this.tenMH = tenMH;
+		this.diem = diem;
+	}
+
+	public float setDiem(float diem) {
+		return this.diem = diem;
 	}
 
 	public String getMaMH() {
@@ -23,6 +34,10 @@ public class MonHoc {
 
 	public String getTenMH() {
 		return tenMH;
+	}
+
+	public float getDiem() {
+		return diem;
 	}
 
 	public MonHoc(String maMH, String tenMH, int soTinChi, int namHoc, int hocKi) {
