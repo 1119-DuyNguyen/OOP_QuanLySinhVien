@@ -1,13 +1,15 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DSNganh implements DanhSach {
+public class DSNganh extends DanhSach implements suggestDS<Nganh> {
 
 //	private String[] stringTenNganh = {"kỹ thuật phần mềm", "kế toán" };
 //	private String[] stringMaNganh = { "KTPM", "KT" };
@@ -36,53 +38,64 @@ public class DSNganh implements DanhSach {
 				e.printStackTrace();
 			}
 		}
-		try {
-			// ghiFile();
-			docFile();
 
+		// ghiFile();
+		docFile();
+
+	}
+
+	public void docFile() {
+		FileReader fReader;
+		try {
+			fReader = new FileReader(urlFile);
+
+			BufferedReader bufferreader = new BufferedReader(fReader);
+			// File file = new File("resources/commands.txt");
+
+			String line = bufferreader.readLine();
+			int i = 0;
+			while (line != null) {
+				String data[] = line.split("\\|");
+//			for (String d : data) {
+//				System.out.println(d);
+//			}
+				// xóa khoảng trắng
+				for (int index = 0; index < data.length; ++index) {
+					data[index] = data[index].trim();
+				}
+				if (i + 1 > dsNganh.length) {
+					dsNganh = Arrays.copyOf(dsNganh, (i + 1) * 2);
+				}
+
+				dsNganh[i++] = new Nganh(data[0], data[1]);
+				line = bufferreader.readLine();
+			}
+			bufferreader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
-	public void docFile() throws IOException {
-		FileReader fReader = new FileReader(urlFile);
-		BufferedReader bufferreader = new BufferedReader(fReader);
-		// File file = new File("resources/commands.txt");
+	public void ghiFile() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(urlFile);
 
-		String line = bufferreader.readLine();
-		int i = 0;
-		while (line != null) {
-			String data[] = line.split("\\|");
-//			for (String d : data) {
-//				System.out.println(d);
-//			}
-			// xóa khoảng trắng
-			for (int index = 0; index < data.length; ++index) {
-				data[index] = data[index].trim();
+			BufferedWriter writer = new BufferedWriter(fw);
+			for (Nganh n : dsNganh) {
+				if (n != null)
+					writer.write(n + "\n");
+
 			}
-			if (i + 1 > dsNganh.length) {
-				dsNganh = Arrays.copyOf(dsNganh, (i + 1) * 2);
-			}
-
-			dsNganh[i++] = new Nganh(data[0], data[1]);
-			line = bufferreader.readLine();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		bufferreader.close();
-	}
-
-	public void ghiFile() throws IOException {
-		FileWriter fw = new FileWriter(urlFile);
-
-		BufferedWriter writer = new BufferedWriter(fw);
-		for (Nganh n : dsNganh) {
-			if (n != null)
-				writer.write(n + "\n");
-
-		}
-		writer.close();
 
 	}
 
@@ -116,7 +129,7 @@ public class DSNganh implements DanhSach {
 	}
 
 	@Override
-	public void themKPhanTu(int k) {
+	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
 	}
@@ -219,5 +232,28 @@ public class DSNganh implements DanhSach {
 	public void nhapNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Nganh suggest() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		System.out.println("Danh sách môn hợp lệ");
+
+		for (int i = 0; i < size; ++i) {
+			System.out.println(i + ". " + dsNganh[i]);
+		}
+		System.out.println(size + "." + "Quay lại");
+		System.out.println("Chọn môn để nhập");
+		while (true) {
+			int choice = Integer.parseInt(sc.nextLine());
+			if (choice > 0 && choice < size) {
+				return dsNganh[choice];
+			} else if (choice == size) {
+				return null;
+			} else {
+				System.out.println("Nhập sai lựa chọn");
+			}
+		}
 	}
 }

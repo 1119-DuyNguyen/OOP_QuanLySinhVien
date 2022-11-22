@@ -1,13 +1,14 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Scanner;
 
-public class DSKhoa implements DanhSach {
+public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
 //	private String[] stringTenKhoa = { "Công nghệ thông tin",
 //			"Toán" };
 //	private String[] stringMaKhoa = { "CNTT", "Toan"};
@@ -34,51 +35,62 @@ public class DSKhoa implements DanhSach {
 				e.printStackTrace();
 			}
 		}
-		try {
-			// ghiFile();
-			docFile();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// ghiFile();
+		docFile();
 
 	}
 
-	public void docFile() throws IOException {
-		FileReader fReader = new FileReader(urlFile);
-		BufferedReader bufferreader = new BufferedReader(fReader);
-		// File file = new File("resources/commands.txt");
+	public void docFile() {
+		FileReader fReader;
+		try {
+			fReader = new FileReader(urlFile);
 
-		String line = bufferreader.readLine();
-		int i = 0;
-		while (line != null) {
-			String data[] = line.split("\\|");
+			BufferedReader bufferreader = new BufferedReader(fReader);
+			// File file = new File("resources/commands.txt");
+
+			String line = bufferreader.readLine();
+			int i = 0;
+			while (line != null) {
+				String data[] = line.split("\\|");
 
 //			for (String d : data) {
 //				System.out.println(d);
 //			}
-			for (int index = 0; index < data.length; ++index) {
-				data[index] = data[index].trim();
+				for (int index = 0; index < data.length; ++index) {
+					data[index] = data[index].trim();
+				}
+				if (i + 1 > dsKhoa.length) {
+					dsKhoa = Arrays.copyOf(dsKhoa, (i + 1) * 2);
+				}
+				dsKhoa[i++] = new Khoa(data[0], data[1]);
+				line = bufferreader.readLine();
 			}
-			if (i + 1 > dsKhoa.length) {
-				dsKhoa = Arrays.copyOf(dsKhoa, (i + 1) * 2);
-			}
-			dsKhoa[i++] = new Khoa(data[0], data[1]);
-			line = bufferreader.readLine();
+			bufferreader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		bufferreader.close();
 	}
 
-	public void ghiFile() throws IOException {
-		FileWriter fw = new FileWriter(urlFile);
+	public void ghiFile() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(urlFile);
 
-		BufferedWriter writer = new BufferedWriter(fw);
-		for (Khoa n : dsKhoa) {
-			writer.write(n + "\n");
+			BufferedWriter writer = new BufferedWriter(fw);
+			for (Khoa n : dsKhoa) {
+				writer.write(n + "\n");
 
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		writer.close();
 
 	}
 
@@ -123,19 +135,13 @@ public class DSKhoa implements DanhSach {
 	}
 
 	@Override
-	public void themKPhanTu(int k) {
+	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
-		Scanner sc = new Scanner(System.in);
 		System.out.println("\nNhap so khoa muon them:\n");
-		k = sc.nextInt();
 
 		System.out.println("\nDanh sach Khoa sau khi them la:\n");
-		try {
-			ghiFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		ghiFile();
 
 	}
 
@@ -190,6 +196,29 @@ public class DSKhoa implements DanhSach {
 	public void nhapNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Khoa suggest() {
+
+		// TODO Auto-generated method stub
+		System.out.println("Danh sách môn hợp lệ");
+
+		for (int i = 0; i < size; ++i) {
+			System.out.println(i + ". " + dsKhoa[i]);
+		}
+		System.out.println(size + "." + "Quay lại");
+		System.out.println("Chọn môn để nhập");
+		while (true) {
+			int choice = Integer.parseInt(sc.nextLine());
+			if (choice > 0 && choice < size) {
+				return dsKhoa[choice];
+			} else if (choice == size) {
+				return null;
+			} else {
+				System.out.println("Nhập sai lựa chọn");
+			}
+		}
 	}
 
 }

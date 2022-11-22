@@ -1,24 +1,25 @@
+
 import java.util.Scanner;
 
-public class MonHoc {
+public class Mon {
 	private static Scanner sc = new Scanner(System.in);
 	private String maMH;
 	private String tenMH;
 	private float diem;
 
-	public MonHoc() {
+	public Mon() {
 		System.out.print("Nhập mã môn: ");
 		this.maMH = sc.nextLine();
 		System.out.print("Nhập tên môn: ");
 		this.tenMH = sc.nextLine();
 	}
 
-	public MonHoc(String maMh, String tenMH) {
+	public Mon(String maMh, String tenMH) {
 		this.maMH = maMh;
 		this.tenMH = tenMH;
 	}
 
-	public MonHoc(String maMH, String tenMH, float diem) {
+	public Mon(String maMH, String tenMH, float diem) {
 		this.maMH = maMH;
 		this.tenMH = tenMH;
 		this.diem = diem;
@@ -40,7 +41,7 @@ public class MonHoc {
 		return diem;
 	}
 
-	public MonHoc(String maMH, String tenMH, int soTinChi, int namHoc, int hocKi) {
+	public Mon(String maMH, String tenMH, int soTinChi, int namHoc, int hocKi) {
 
 		this.maMH = maMH;
 		this.tenMH = tenMH;

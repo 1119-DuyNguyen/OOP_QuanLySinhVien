@@ -2,11 +2,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DanhSachSV implements DanhSach {
+public class DanhSachSV extends DanhSach {
 	// private static SinhVien sVien[] = new SinhVien[100];
 	public static Scanner scanner = new Scanner(System.in);
 
-	private int size = 0; // phần tử thực tế của array
 	private SinhVien dsSV[] = new SinhVien[20];
 
 	public DanhSachSV() {
@@ -74,7 +73,7 @@ public class DanhSachSV implements DanhSach {
 	}
 
 	@Override
-	public void themKPhanTu(int k) {
+	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
 //		boolean isRebuild = false;
 //		int length = dsSV.length;
@@ -145,6 +144,18 @@ public class DanhSachSV implements DanhSach {
 
 	@Override
 	public void nhapNPhanTu(int n) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void docFile() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void ghiFile() {
 		// TODO Auto-generated method stub
 
 	}

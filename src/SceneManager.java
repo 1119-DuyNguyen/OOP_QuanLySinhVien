@@ -14,8 +14,8 @@ public class SceneManager {
 		System.out.println("1. Thao tác với DSSV.");
 		System.out.println("2. Thao tác với DS cố vấn học tập.");
 		System.out.println("3. Thao tác với lớp.");
-		System.out.println("4. Xem DS Khoa.");
-		System.out.println("5. Xem DS Ngành.");
+		System.out.println("4. Thao tác DS Khoa.");
+		System.out.println("5. Thao tác DS Ngành.");
 		System.out.println("6. Thao tác với DS Môn.");
 		System.out.println("Nhấn phím 0 để thoát!!");
 		System.out.println("---------------------------");
@@ -321,7 +321,6 @@ public class SceneManager {
 		System.out.println("5. Xoá n nganh");
 		System.out.println("6. Quay về trang chủ");
 		System.out.println("---------------------------");
-
 		System.out.print("Nhập lựa chọn: ");
 //		int choiceCV = sc.nextInt();
 //		switch (choiceCV) {
@@ -386,9 +385,7 @@ public class SceneManager {
 			System.out.println("Hàm thêm n");
 			System.out.println("nhập số lượng cần thêm");
 			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				dsMon.them1PhanTu();
-			}
+			dsMon.nhapNPhanTu(n);
 			break;
 		}
 		case 4: {

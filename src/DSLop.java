@@ -1,12 +1,14 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class DSLop implements DanhSach {
+public class DSLop extends DanhSach implements suggestDS<Lop> {
 	private String[] tenLop = { "KTPM1", "KTPM2" };
 	private String[] maLop = { "DKP1211", "DKP1212" };
 
@@ -32,56 +34,68 @@ public class DSLop implements DanhSach {
 				e.printStackTrace();
 			}
 		} else {
-			try {
-				// ghiFile();
-				docFile();
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// ghiFile();
+			docFile();
+
 		}
 
 	}
 
-	public void docFile() throws IOException {
-		FileReader fReader = new FileReader(urlFile);
-		BufferedReader bufferreader = new BufferedReader(fReader);
-		// File file = new File("resources/commands.txt");
+	public void docFile() {
+		FileReader fReader;
+		try {
+			fReader = new FileReader(urlFile);
 
-		String line = bufferreader.readLine();
-		int i = 0;
-		while (line != null) {
-			String data[] = line.split("\\|");
+			BufferedReader bufferreader = new BufferedReader(fReader);
+			// File file = new File("resources/commands.txt");
+
+			String line = bufferreader.readLine();
+			int i = 0;
+			while (line != null) {
+				String data[] = line.split("\\|");
 //			for (String d : data) {
 //				System.out.println(d);
 //			}
-			// xóa khoảng trắng
-			for (int index = 0; index < data.length; ++index) {
-				data[index] = data[index].trim();
-			}
-			if (i + 1 > dsLop.length) {
-				dsLop = Arrays.copyOf(dsLop, (i + 1) * 2);
-			}
+				// xóa khoảng trắng
+				for (int index = 0; index < data.length; ++index) {
+					data[index] = data[index].trim();
+				}
+				if (i + 1 > dsLop.length) {
+					dsLop = Arrays.copyOf(dsLop, (i + 1) * 2);
+				}
 
-			dsLop[i++] = new Lop(data[0], data[1]);
-			line = bufferreader.readLine();
+				dsLop[i++] = new Lop(data[0], data[1]);
+				line = bufferreader.readLine();
+			}
+			bufferreader.close();
+			size = i;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		bufferreader.close();
-		size = i;
 
 	}
 
-	public void ghiFile() throws IOException {
-		FileWriter fw = new FileWriter(urlFile);
+	public void ghiFile() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(urlFile);
 
-		BufferedWriter writer = new BufferedWriter(fw);
-		for (Lop n : dsLop) {
-			if (n != null)
-				writer.write(n + "\n");
+			BufferedWriter writer = new BufferedWriter(fw);
+			for (Lop n : dsLop) {
+				if (n != null)
+					writer.write(n + "\n");
 
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		writer.close();
 
 	}
 
@@ -112,18 +126,15 @@ public class DSLop implements DanhSach {
 			dsLop = Arrays.copyOf(dsLop, length);
 		}
 		dsLop[size++] = new Lop();
-		try {
-			ghiFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		ghiFile();
+
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void themKPhanTu(int k) {
+	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
 	}
@@ -140,12 +151,9 @@ public class DSLop implements DanhSach {
 			dsLop[--size] = null;
 		} else
 			System.out.println(MaMH + " không tồn tại!");
-		try {
-			ghiFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		ghiFile();
+
 	}
 
 	@Override
@@ -173,17 +181,36 @@ public class DSLop implements DanhSach {
 			dsLop[index] = new Lop();
 		} else
 			System.out.println(maMH + " không tồn tại!");
-		try {
-			ghiFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		ghiFile();
+
 	}
 
 	@Override
 	public void nhapNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Lop suggest() {
+		// TODO Auto-generated method stub
+		System.out.println("Danh sách môn hợp lệ");
+
+		for (int i = 0; i < size; ++i) {
+			System.out.println(i + ". " + dsLop[i]);
+		}
+		System.out.println(size + "." + "Quay lại");
+		System.out.println("Chọn môn để nhập");
+		while (true) {
+			int choice = Integer.parseInt(sc.nextLine());
+			if (choice > 0 && choice < size) {
+				return dsLop[choice];
+			} else if (choice == size) {
+				return null;
+			} else {
+				System.out.println("Nhập sai lựa chọn");
+			}
+		}
 	}
 }

@@ -1,12 +1,13 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class DSCVHT implements DanhSach {
+public class DSCVHT extends DanhSach {
 	private String[] tenCV = { "A", "B" };
 	private String[] lopCV = { "DKP1211", "DKP1212" };
 	private static CoVanHocTap[] dsCVHT = new CoVanHocTap[2];
@@ -31,50 +32,62 @@ public class DSCVHT implements DanhSach {
 				e.printStackTrace();
 			}
 		} else {
-			try {
-				// ghiFile();
-				docFile();
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// ghiFile();
+			docFile();
+
 		}
 
 	}
 
-	public void docFile() throws IOException {
-		FileReader fReader = new FileReader(urlFile);
-		BufferedReader bufferreader = new BufferedReader(fReader);
-		// File file = new File("resources/commands.txt");
+	public void docFile() {
+		FileReader fReader;
+		try {
+			fReader = new FileReader(urlFile);
 
-		String line = bufferreader.readLine();
-		int i = 0;
-		while (line != null) {
-			String data[] = line.split("\\|");
+			BufferedReader bufferreader = new BufferedReader(fReader);
+			// File file = new File("resources/commands.txt");
+
+			String line = bufferreader.readLine();
+			int i = 0;
+			while (line != null) {
+				String data[] = line.split("\\|");
 //			for (String d : data) {
 //				System.out.println(d);
 //			}
-			// xóa khoảng trắng
-			for (int index = 0; index < data.length; ++index) {
-				data[index] = data[index].trim();
+				// xóa khoảng trắng
+				for (int index = 0; index < data.length; ++index) {
+					data[index] = data[index].trim();
+				}
+				dsCVHT[i++] = new CoVanHocTap(data[0], data[1]);
+				line = bufferreader.readLine();
 			}
-			dsCVHT[i++] = new CoVanHocTap(data[0], data[1]);
-			line = bufferreader.readLine();
+			bufferreader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		bufferreader.close();
 	}
 
-	public void ghiFile() throws IOException {
-		FileWriter fw = new FileWriter(urlFile);
+	public void ghiFile() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(urlFile);
 
-		BufferedWriter writer = new BufferedWriter(fw);
-		for (CoVanHocTap n : dsCVHT) {
-			if (n != null)
-				writer.write(n + "\n");
+			BufferedWriter writer = new BufferedWriter(fw);
+			for (CoVanHocTap n : dsCVHT) {
+				if (n != null)
+					writer.write(n + "\n");
 
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		writer.close();
 
 	}
 
@@ -137,7 +150,7 @@ public class DSCVHT implements DanhSach {
 	}
 
 	@Override
-	public void themKPhanTu(int k) {
+	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
 	}

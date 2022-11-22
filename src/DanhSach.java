@@ -1,16 +1,25 @@
+import java.util.Scanner;
 
-interface DanhSach {
-	public void them1PhanTu();
+public abstract class DanhSach {
+	protected int size = 0;
+	protected static Scanner sc = new Scanner(System.in);
 
-	public void themKPhanTu(int k);
+	public abstract void them1PhanTu();
 
-	public void xoaPhanTu(String maSo);
+	public abstract void themNPhanTu(int n);
 
-	public void xoaKPhanTu(int k);
+	public abstract void xoaPhanTu(String maSo);
 
-	public void xuatDanhSach();
+	public abstract void xoaKPhanTu(int k);
 
-	public void suaPhanTu(String maSo);
+	public abstract void suaPhanTu(String maSo);
 
-	public void nhapNPhanTu(int n);
+	public abstract void nhapNPhanTu(int n);
+
+	public abstract void xuatDanhSach();
+
+	public abstract void docFile();
+
+	public abstract void ghiFile();
+
 }

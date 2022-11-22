@@ -2,7 +2,6 @@ public class SinhVien extends Nguoi {
 	private String maSV;
 	private Lop lop;
 	private Nganh nganh;
-	private Khoa khoa;
 	private static int currentMaSV = 0;// thêm cả ở class cvht
 
 	public SinhVien() {
@@ -45,14 +44,6 @@ public class SinhVien extends Nguoi {
 		this.nganh = nganh;
 	}
 
-	public Khoa getKhoa() {
-		return khoa;
-	}
-
-	public void setKhoa(Khoa khoa) {
-		this.khoa = khoa;
-	}
-
 	public void DanhSachMH() {
 
 	}
@@ -66,7 +57,7 @@ public class SinhVien extends Nguoi {
 	@Override
 	public String toString() {
 		String formatString = String.format("%-4s| %s |%-20s |%-20s |%-20s", maSV, super.toString(), lop.getTenLop(),
-				nganh.getTenNganh(), khoa.getTenKhoa());
+				nganh);
 		return formatString;
 	}
 
@@ -90,7 +81,7 @@ public class SinhVien extends Nguoi {
 	@Override
 	public void xemLop() {
 		String formatString = String.format("%-4s|%-20s |%-20s |%-20s |%-20s", maSV, this.getHoTen(), lop.getTenLop(),
-				nganh.getTenNganh(), khoa.getTenKhoa());
+				nganh.getTenNganh());
 		System.out.println(formatString);
 	}
 }

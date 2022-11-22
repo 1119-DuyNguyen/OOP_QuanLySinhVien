@@ -1,5 +1,6 @@
 
-public class Nganh {
+
+public class Nganh extends Khoa {
 	private String maNganh;
 	private String tenNganh;
 
