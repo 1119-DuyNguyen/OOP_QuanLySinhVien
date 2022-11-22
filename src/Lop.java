@@ -1,17 +1,26 @@
 
+import java.util.Scanner;
+
 public class Lop {
+	private static Scanner sc = new Scanner(System.in);
 	String maLop;
 	String tenLop;
 	int soLuong;
 
 	public Lop() {
-		super();
+		System.out.print("Nhập mã lớp: ");
+		this.maLop = sc.nextLine();
+		System.out.print("Nhập tên lớp: ");
+		this.tenLop = sc.nextLine();
 	}
 
-	public Lop(String[] maLop, String tenLop, int soLuong) {
-		super();
+	public Lop(String maLop, String tenLop) {
+		this.maLop = maLop;
 		this.tenLop = tenLop;
-		this.soLuong = soLuong;
+	}
+
+	public Lop(String maLop) {
+		this.maLop = maLop;
 	}
 
 	public String getMaLop() {

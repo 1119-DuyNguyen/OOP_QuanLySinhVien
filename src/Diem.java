@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Diem extends MonHoc {
+public class Diem extends Mon {
 	public Diem(String maMH, String tenMH, int soTinChi, int namHoc, int hocKi) {
 		super(maMH, tenMH, soTinChi, namHoc, hocKi);
 	}
