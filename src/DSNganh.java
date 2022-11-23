@@ -10,9 +10,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DSNganh extends DanhSach implements suggestDS<Nganh> {
-
-//	private String[] stringTenNganh = {"kỹ thuật phần mềm", "kế toán" };
-//	private String[] stringMaNganh = { "KTPM", "KT" };
 	private String[] stringTenNganh = { "kỹ thuật phần mềm", "Công nghệ thông tin" };
 	private String[] stringMaNganh = { "KTPM", "CNTT" };
 	private Nganh[] dsNganh = new Nganh[2];
