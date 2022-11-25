@@ -1,3 +1,4 @@
+package DanhSach;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,9 +7,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
-public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
+import LopHoc.Khoa;
+
+public class DSKhoa extends DanhSach implements suggestDS {
 //	private String[] stringTenKhoa = { "Công nghệ thông tin",
 //			"Toán" };
 //	private String[] stringMaKhoa = { "CNTT", "Toan"};
@@ -25,7 +30,8 @@ public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
 				file.createNewFile();
 				for (int i = 0; i < dsKhoa.length; i++) {
 					if (dsKhoa[i] == null) {
-						dsKhoa[i] = new Khoa(stringMaKhoa[i], stringTenKhoa[i]);
+						dsKhoa[i] = new Khoa(stringMaKhoa[i], stringTenKhoa[i],
+								new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 
 					}
 				}
@@ -63,7 +69,8 @@ public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
 				if (i + 1 > dsKhoa.length) {
 					dsKhoa = Arrays.copyOf(dsKhoa, (i + 1) * 2);
 				}
-				dsKhoa[i++] = new Khoa(data[0], data[1]);
+				dsKhoa[i++] = new Khoa(data[0], data[1], data[2]);
+				this.size = i;
 				line = bufferreader.readLine();
 			}
 			bufferreader.close();
@@ -170,12 +177,6 @@ public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
 	}
 
 	@Override
-	public void xoaKPhanTu(int k) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void xuatDanhSach() {
 		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã Khoa", "Tên Khoa");
@@ -199,7 +200,7 @@ public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
 	}
 
 	@Override
-	public Khoa suggest() {
+	public String suggest() {
 
 		// TODO Auto-generated method stub
 		System.out.println("Danh sách môn hợp lệ");
@@ -212,13 +213,19 @@ public class DSKhoa extends DanhSach implements suggestDS<Khoa> {
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice > 0 && choice < size) {
-				return dsKhoa[choice];
+				return dsKhoa[choice].getMaKhoa();
 			} else if (choice == size) {
 				return null;
 			} else {
 				System.out.println("Nhập sai lựa chọn");
 			}
 		}
+	}
+
+	@Override
+	public void xoaNPhanTu(int n) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

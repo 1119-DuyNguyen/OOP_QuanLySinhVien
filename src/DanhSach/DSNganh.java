@@ -1,4 +1,6 @@
 
+package DanhSach;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,7 +11,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DSNganh extends DanhSach implements suggestDS<Nganh> {
+import LopHoc.Nganh;
+import LopHoc.NienKhoa;
+
+public class DSNganh extends DanhSach implements suggestDS {
 	private String[] stringTenNganh = { "kỹ thuật phần mềm", "Công nghệ thông tin" };
 	private String[] stringMaNganh = { "KTPM", "CNTT" };
 	private Nganh[] dsNganh = new Nganh[2];
@@ -25,9 +30,10 @@ public class DSNganh extends DanhSach implements suggestDS<Nganh> {
 			try {
 				// khởi tạo mẫu
 				file.createNewFile();
+				NienKhoa nienKhoa = new NienKhoa(2021, 2022, "Chính quy");
 				for (int i = 0; i < stringTenNganh.length; i++) {
 					if (dsNganh[i] == null)
-						dsNganh[i] = new Nganh(stringMaNganh[i], stringTenNganh[i]);
+						dsNganh[i] = new Nganh(stringMaNganh[i], stringTenNganh[i], nienKhoa);
 				}
 				ghiFile();
 			} catch (IOException e) {
@@ -150,12 +156,6 @@ public class DSNganh extends DanhSach implements suggestDS<Nganh> {
 	}
 
 	@Override
-	public void xoaKPhanTu(int k) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void xuatDanhSach() {
 		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã ngành", "Tên Ngành");
@@ -232,7 +232,7 @@ public class DSNganh extends DanhSach implements suggestDS<Nganh> {
 	}
 
 	@Override
-	public Nganh suggest() {
+	public String suggest() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		System.out.println("Danh sách môn hợp lệ");
@@ -245,12 +245,18 @@ public class DSNganh extends DanhSach implements suggestDS<Nganh> {
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice > 0 && choice < size) {
-				return dsNganh[choice];
+				return dsNganh[choice].getMaNganh();
 			} else if (choice == size) {
 				return null;
 			} else {
 				System.out.println("Nhập sai lựa chọn");
 			}
 		}
+	}
+
+	@Override
+	public void xoaNPhanTu(int n) {
+		// TODO Auto-generated method stub
+
 	}
 }

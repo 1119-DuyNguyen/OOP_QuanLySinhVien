@@ -1,3 +1,4 @@
+package DanhSach;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,26 +9,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class DSLop extends DanhSach implements suggestDS<Lop> {
-	private String[] tenLop = { "KTPM1", "KTPM2" };
-	private String[] maLop = { "DKP1211", "DKP1212" };
+import Mon.Mon;
+import Nguoi.SinhVien;
 
-	private Lop[] dsLop = new Lop[20];
-	private static final String urlFile = "data/Lop.txt";
-	private int size = 4;
+public class DanhSachSV extends DanhSach {
+	// private static SinhVien sVien[] = new SinhVien[100];
 
-	public DSLop() {
+	private SinhVien dsSV[] = new SinhVien[20];
+	private static final String urlFile = "data/SinhVien.txt";
+
+	public DanhSachSV() {
 //		System.out.println("%-20");
 
-		File file = new File("data/Mon.txt");
+		File file = new File("data/SinhVien.txt");
 		if (!file.exists()) {
 			try {
 				// khởi tạo mẫu
 				file.createNewFile();
-				for (int i = 0; i < tenLop.length; i++) {
-					if (dsLop[i] == null)
-						dsLop[i] = new Lop(maLop[i], tenLop[i]);
-				}
+				Mon mon[] = new Mon[2];
+				mon[0] = new Mon("Cơ sở dữ liệu", 3f);
+				mon[1] = new Mon("OOP", 10f);
+				dsSV[0] = new SinhVien("Duy SV1", "273 An Dương Vương – Phường 3 – Quận 5", "123456789", "Nam", "100",
+						"DKP1211", mon);
+				dsSV[1] = new SinhVien("Duy SV2", "273 An Dương Vương – Phường 3 – Quận 5", "123456789", "Nam", "101",
+						"DKP1211", mon);
 				ghiFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -61,11 +66,11 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 				for (int index = 0; index < data.length; ++index) {
 					data[index] = data[index].trim();
 				}
-				if (i + 1 > dsLop.length) {
-					dsLop = Arrays.copyOf(dsLop, (i + 1) * 2);
+				if (i + 1 > dsSV.length) {
+					dsSV = Arrays.copyOf(dsSV, (i + 1) * 2);
 				}
 
-				dsLop[i++] = new Lop(data[0], data[1]);
+				// dsSV[i++] = new SinhVien(data[0], data[1]);
 				line = bufferreader.readLine();
 			}
 			bufferreader.close();
@@ -77,7 +82,6 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void ghiFile() {
@@ -86,7 +90,7 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 			fw = new FileWriter(urlFile);
 
 			BufferedWriter writer = new BufferedWriter(fw);
-			for (Lop n : dsLop) {
+			for (SinhVien n : dsSV) {
 				if (n != null)
 					writer.write(n + "\n");
 
@@ -99,13 +103,13 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 
 	}
 
-	public int timKiemLopTheoMaLop(String MaLop) {
+	public int timKiemSVTheoMaSo(String maSV) {
 
 		for (int i = 0; i < size; ++i) {
-			System.out.println(dsLop[i].getMaLop().length());
-			if (dsLop[i].getMaLop().equals(MaLop)) {
+			System.out.println(dsSV[i].getMaSV().length());
+			if (dsSV[i].getMaSV().equals(maSV)) {
 
-				System.out.println(dsLop[i].getMaLop());
+				System.out.println(dsSV[i].getMaSV());
 				// sắp xếp lại thứ tự mảng
 				return i;
 			}
@@ -117,15 +121,15 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 	@Override
 	public void them1PhanTu() {
 		boolean isRebuild = false;
-		int length = dsLop.length;
+		int length = dsSV.length;
 		while (size + 1 >= length) {
 			length += 1;
 			isRebuild = true;
 		}
 		if (isRebuild) {
-			dsLop = Arrays.copyOf(dsLop, length);
+			dsSV = Arrays.copyOf(dsSV, length);
 		}
-		dsLop[size++] = new Lop();
+		dsSV[size++] = new SinhVien();
 
 		ghiFile();
 
@@ -136,28 +140,30 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 	@Override
 	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
-
+		for (int i = 0; i < n; ++i) {
+			this.them1PhanTu();
+		}
 	}
 
 	@Override
-	public void xoaPhanTu(String MaMH) {
-		System.out.println(MaMH.length());
+	public void xoaPhanTu(String maSV) {
+		System.out.println(maSV.length());
 		// TODO Auto-generated method stub
-		int index = timKiemLopTheoMaLop(MaMH);
+		int index = timKiemSVTheoMaSo(maSV);
 		if (index >= 0) {
-			for (int j = index + 1; j < dsLop.length; ++j) {
-				dsLop[j - 1] = dsLop[j];
+			for (int j = index + 1; j < dsSV.length; ++j) {
+				dsSV[j - 1] = dsSV[j];
 			}
-			dsLop[--size] = null;
+			dsSV[--size] = null;
 		} else
-			System.out.println(MaMH + " không tồn tại!");
+			System.out.println(maSV + " không tồn tại!");
 
 		ghiFile();
 
 	}
 
 	@Override
-	public void xoaKPhanTu(int k) {
+	public void xoaNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
 	}
@@ -166,7 +172,7 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 	public void xuatDanhSach() {
 		// TODO Auto-generated method stub
 		System.out.printf("%-20s|%-20s\n", "Mã môn", "Tên môn");
-		for (Lop n : dsLop) {
+		for (SinhVien n : dsSV) {
 			if (n != null)
 				System.out.println(n);
 
@@ -174,13 +180,13 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 	}
 
 	@Override
-	public void suaPhanTu(String maMH) {
+	public void suaPhanTu(String maSV) {
 		// TODO Auto-generated method stub
-		int index = timKiemLopTheoMaLop(maMH);
+		int index = timKiemSVTheoMaSo(maSV);
 		if (index >= 0) {
-			dsLop[index] = new Lop();
+			dsSV[index] = new SinhVien();
 		} else
-			System.out.println(maMH + " không tồn tại!");
+			System.out.println(maSV + " không tồn tại!");
 
 		ghiFile();
 
@@ -190,27 +196,5 @@ public class DSLop extends DanhSach implements suggestDS<Lop> {
 	public void nhapNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public Lop suggest() {
-		// TODO Auto-generated method stub
-		System.out.println("Danh sách môn hợp lệ");
-
-		for (int i = 0; i < size; ++i) {
-			System.out.println(i + ". " + dsLop[i]);
-		}
-		System.out.println(size + "." + "Quay lại");
-		System.out.println("Chọn môn để nhập");
-		while (true) {
-			int choice = Integer.parseInt(sc.nextLine());
-			if (choice > 0 && choice < size) {
-				return dsLop[choice];
-			} else if (choice == size) {
-				return null;
-			} else {
-				System.out.println("Nhập sai lựa chọn");
-			}
-		}
 	}
 }
