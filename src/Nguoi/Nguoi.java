@@ -1,7 +1,8 @@
+package Nguoi;
 
 import java.util.Scanner;
 
-public abstract class Nguoi {
+public class Nguoi {
 	protected static Scanner sc = new Scanner(System.in);
 	private String hoTen;
 	private String gioiTinh;
@@ -65,7 +66,9 @@ public abstract class Nguoi {
 		return String.format("%-20s |%-5s |%-10s |%-20s ", this.hoTen, this.gioiTinh, this.soDt, this.diaChi);
 	}
 
-	abstract public void xemLop();
-
-	abstract public void xuatThongTin();
+//	public void nhapThongTin() {
+//	};
+//
+//	public void xuatThongTin() {
+//	};
 }

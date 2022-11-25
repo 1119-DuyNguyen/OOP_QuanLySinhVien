@@ -1,3 +1,5 @@
+package DanhSach;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,24 +9,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class DSCVHT extends DanhSach {
-	private String[] tenCV = { "A", "B" };
-	private String[] lopCV = { "DKP1211", "DKP1212" };
-	private static CoVanHocTap[] dsCVHT = new CoVanHocTap[2];
-	private int size = 2;
-	private static final String urlFile = "data/CVHT.txt";
+import LopHoc.Lop;
 
-	public DSCVHT() {
+public class DSLop extends DanhSach implements suggestDS {
+	private Lop[] dsLop = new Lop[20];
+	private static final String urlFile = "data/Lop.txt";
+	private int size = 4;
+
+	public DSLop() {
 //		System.out.println("%-20");
 
-		File file = new File("data/CVHT.txt");
+		File file = new File("data/Mon.txt");
 		if (!file.exists()) {
 			try {
 				// khởi tạo mẫu
 				file.createNewFile();
-				for (int i = 0; i < tenCV.length; i++) {
-					if (dsCVHT[i] == null)
-						dsCVHT[i] = new CoVanHocTap(tenCV[i], lopCV[i]);
+				String[] tenLop = { "KTPM1", "KTPM2" };
+				String[] maLop = { "DKP1211", "DKP1212" };
+				for (int i = 0; i < tenLop.length; i++) {
+					if (dsLop[i] == null)
+						dsLop[i] = new Lop(maLop[i], tenLop[i]);
 				}
 				ghiFile();
 			} catch (IOException e) {
@@ -59,10 +63,15 @@ public class DSCVHT extends DanhSach {
 				for (int index = 0; index < data.length; ++index) {
 					data[index] = data[index].trim();
 				}
-				dsCVHT[i++] = new CoVanHocTap(data[0], data[1]);
+				if (i + 1 > dsLop.length) {
+					dsLop = Arrays.copyOf(dsLop, (i + 1) * 2);
+				}
+
+				dsLop[i++] = new Lop(data[0], data[1]);
 				line = bufferreader.readLine();
 			}
 			bufferreader.close();
+			size = i;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,6 +79,7 @@ public class DSCVHT extends DanhSach {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	public void ghiFile() {
@@ -78,7 +88,7 @@ public class DSCVHT extends DanhSach {
 			fw = new FileWriter(urlFile);
 
 			BufferedWriter writer = new BufferedWriter(fw);
-			for (CoVanHocTap n : dsCVHT) {
+			for (Lop n : dsLop) {
 				if (n != null)
 					writer.write(n + "\n");
 
@@ -91,16 +101,13 @@ public class DSCVHT extends DanhSach {
 
 	}
 
-	public void xuatDS() {
-		for (CoVanHocTap i : dsCVHT)
-			i.xuatThongTin();
-	}
+	public int timKiemLopTheoMaLop(String MaLop) {
 
-	public int timKiemCVTheoMaSo(String maSo) {
+		for (int i = 0; i < size; ++i) {
+			System.out.println(dsLop[i].getMaLop().length());
+			if (dsLop[i].getMaLop().equals(MaLop)) {
 
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getMaGV().equals(maSo)) {
+				System.out.println(dsLop[i].getMaLop());
 				// sắp xếp lại thứ tự mảng
 				return i;
 			}
@@ -109,42 +116,21 @@ public class DSCVHT extends DanhSach {
 		return -1;
 	}
 
-	public void timKiemCVTheoHoTen(String maSo) {
-
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getHoTen().equals(maSo)) {
-				// sắp xếp lại thứ tự mảng
-				System.out.println(dsCVHT[i]);
-			}
-
-		}
-	}
-
-	public void timKiemCVTheoMaCV(String maSo) {
-
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getMaGV().equals(maSo)) {
-				// sắp xếp lại thứ tự mảng
-				System.out.println(dsCVHT[i]);
-			}
-
-		}
-	}
-
 	@Override
 	public void them1PhanTu() {
 		boolean isRebuild = false;
-		int length = dsCVHT.length;
+		int length = dsLop.length;
 		while (size + 1 >= length) {
 			length += 1;
 			isRebuild = true;
 		}
 		if (isRebuild) {
-			dsCVHT = Arrays.copyOf(dsCVHT, length);
+			dsLop = Arrays.copyOf(dsLop, length);
 		}
-		dsCVHT[size++] = new CoVanHocTap();
+		dsLop[size++] = new Lop();
+
+		ghiFile();
+
 		// TODO Auto-generated method stub
 
 	}
@@ -156,21 +142,24 @@ public class DSCVHT extends DanhSach {
 	}
 
 	@Override
-	public void xoaPhanTu(String maSo) {
+	public void xoaPhanTu(String MaMH) {
+		System.out.println(MaMH.length());
 		// TODO Auto-generated method stub
-		int index = timKiemCVTheoMaSo(maSo);
+		int index = timKiemLopTheoMaLop(MaMH);
 		if (index >= 0) {
-			for (int j = index + 1; j < dsCVHT.length; ++j) {
-				dsCVHT[j - 1] = dsCVHT[j];
+			for (int j = index + 1; j < dsLop.length; ++j) {
+				dsLop[j - 1] = dsLop[j];
 			}
-			dsCVHT[--size] = null;
+			dsLop[--size] = null;
 		} else
-			System.out.println(maSo + " không tồn tại!");
+			System.out.println(MaMH + " không tồn tại!");
+
+		ghiFile();
 
 	}
 
 	@Override
-	public void xoaKPhanTu(int k) {
+	public void xoaNPhanTu(int n) {
 		// TODO Auto-generated method stub
 
 	}
@@ -178,17 +167,25 @@ public class DSCVHT extends DanhSach {
 	@Override
 	public void xuatDanhSach() {
 		// TODO Auto-generated method stub
+		System.out.printf("%-20s|%-20s\n", "Mã môn", "Tên môn");
+		for (Lop n : dsLop) {
+			if (n != null)
+				System.out.println(n);
 
+		}
 	}
 
 	@Override
-	public void suaPhanTu(String maSo) {
+	public void suaPhanTu(String maMH) {
 		// TODO Auto-generated method stub
-		int index = timKiemCVTheoMaSo(maSo);
+		int index = timKiemLopTheoMaLop(maMH);
 		if (index >= 0) {
-			dsCVHT[index] = new CoVanHocTap();
+			dsLop[index] = new Lop();
 		} else
-			System.out.println(maSo + " không tồn tại!");
+			System.out.println(maMH + " không tồn tại!");
+
+		ghiFile();
+
 	}
 
 	@Override
@@ -197,10 +194,25 @@ public class DSCVHT extends DanhSach {
 
 	}
 
-	public void xemLopQuanLy() {
-		for (int i = 0; i < tenCV.length; i++) {
-			System.out.println("Ten Co Van: " + tenCV[i]);
-			System.out.println("Ma lop day: " + lopCV[i]);
+	@Override
+	public String suggest() {
+		// TODO Auto-generated method stub
+		System.out.println("Danh sách môn hợp lệ");
+
+		for (int i = 0; i < size; ++i) {
+			System.out.println(i + ". " + dsLop[i]);
+		}
+		System.out.println(size + "." + "Quay lại");
+		System.out.println("Chọn môn để nhập");
+		while (true) {
+			int choice = Integer.parseInt(sc.nextLine());
+			if (choice > 0 && choice < size) {
+				return dsLop[choice].getMaLop();
+			} else if (choice == size) {
+				return null;
+			} else {
+				System.out.println("Nhập sai lựa chọn");
+			}
 		}
 	}
 }

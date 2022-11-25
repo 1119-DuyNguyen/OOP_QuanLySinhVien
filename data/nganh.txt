@@ -1,2 +1,2 @@
-KTPM                |kỹ thuật phần mềm   
-CNTT                |Công nghệ thông tin 
+KTPM                |kỹ thuật phần mềm   |Chính quy           |2021    |2022    
+CNTT                |Công nghệ thông tin |Chính quy           |2021    |2022    
