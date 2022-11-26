@@ -1,4 +1,4 @@
-package LopHoc;
+package trash;
 
 import java.util.Scanner;
 

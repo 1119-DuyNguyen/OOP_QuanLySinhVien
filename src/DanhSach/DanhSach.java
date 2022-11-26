@@ -1,4 +1,5 @@
 package DanhSach;
+
 import java.util.Scanner;
 
 public abstract class DanhSach {
@@ -11,13 +12,13 @@ public abstract class DanhSach {
 
 	public abstract void xoaPhanTu(String maSo);
 
-	public abstract void xoaNPhanTu(int n);
-
 	public abstract void suaPhanTu(String maSo);
 
 	public abstract void nhapNPhanTu(int n);
 
 	public abstract void xuatDanhSach();
+
+	public abstract void khoiTaoFile();
 
 	public abstract void docFile();
 

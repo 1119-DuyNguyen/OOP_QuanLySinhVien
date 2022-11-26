@@ -1,25 +1,48 @@
 package Nguoi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import DanhSach.DSLop;
 
 public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	private String maCVHT;
-	private String maLop[];
-	private static int createdMaCVHT = 0;// thêm cả ở class cvht
+	private static int createdMaCVHT = 2;// thêm cả ở class cvht
+	{
+		// Khởi tạo data
+		File file = new File("data/maCVHT.txt");
+		if (!file.exists()) {
+			try {
+				// khởi tạo mẫu
+				file.createNewFile();
+				CoVanHocTap.writeFileCurrentMaSV(createdMaCVHT);
 
-	public CoVanHocTap(String hoTen, String diaChi, String soDt, String gioiTinh, String maCVHT, String[] maLop) {
-		super(hoTen, diaChi, soDt, gioiTinh);
-		this.maCVHT = maCVHT;
-		this.maLop = maLop;
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		} else {
+
+			// ghiFile();
+			// CoVanHocTap.readFileCurrentMaSV();
+			readFileCurrentMaSV();
+		}
 	}
 
 	public CoVanHocTap() {
 		super();
-
-//		System.out.print("Nhập lớp cố vấn: ");
-//		this.maLop = sc.nextLine();
 		this.maCVHT = Integer.toString(createdMaCVHT++);
 		// none
+	}
+
+	public CoVanHocTap(String maCVHT, String hoTen, String gioiTinh, String soDt, String diaChi) {
+		super(hoTen, gioiTinh, soDt, diaChi);
+		this.maCVHT = maCVHT;
 	}
 
 	public String getMaGV() {
@@ -36,16 +59,55 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	}
 
 	@Override
-	public void xemLop(DSLop ds) {
+	public void xemLop() {
 		// TODO Auto-generated method stub
-
+		System.out.println("Các lớp cố vấn quản lý là :");
+		DSLop dsLop = new DSLop();
+		dsLop.xuatDSTheoMaCoVan(this.maCVHT);
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		String parentString = super.toString();
-		String maLopString = String.join(",", maLop);
-		return String.format("%s|%-10s|%s", parentString, this.maCVHT, maLopString);
+
+		return String.format("%-20s|%s", this.maCVHT, parentString);
+	}
+
+	// đọc file
+	private static void readFileCurrentMaSV() {
+		FileReader fReader;
+		try {
+			fReader = new FileReader("data/maCVHT.txt");
+
+			BufferedReader bufferreader = new BufferedReader(fReader);
+			CoVanHocTap.createdMaCVHT = Integer.parseInt(bufferreader.readLine());
+
+			bufferreader.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// ghi file
+	public static void writeFileCurrentMaSV(int createdMaCVHT) {
+		CoVanHocTap.createdMaCVHT = createdMaCVHT;
+		FileWriter fw;
+		try {
+			fw = new FileWriter("data/maCVHT.txt");
+
+			BufferedWriter writer = new BufferedWriter(fw);
+			writer.write(Integer.toString(createdMaCVHT));
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

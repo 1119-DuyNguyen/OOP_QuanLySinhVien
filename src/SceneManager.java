@@ -2,8 +2,11 @@ import java.util.Scanner;
 
 import DanhSach.DSCVHT;
 import DanhSach.DSKhoa;
+import DanhSach.DSLop;
+import DanhSach.DSMon;
 import DanhSach.DSNganh;
 import DanhSach.DanhSachSV;
+import Nguoi.SinhVien;
 
 public class SceneManager {
 //	private static DSMon dsMon = new DSMon();
@@ -11,6 +14,7 @@ public class SceneManager {
 	private static DSKhoa dsKhoa = new DSKhoa();
 	private static DSCVHT dsCVHT = new DSCVHT();
 	private static DanhSachSV dsSV = new DanhSachSV();
+	private static DSLop dsLop = new DSLop();
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void showMenu() {
@@ -18,14 +22,15 @@ public class SceneManager {
 		System.out.println("1. Thao tác với DSSV.");
 		System.out.println("2. Thao tác với DS cố vấn học tập.");
 		System.out.println("3. Thao tác với lớp.");
-//		System.out.println("4. Thao tác với DS Môn.");
-		System.out.println("4. Thao tác DS Khoa.");
-		System.out.println("5. Thao tác DS Ngành.");
+		System.out.println("4. Thao tác với điểm sinh viên.");
+		System.out.println("5. Thao tác DS Khoa.");
+		System.out.println("6. Thao tác DS Ngành.");
 		System.out.println("Nhấn phím 0 để thoát!!");
 		System.out.println("---------------------------");
 	}
 
 	public static void main(String[] args) {
+
 		// TODO Auto-generated method stub
 		boolean con = true;
 		while (con) {
@@ -34,7 +39,8 @@ public class SceneManager {
 			int choice = Integer.parseInt(sc.nextLine());
 			switch (choice) {
 			case 1:
-				showMenuSV();
+				while (showMenuSV()) {
+				}
 				break;
 			case 2:
 				showMenuCVHT();
@@ -43,14 +49,15 @@ public class SceneManager {
 				showMenuLop();
 				break;
 			case 4:
-				showFaculty();
+				showSubject();
 				break;
 			case 5:
+				showFaculty();
+				break;
+			case 6:
 				showMajor();
 				break;
-//			case 4:
-//				showSubject();
-//				break;
+
 			case 0: {
 				con = false;
 				System.exit(0);
@@ -63,7 +70,7 @@ public class SceneManager {
 		}
 	}
 
-	private static void showMenuLop() {
+	private static boolean showMenuLop() {
 		// TODO Auto-generated method stub
 		System.out.println("\n-----------Lớp------------");
 		System.out.println("1. Xem DS lớp");
@@ -77,47 +84,63 @@ public class SceneManager {
 		System.out.print("Nhập lựa chọn: ");
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
+		case 0:
+			return false;
 		case 1:
-			System.out.println("Hàm xem");
+			System.out.println("Hiển thị danh sách khoa");
+			dsLop.xuatDanhSach();
 			break;
 		case 2:
-			System.out.println("Hàm thêm 1");
+			dsLop.them1PhanTu();
 			break;
-		case 3:
-			System.out.println("Hàm thêm n");
+		case 3: {
+			System.out.println("nhập số lượng cần thêm");
+			int n = Integer.parseInt(sc.nextLine());
+			dsLop.themNPhanTu(n);
 			break;
-		case 4:
-			System.out.println("Hàm sửa");
+		}
+		case 4: {
+			System.out.println("Nhập mã khoa muốn sửa:");
+			dsLop.suaPhanTu(sc.nextLine());
 			break;
-		case 5:
-			System.out.println("Hàm xoá");
+		}
+		case 5: {
+			System.out.print("Nhập mã khoa muốn xóa:");
+			dsLop.xoaPhanTu(sc.nextLine());
 			break;
+		}
 		case 6:
-			showMenu();
+			System.out.println("Hàm thêm n");
+			System.out.println("nhập số lượng cần thêm");
+			int n = Integer.parseInt(sc.nextLine());
+			dsLop.nhapNPhanTu(n);
+
 			break;
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+
 		}
+		return true;
 
 	}
 
-	private static void showMenuCVHT() {
+	private static boolean showMenuCVHT() {
 		// TODO Auto-generated method stub
 		System.out.println("\n-----------CỐ VẤN------------");
+		System.out.println("0. Quay về trang chủ");
 		System.out.println("1. Xem DS cố vấn học tập");
 		System.out.println("2. Thêm 1 cố vấn học tập");
 		System.out.println("3. Thêm n cố vấn học tập");
-		System.out.println("4. Sửa n cố vấn học tập");
-		System.out.println("5. Xoá n cố vấn học tập");
-		System.out.println("6. Tìm kiếm cố vấn học tập (theo họ tên)");
-		System.out.println("7. Tìm kiếm cố vấn học tập (theo lớp cố vấn)");
-		System.out.println("8. Xem lớp quản lý của cố vấn");
-		System.out.println("9. Quay về trang chủ");
+		System.out.println("4. Sửa theo mã cố vấn học tập");
+		System.out.println("5. Xoá theo mã cố vấn học tập");
+		System.out.println("6. Xem lớp quản lý của cố vấn");
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
+		case 0:
+			return false;
 		case 1:
 			dsCVHT.xuatDanhSach();
 			break;
@@ -125,77 +148,56 @@ public class SceneManager {
 			dsCVHT.them1PhanTu();
 			break;
 		case 3: {
-			System.out.println("Hàm thêm n");
 			System.out.println("nhập số lượng cần thêm");
 			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				dsCVHT.them1PhanTu();
-			}
+			dsCVHT.themNPhanTu(n);
 			break;
 		}
 		case 4: {
-			System.out.println("Hàm sửa");
-			System.out.println("nhập số lượng cần sửa");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Nhập mã số cần sửa :");
-				dsCVHT.suaPhanTu(sc.nextLine());
-			}
+
+			System.out.println("nhập mã số cố vấn cần sửa");
+			dsCVHT.suaPhanTu(sc.nextLine());
 			break;
 		}
 		case 5: {
-			System.out.println("Hàm xoá");
-			System.out.println("nhập số lượng cần sửa");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Nhập mã số cần xóa:");
-				dsCVHT.xoaPhanTu(sc.nextLine());
-			}
+			System.out.println("nhập mã số cố vấn cần xóa");
+			dsCVHT.xoaPhanTu(sc.nextLine());
 			break;
 		}
+
 		case 6:
-			System.out.println("Hàm tìm theo họ tên");
-			System.out.println("Nhập tên muốn tìm: ");
-			String inputHoTen = sc.nextLine();
-			dsCVHT.timKiemCVTheoHoTen(inputHoTen);
-			break;
-		case 7:
-			System.out.println("Hàm tìm theo mã cố vấn");
-			System.out.println("Nhập mã muốn tìm: ");
-			String inputMaCV = sc.nextLine();
-			dsCVHT.timKiemCVTheoHoTen(inputMaCV);
-			break;
-		case 8:
 			System.out.println("Hàm xem lớp quản lý");
-			// lấy hàm của cái case 1 tạm, đm
 			dsCVHT.xemLopQuanLy();
 			break;
-		case 9:
-			showMenu();
-			break;
+
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+		return true;
 	}
 
-	public static void showMenuSV() {
+	public static boolean showMenuSV() {
 		System.out.println("\n--------SINH VIÊN---------");
+		System.out.println("0. Quay về trang chủ");
 		System.out.println("1. Xem DS sinh viên");
 		System.out.println("2. Thêm 1 sinh viên");
 		System.out.println("3. Thêm n sinh viên");
-		System.out.println("4. Sửa n sinh viên");
-		System.out.println("5. Xoá n sinh viên");
-		System.out.println("6. Thống kê sinh viên qua môn");
-		System.out.println("7. Thống kê sinh viên nợ môn");
-		System.out.println("8. Thống kê sinh viên theo khoa");
+		System.out.println("4. Sửa theo mã sinh viên");
+		System.out.println("5. Xoá theo mã sinh viên");
+		System.out.println("6. Thống kê sinh viên đủ điều kiện học bổng");
+		System.out.println("7. Thống kê những sinh viên nợ môn");
+		System.out.println("8. Thống kê sinh viên theo lớp");
 		System.out.println("9. Tìm kiếm sinh viên (theo họ tên)");
 		System.out.println("10. Tìm kiếm sinh viên (theo MSSV)");
-		System.out.println("11. Quay về trang chủ");
+		System.out.println("11. Thêm mới n sinh viên");
+		System.out.println("12. Xem lớp sinh viên");
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
 		int choiceSV = Integer.parseInt(sc.nextLine());
 		switch (choiceSV) {
+		case 0:
+			return false;
 		case 1:
 			dsSV.xuatDanhSach();
 			break;
@@ -203,75 +205,111 @@ public class SceneManager {
 			dsSV.them1PhanTu();
 			break;
 		case 3: {
-			System.out.println("Hàm thêm n");
 			System.out.println("nhập số lượng cần thêm");
 			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				dsSV.them1PhanTu();
-			}
+			dsSV.themNPhanTu(n);
 			break;
 		}
 		case 4: {
-			System.out.println("Hàm sửa");
-			System.out.println("nhập số lượng cần sửa");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Nhập mã số cần sửa :");
-				dsSV.suaPhanTu(sc.nextLine());
-			}
+			System.out.println("Nhập mã số sinh viên cần sửa");
+			dsSV.suaPhanTu(sc.nextLine());
+
 			break;
 		}
 		case 5: {
-			System.out.println("Hàm xoá");
-			System.out.println("nhập số lượng cần sửa");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Nhập mã số cần xóa:");
-				dsSV.xoaPhanTu(sc.nextLine());
-			}
+			System.out.println("Nhập mã số sinh viên cần xóa");
+			dsSV.xoaPhanTu(sc.nextLine());
+
 			break;
 		}
 
 		case 6:
-			System.out.println("Hàm thống kê qua môn");
+			System.out.println("Thống kê đủ điều kiện học bổng");
+			dsSV.thongKeDuDieuKienHocBong();
 			break;
 		case 7:
-			System.out.println("Hàm thống kê nợ môn");
+			System.out.println("Thống kê nợ môn");
+			dsSV.thongKeSVNoMon();
 			break;
 		case 8:
-			System.out.println("Hàm thống kê theo khoa");
+			System.out.println("Hàm thống kê theo lớp");
+			dsSV.thongKeSVTheoLop();
 			break;
-		case 9:
-			System.out.println("Hàm tìm kiếm theo tên");
+		case 9: {
+			boolean isApproximately = showMenuSearch();
+			System.out.println("Nhập tên cần tìm : ");
+			if (isApproximately) {
+				dsSV.timKiemSVTheoHoTen(sc.nextLine(), isApproximately);
+			} else {
+				int position = dsSV.timKiemSVTheoHoTen(sc.nextLine(), isApproximately);
+				if (position == -1) {
+					System.out.println("Không tìm thấy sinh viên");
+				} else {
+					System.out.println("Sinh viên cần tìm là :");
+					dsSV.xuatKQTimKiem(position);
+				}
+			}
+		}
+			break;
+		case 10: {
+			System.out.println("Nhập mã số cần tìm:");
+			boolean isApproximately = showMenuSearch();
+			if (isApproximately) {
+				dsSV.timKiemSVTheoHoTen(sc.nextLine(), isApproximately);
+			} else {
+				int position = dsSV.timKiemSVTheoMaSo(sc.nextLine(), isApproximately);
+				if (position == -1) {
+					System.out.println("Không tìm thấy sinh viên");
+				} else {
+					dsSV.xuatKQTimKiem(position);
+				}
+			}
+
+		}
+			break;
+
+		case 11:
+			System.out.println("nhập số lượng cần nhập mới");
+			int n = Integer.parseInt(sc.nextLine());
+			dsSV.nhapNPhanTu(n);
 
 			break;
-		case 10:
-			System.out.println("Hàm tìm kiếm theo mssv");
-			break;
-		case 11:
-			showMenu();
+		case 12:
+			System.out.println("Nhập mã số cần xem lớp:");
+			int position = dsSV.timKiemSVTheoMaSo(sc.nextLine(), false);
+			if (position == -1) {
+				System.out.println("Không tìm thấy sinh viên");
+			} else {
+				SinhVien sVien = dsSV.getSV(position);
+				sVien.xemLop();
+			}
+
 			break;
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
-
+		return true;
 	}
 
-	public static void showFaculty() {
+	public static boolean showFaculty() {
 //		System.out.println("Hiển thị danh sách khoa");
 //		//dsKhoa.xuatDanhSach();
+
 		System.out.println("\n-----------Khoa------------");
-		System.out.println("1. Xem DS Khoa");
-		System.out.println("2. Them 1 Khoa");
-		System.out.println("3. Them n Khoa ");
-		System.out.println("4. Xoa 1 Khoa");
-		System.out.println("5. Xoá n Khoa");
-		System.out.println("6. Quay về trang chủ");
+		System.out.println("0. Quay về trang chủ");
+		System.out.println("1. Xem danh sách Khoa");
+		System.out.println("2. Thêm 1 Khoa");
+		System.out.println("3. Thêm n Khoa");
+		System.out.println("4. Sửa theo mã Khoa");
+		System.out.println("5. Xoá theo mã Khoa");
+		System.out.println("6. Nhập mới n Khoa");
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
+		case 0:
+			return false;
 		case 1:
 			System.out.println("Hiển thị danh sách khoa");
 			dsKhoa.xuatDanhSach();
@@ -280,158 +318,86 @@ public class SceneManager {
 			dsKhoa.them1PhanTu();
 			break;
 		case 3: {
+			System.out.println("nhập số lượng cần thêm");
+			int n = Integer.parseInt(sc.nextLine());
+			dsKhoa.themNPhanTu(n);
+			break;
+		}
+		case 4: {
+			System.out.println("Nhập mã khoa muốn sửa:");
+			dsKhoa.suaPhanTu(sc.nextLine());
+			break;
+		}
+		case 5: {
+			System.out.print("Nhập mã khoa muốn xóa:");
+			dsKhoa.xoaPhanTu(sc.nextLine());
+			break;
+		}
+		case 6:
 			System.out.println("Hàm thêm n");
 			System.out.println("nhập số lượng cần thêm");
 			int n = Integer.parseInt(sc.nextLine());
 			dsKhoa.nhapNPhanTu(n);
-			break;
-		}
-		case 4: {
-			System.out.println("Danh sách khoa trước khi sửa: ");
-			dsKhoa.xuatDanhSach();
-			System.out.println("Hàm sửa");
-			System.out.println("Nhập số lượng cần sửa: ");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Chọn khoa muốn sửa:");
-				String input = sc.nextLine();
-				dsKhoa.suaPhanTu(input);
-				System.out.println("Danh sách khoa mới sau khi sửa: ");
-				dsKhoa.xuatDanhSach();
-			}
-			break;
-		}
-		case 5: {
-			System.out.println("Danh sách khoa trước khi xoá: ");
-			dsKhoa.xuatDanhSach();
-			System.out.println("Hàm xoá");
-			System.out.println("Nhập số lượng cần xoá: ");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Chọn khoa muốn xoá:");
-				String input = sc.nextLine();
-				dsKhoa.xoaPhanTu(input);
-				System.out.println("Danh sách khoa mới sau khi xoá: ");
-				dsKhoa.xuatDanhSach();
-			}
-			break;
-		}
-		case 6:
-			showMenu();
+
 			break;
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+
 		}
-//		System.out.print("Nhập lựa chọn: ");
-//		int choiceKhoa = sc.nextInt();
-//		switch (choiceKhoa) {
-//		case 1:
-//			dsKhoa.xuatDanhSach();
-//			break;
-//		case 2:
-//			dsKhoa.them1PhanTu();
-//			break;
-//		//case 3: {
-//			//System.out.println("Hàm thêm n Khoa");
-//			//System.out.println("nhập số lượng cần thêm");
-//			//int n = sc.nextInt();
-//			//for (int i = 0; i < n; ++i) {
-//				//dsKhoa.them1PhanTu();
-//			//}
-//			break;
-//		}
-//		case 4: {
-//			System.out.println("Hàm xoa 1 khoa");
-//			for (int i = 0; i < n; ++i) {
-//				System.out.println("Nhập mã số Khoa cần xoa :");
-//				dsKhoa.xoaPhanTu();
-//			}
-//			break;
-//		}
-//		/*case 5: {
-//			System.out.println("Hàm xoá n khoa");
-//			System.out.println("nhập số lượng cần xoa");
-//			int n = Integer.parseInt(sc.nextLine());
-//			for (int i = 0; i < n; ++i) {
-//				System.out.println("Nhập mã Khoa cần xóa:");
-//				dsKhoa.xoaKPhanTu(sc.nextLine());
-//			}
-//			break;
-//		}*/
-//		case 6:
-//			showMenu();
-//			break;
-//		default:
-//			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
-//		}
+		return true;
 
 	}
 
-	public static void showMajor() {
-		System.out.println("Hiển thị danh sách ngành");
-		// dsNganh.xuatDanhSach();
-		System.out.println("\n-----------Nganh------------");
-		System.out.println("1. Xem DS nganh");
-		System.out.println("2. Thêm 1 nganh vào danh sách");
-		System.out.println("3. Thêm n nganh vào danh sách");
-		System.out.println("4. Sửa n nganh");
-		System.out.println("5. Xoá n nganh");
-		System.out.println("6. Quay về trang chủ");
+	public static boolean showMajor() {
+		System.out.println("\n-----------Ngành------------");
+		System.out.println("0. Quay về trang chủ");
+		System.out.println("1. Xem danh sách Ngành");
+		System.out.println("2. Thêm 1 Ngành");
+		System.out.println("3. Thêm n Ngành");
+		System.out.println("4. Sửa theo mã Ngành");
+		System.out.println("5. Xoá theo mã Ngành");
+		System.out.println("6. Nhập mới n Ngành");
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
+		case 0:
+			return false;
 		case 1:
-			System.out.println("Hiển thị danh sách khoa");
+			System.out.println("Hiển thị danh sách ngành");
 			dsNganh.xuatDanhSach();
 			break;
 		case 2:
 			dsNganh.them1PhanTu();
 			break;
 		case 3: {
+			System.out.println("nhập số lượng cần thêm");
+			int n = Integer.parseInt(sc.nextLine());
+			dsNganh.themNPhanTu(n);
+			break;
+		}
+		case 4: {
+			System.out.println("Nhập mã ngành muốn sửa:");
+			dsNganh.suaPhanTu(sc.nextLine());
+			break;
+		}
+		case 5: {
+			System.out.print("Nhập mã ngành muốn xóa:");
+			dsNganh.xoaPhanTu(sc.nextLine());
+			break;
+		}
+		case 6:
 			System.out.println("Hàm thêm n");
 			System.out.println("nhập số lượng cần thêm");
 			int n = Integer.parseInt(sc.nextLine());
 			dsNganh.nhapNPhanTu(n);
 			break;
-		}
-		case 4: {
-			System.out.println("Danh sách khoa trước khi sửa: ");
-			dsNganh.xuatDanhSach();
-			System.out.println("Hàm sửa");
-			System.out.println("Nhập số lượng cần sửa: ");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Chọn khoa muốn sửa:");
-				String input = sc.nextLine();
-				dsNganh.suaPhanTu(input);
-				System.out.println("Danh sách khoa mới sau khi sửa: ");
-				dsNganh.xuatDanhSach();
-			}
-			break;
-		}
-		case 5: {
-			System.out.println("Danh sách khoa trước khi xoá: ");
-			dsNganh.xuatDanhSach();
-			System.out.println("Hàm xoá");
-			System.out.println("Nhập số lượng cần xoá: ");
-			int n = Integer.parseInt(sc.nextLine());
-			for (int i = 0; i < n; ++i) {
-				System.out.println("Chọn khoa muốn xoá:");
-				String input = sc.nextLine();
-				dsNganh.xoaPhanTu(input);
-				System.out.println("Danh sách khoa mới sau khi xoá: ");
-				dsNganh.xuatDanhSach();
-			}
-			break;
-		}
-		case 6:
-			showMenu();
-			break;
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+		return true;
+
 //		int choiceCV = sc.nextInt();
 //		switch (choiceCV) {
 //		case 1:
@@ -471,254 +437,95 @@ public class SceneManager {
 //		;
 	}
 
-	public static void showSubject() {
-		System.out.println("\n-----------MÔN------------");
-		System.out.println("1. Xem DS môn");
-		System.out.println("2. Thêm 1 môn");
-		System.out.println("3. Thêm n môn");
-		System.out.println("4. Sửa n môn");
-		System.out.println("5. Xoá n môn");
-		System.out.println("6. Quay về trang chủ");
-		System.out.println("---------------------------");
+	public static boolean showSubject() {
+		while (true) {
+			System.out.println("Nhập mã sinh viên cần thao tác: ");
+			int position = dsSV.timKiemSVTheoMaSo(sc.nextLine(), false);
+			if (position == -1) {
+				System.out.println("Không tìm thấy sinh viên");
+				return false;
+			}
+			SinhVien sVien = dsSV.getSV(position);
+			System.out.println("Thông tin sinh viên được thao tác : ");
+			dsSV.xuatKQ1SV(position);
+			DSMon dsMon = sVien.getNhungMonHoc();
+			// SinhVien sinhVien = dsSV[position];
+			System.out.println("\n-----------Môn------------");
+			System.out.println("0. Quay về trang chủ");
+			System.out.println("1. Xem DS môn");
+			System.out.println("2. Thêm 1 môn");
+			System.out.println("3. Thêm n môn");
+			System.out.println("4. Sửa môn");
+			System.out.println("5. Xoá môn");
+			System.out.println("6. Thêm mới n môn");
+			System.out.println("---------------------------");
 
-//		System.out.print("Nhập lựa chọn: ");
-//		int choiceCV = Integer.parseInt(sc.nextLine());
-//		switch (choiceCV) {
-//		case 1:
-//			System.out.println("Hiển thị danh sách môn");
-//			dsMon.xuatDanhSach();
-//			break;
-//		case 2:
-//			dsMon.them1PhanTu();
-//			break;
-//		case 3: {
-//			System.out.println("Hàm thêm n");
-//			System.out.println("nhập số lượng cần thêm");
-//			int n = Integer.parseInt(sc.nextLine());
-//			dsMon.nhapNPhanTu(n);
-//			break;
-//		}
-//		case 4: {
-//			System.out.println("Danh sách môn trước khi sửa: ");
-//			dsMon.xuatDanhSach();
-//			System.out.println("Hàm sửa");
-//			System.out.println("Nhập số lượng cần sửa: ");
-//			int n = Integer.parseInt(sc.nextLine());
-//			for (int i = 0; i < n; ++i) {
-//				System.out.println("Chọn môn muốn sửa:");
-//				String input = sc.nextLine();
-//				dsMon.suaPhanTu(input);
-//				System.out.println("Danh sách môn mới sau khi sửa: ");
-//				dsMon.xuatDanhSach();
-//			}
-//			break;
-//		}
-//		case 5: {
-//			System.out.println("Danh sách môn trước khi xoá: ");
-//			dsMon.xuatDanhSach();
-//			System.out.println("Hàm xoá");
-//			System.out.println("Nhập số lượng cần xoá: ");
-//			int n = Integer.parseInt(sc.nextLine());
-//			for (int i = 0; i < n; ++i) {
-//				System.out.println("Chọn môn muốn xoá:");
-//				String input = sc.nextLine();
-//				dsMon.xoaPhanTu(input);
-//				System.out.println("Danh sách môn mới sau khi xoá: ");
-//				dsMon.xuatDanhSach();
-//			}
-//			break;
-//		}
-//		case 6:
-//			showMenu();
-//			break;
-//		default:
-//			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
-//		}
+			System.out.print("Nhập lựa chọn: ");
+			int choiceCV = Integer.parseInt(sc.nextLine());
+			switch (choiceCV) {
+			case 0:
+				return false;
+			case 1:
+				dsMon.xuatDanhSach();
+				break;
+			case 2:
+				dsMon.them1PhanTu();
+				break;
+			case 3: {
+				System.out.println("nhập số lượng cần thêm");
+				int n = Integer.parseInt(sc.nextLine());
+				dsMon.themNPhanTu(n);
+				break;
+			}
+			case 4: {
+				int index = dsMon.suggest();
+				dsMon.suaPhanTu(index);
+				System.out.println("Danh sách môn sau khi sửa: ");
+				dsMon.xuatDanhSach();
+				break;
+			}
+			case 5: {
+				int index = dsMon.suggest();
+				dsMon.xoaPhanTu(index);
+				System.out.println("Danh sách môn sau khi xoá: ");
+				dsMon.xuatDanhSach();
+			}
+				break;
+
+			case 6:
+				System.out.println("nhập số lượng nhập mới");
+				int n = Integer.parseInt(sc.nextLine());
+				dsMon.nhapNPhanTu(n);
+				break;
+			default:
+				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+			}
+		}
 
 	}
 
-	// toàn bộ phần phía trên sẽ là menu chính
+	// nếu là true thì tìm kiếm gần đúng, false tìm kiếm chính xác
+	public static boolean showMenuSearch() {
+		System.out.println("\n-----------Tìm kiếm------------");
+		System.out.println("1. Tìm kiếm chính xác");
+		System.out.println("2. Tìm kiếm gần đúng");
+		System.out.println("---------------------------");
 
-//	public static void AddNewStudentorGiaoVien() {
-//		System.out.println("1.Thêm SV");
-//		System.out.println("2.Thêm GV");
-//		System.out.print("Nhập lựa chọn: ");
-//		int choice2 = Integer.parseInt(sc.nextLine());
-//		if (choice2 == 1) {
-//			danhSachSV.add();
-//			SV1.add(danhSachSV);
-//		} else {
-//			gv1.nhapTT();
-//			GV1.add(gv1);
-//		}
-//	}
+		System.out.print("Nhập lựa chọn: ");
+		do {
+			int choiceCV = Integer.parseInt(sc.nextLine());
+			switch (choiceCV) {
+			case 1:
+				return false;
+			case 2:
+				return true;
+			default:
+				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
+			}
 
-//	public static void suaSV() {
-//		String maSV = danhSachSV.nhapMaSV();
-//		danhSachSV.edit(maSV);
-//	}
-//
-//	public static void xoaSV() {
-//		String maSV = danhSachSV.nhapMaSV();
-//		danhSachSV.delete(maSV);
-//	}
-//
-//	public static void ShowProfileGiaoVien() {
-//		String header = String.format("%-12s%-12s%-15s%-15s%-15s%-15s%-15s", "Mã GV", "Họ Tên", "Giới tính",
-//				"Ngày sinh", "Địa chỉ", "SĐT", "Khoa");
-//		System.out.println(header);
-//		for (CoVanHocTap gv1 : GV1) {
-//			String row = String.format("%-12s%-12s%-15S%-15s%-15s%-15s%-15s", gv1.getMaGV(), gv1.getHoTen(),
-//					gv1.getGioiTinh(), gv1.getNgaySinh(), gv1.getDiaChi(), gv1.getSoDt(), gv1.getKhoa());
-//			System.out.println(row);
-//		}
-//	}
-//
-//	public static void InsertMark() {
-//		for (int i = 0; i < 1; i++) {
-//			diem1.nhapTT();
-//			Diem1.add(diem1);
-//		}
-//	}
-//
-//	public static void nhapDiem() {
-//		m1.nhapTTMon();
-//		taoMon.add(m1);
-//	}
-//
-//	public static void DangKiMonHoc() {
-//		boolean check = true;
-//		while (check) {
-//			System.out.print("Đăng kí học (Y/N): ");
-//			String option = sc1.nextLine();
-//			if (Objects.equals(option, "Y") || Objects.equals(option, "y")) {
-//				DangKiMonHoc dk1 = new DangKiMonHoc();
-//				dk1.DKi();
-//				DK1.add(dk1);
-//			} else {
-//				check = false;
-//			}
-//		}
-//	}
-//
-//	public static void inTTDangKi() {
-//		System.out.print("Nhập mã SV: ");
-//		String masv1 = sc1.nextLine();
-//		String header3 = String.format("%-12s%-12s%-15s", "TênMH", "Số TC", "Tên Giảng Viên");
-//		System.out.println(header3);
-//		for (DangKiMonHoc dk1 : DK1) {
-//			if (masv1.equals(dk1.maSV)) {
-//				String row = String.format("%-12s%-12s%-15s", show(dk1.maMH), show1(dk1.maMH), show2(dk1.maGV));
-//				System.out.println(row);
-//			}
-//		}
-//	}
-//
-//	public static String show(String MaMH) {
-//		for (HocPhan m1 : taoMon) {
-//			if (MaMH.equals(m1.getMaMH())) {
-//				return m1.tenMh;
-//			}
-//		}
-//		return null;
-//	}
-//
-//	public static int show1(String MaMH) {
-//		for (HocPhan m1 : taoMon) {
-//			if (MaMH.equals(m1.getMaMH())) {
-//				return m1.soTC;
-//			}
-//		}
-//		return 0;
-//	}
-//
-//	public static String show2(String MaGV) {
-//		for (CoVanHocTap gv1 : GV1) {
-//			if ((MaGV.equals(gv1.getMaGV()))) {
-//				return gv1.getHoTen();
-//			}
-//		}
-//		return null;
-//	}
-//
-//	public static void CheckbyIDStudent() {
-//		System.out.print("Nhập mã SV: ");
-//		String MaSv = sc1.nextLine();
-//		String header = String.format("%-12s%-12s%-15s%-15s%-10s", "Mã SV", "MaMH", "TênMH", "Điểm", "Tình Trạng");
-//		System.out.println(header);
-//		for (Diem diem1 : Diem1) {
-//			if (MaSv.equals(diem1.getMaSv())) {
-//				for (int i = 0; i < diem1.Mon.length; i++) {
-//					String row = String.format("%-12s%-12s%-15S%-15.2f%-10s", diem1.getMaSv(), diem1.Mon[i].maMH,
-//							diem1.Mon[i].tenMh, diem1.Mon[i].getDiem(), diem1.Mon[i].getTinhTrang());
-//					System.out.println(row);
-//				}
-//			}
-//		}
-//	}
-//
-//	public static void CheckbyIDSubject() {
-//		System.out.print("Nhập mã MH: ");
-//		String MaMH = sc1.nextLine();
-//		String header2 = String.format("%-12s%-12s%-15s%-15s%-10s", "Mã SV", "MaMH", "TênMH", "Điểm", "Tình Trạng");
-//		System.out.println(header2);
-//		for (Diem diem1 : Diem1) {
-//			for (int i = 0; i < diem1.Mon.length; i++) {
-//				if (MaMH.equals(diem1.Mon[i].maMH)) {
-//					String row = String.format("%-12s%-12s%-15S%-15f%-10s", diem1.getMaSv(), diem1.Mon[i].maMH,
-//							diem1.Mon[i].tenMh, diem1.Mon[i].getDiem(), diem1.Mon[i].getTinhTrang());
-//					System.out.println(row);
-//				}
-//			}
-//		}
-//	}
-//
-//	public static void ListPassorFail() {
-//		System.out.print("Nhập mã MH: ");
-//		String Ma = sc1.nextLine();
-//		System.out.println("1.Trượt");
-//		System.out.println("2.Qua");
-//		System.out.print("Nhập lựa chọn: ");
-//		int chon = Integer.parseInt(sc.nextLine());
-//		String header3 = String.format("%-12s%-12s%-15s%-15s", "Mã SV", "MaMH", "TênMH", "Điểm");
-//		System.out.println(header3);
-//		if (chon == 1) {
-//			for (Diem diem1 : Diem1) {
-//				for (int i = 0; i < diem1.Mon.length; i++) {
-//					if ("Thi Lại".equals(diem1.Mon[i].getTinhTrang()) && Ma.equals(diem1.Mon[i].getMaMH())) {
-//						String row = String.format("%-12s%-12s%-15S%-15f", diem1.getMaSv(), diem1.Mon[i].getMaMH(),
-//								diem1.Mon[i].getTenMh(), diem1.Mon[i].getDiem());
-//						System.out.println(row);
-//					}
-//				}
-//			}
-//		} else {
-//			for (Diem diem1 : Diem1) {
-//				for (int i = 0; i < diem1.Mon.length; i++) {
-//					if ("Qua Môn".equals(diem1.Mon[i].getTinhTrang()) && Ma.equals(diem1.Mon[i].getMaMH())) {
-//						String row = String.format("%-12s%-12s%-15S%-15f", diem1.getMaSv(), diem1.Mon[i].getMaMH(),
-//								diem1.Mon[i].getTenMh(), diem1.Mon[i].getDiem());
-//						System.out.println(row);
-//					}
-//				}
-//			}
-//		}
-//	}
-//
-//	public static void CheckHocBong() {
-//		for (Diem diem1 : Diem1) {
-//			if (diem1.GPA() > 7.5) {
-//				for (SinhVien sinhVien : danhSachSV.getArrSinhVien()) {
-//					if (diem1.getMaSv().equals(sinhVien.getMaSV())) {
-//						danhSachSV.show();
-//						System.out.println("GPA: " + diem1.GPA());
-//					}
-//				}
-//			} else {
-//				System.out.println("Null!!");
-//			}
-//		}
-//	}
+		} while (true);
+
+	}
 
 	public final static void clearConsole() {
 		for (int i = 0; i < 30; ++i)

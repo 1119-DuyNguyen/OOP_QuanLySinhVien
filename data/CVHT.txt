@@ -1,2 +1,2 @@
-Duy 1                |Nam   |123456789  |273 An Dương Vương – Phường 3 – Quận 5 |100       |DKP1211,DKP1212
-Duy 2                |Nam   |123456789  |273 An Dương Vương – Phường 3 – Quận 5 |101       |DKP1213,DKP1214
+0                   |Nguyễn Thanh Duy    |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  
+1                   |Võ Khương Duy       |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  

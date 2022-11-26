@@ -1,32 +1,59 @@
 package Nguoi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import DanhSach.DSLop;
+import DanhSach.DSMon;
 import Mon.Mon;
 
 public class SinhVien extends Nguoi implements ActionMemberClassroom {
 	private String maSV;
-	private String maLop;
-	private Mon nhungMonHoc[] = new Mon[2];
-	private static int currentMaSV = 0;// thêm cả ở class cvht
+	private String maLop = "Chưa có";
+	// private Mon nhungMonHoc[];
+	private DSMon nhungMonHoc;
+	private static int currentMaSV = 5;// thêm cả ở class cvht
+	{
+		// Khởi tạo data
+		File file = new File("data/maSV.txt");
+		if (!file.exists()) {
+			try {
+				// khởi tạo mẫu
+				file.createNewFile();
+				SinhVien.writeFileCurrentMaSV(currentMaSV);
+
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		} else {
+
+			// ghiFile();
+			// SinhVien.readFileCurrentMaSV();
+			readFileCurrentMaSV();
+		}
+	}
 
 	public SinhVien() {
 		super();
+		DSLop ds = new DSLop();
+		this.maLop = ds.suggest();
+		SinhVien.writeFileCurrentMaSV(SinhVien.currentMaSV + 1);
+		this.maSV = Integer.toString(SinhVien.currentMaSV);
 
-		this.maSV = Integer.toString(currentMaSV++);
 	}
 
-	public SinhVien(String hoTen, String diaChi, String soDt, String gioiTinh, String maSV, String maLop,
+	public SinhVien(String maSV, String hoTen, String gioiTinh, String soDt, String diaChi, String maLop,
 			Mon[] nhungMonHoc) {
-		super(hoTen, diaChi, soDt, gioiTinh);
+		super(hoTen, gioiTinh, soDt, diaChi);
 		this.maSV = maSV;
 		this.maLop = maLop;
-		this.nhungMonHoc = nhungMonHoc;
-	}
-
-	public SinhVien(String maSV, String hoTen, String diaChi, String soDt, String gioiTinh) {
-		super(hoTen, diaChi, soDt, gioiTinh);
-		this.maSV = Integer.toString(currentMaSV++);
-
+		this.nhungMonHoc = new DSMon(nhungMonHoc);
 	}
 
 	public String getMaSV() {
@@ -46,45 +73,192 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 
 	}
 
-	// to string sẽ xuất thông tin cơ bản
+	public String toStringShow() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+
+	// to string sẽ đọc ghi file
 	@Override
 	public String toString() {
+		String toStringMonString;
 
-		String joinMonString[] = new String[nhungMonHoc.length];
-		for (int i = 0; i < nhungMonHoc.length; ++i) {
-			joinMonString[i] = nhungMonHoc[i].toString();
+		if (nhungMonHoc == null) {
+			toStringMonString = "";
+
+		} else {
+			String joinMonString[];
+			Mon listMon[] = nhungMonHoc.getDsMon();
+			joinMonString = new String[listMon.length];
+			for (int i = 0; i < listMon.length; ++i) {
+				if (listMon[i] != null)
+					joinMonString[i] = listMon[i].toString();
+			}
+			toStringMonString = String.join(",", joinMonString);
 		}
-
-		String formatString = String.format("%-4s|%s|%-20s|%s", maSV, super.toString(), maLop,
-				String.join(",", joinMonString));
+		String formatString = String.format("%-6s|%s|%-20s|%s", maSV, super.toString(), maLop, toStringMonString);
 		return formatString;
 	}
 
-	public void XuatThongTinCaNhan() {
-		// System.out.println(this);
-		// System.out.println("Lop cua ban la:" + this.lop);
+	public String getMaLop() {
+		return maLop;
+	}
 
+	public void setMaLop(String maLop) {
+		this.maLop = maLop;
 	}
 
 	public void xuatThongTin() {
-//		System.out.println();
-//		System.out.println("Cố vấn học tập");
-////		super.xuatTT();
-//		System.out.println("Mã giáo viên: " + maGV);
-//		System.out.println("Khoa dạy: " + Khoa);
-		System.out.println(this);
+		float dtb = this.tinhDiemTB();
+		String toStringDTB;
+		if (dtb >= 0f) {
+			toStringDTB = String.format("%-4.2f", dtb);
+		} else {
+			toStringDTB = "Chưa nhập điểm";
+		}
+		String formatString = String.format("%-6s|%s|%-20s|%s", maSV, super.toString(), maLop, toStringDTB);
+		System.out.println(formatString);
 
-	}
-
-	public void xemLop() {
-//		String formatString = String.format("%-4s|%-20s |%-20s |%-20s |%-20s", maSV, this.getHoTen(), maLop.getTenLop(),
-//				maNganh.getTenNganh());
-		System.out.println("xem Lop");
 	}
 
 	@Override
-	public void xemLop(DSLop ds) {
+	public void xemLop() {
 		// TODO Auto-generated method stub
+//		String formatString = String.format("%-4s|%-20s |%-20s |%-20s |%-20s", maSV, this.getHoTen(), maLop.getTenLop(),
+//		maNganh.getTenNganh());
+		System.out.println("Thông tin chi tiết lớp học :");
+		DSLop ds = new DSLop();
+		ds.xuatDSTheoMaLop(this.maLop);
+	}
 
+	public float tinhDiemTB() {
+		float dtb = 0;
+		int index = 0;
+		if (this.nhungMonHoc == null) {
+			return -1f;
+		}
+		for (Mon mon : this.nhungMonHoc.getDsMon()) {
+			if (mon != null) {
+				dtb += mon.getDiem();
+				++index;
+			}
+
+		}
+		if (index != 0) {
+			dtb /= index;
+		}
+		return dtb;
+	}
+
+	// đọc file
+	private static void readFileCurrentMaSV() {
+		FileReader fReader;
+		try {
+			fReader = new FileReader("data/maSV.txt");
+
+			BufferedReader bufferreader = new BufferedReader(fReader);
+			SinhVien.currentMaSV = Integer.parseInt(bufferreader.readLine());
+
+			bufferreader.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// ghi file
+	public static void writeFileCurrentMaSV(int currentMaSV) {
+		SinhVien.currentMaSV = currentMaSV;
+		FileWriter fw;
+		try {
+			fw = new FileWriter("data/maSV.txt");
+
+			BufferedWriter writer = new BufferedWriter(fw);
+			writer.write(Integer.toString(currentMaSV));
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void suaThongTin() {
+		System.out.println("\n-----------Sửa thông tin-----------");
+		System.out.println("0. Quay lại");
+		System.out.println("1. Sửa họ tên");
+		System.out.println("2. Sửa giới tính");
+		System.out.println("3. Sửa số điện thoại");
+		System.out.println("4. Sửa địa chỉ");
+		System.out.println("5. Sửa mã lớp");
+		System.out.println("6. Sửa điểm");
+		System.out.println("---------------------------");
+		int chon = 0;
+		do {
+			System.out.print("Nhap lua chon: ");
+			chon = Integer.parseInt(sc.nextLine());
+			switch (chon) {
+			case 0:
+				break;
+			case 1:
+				System.out.print("Nhập họ tên: ");
+				setHoTen(sc.nextLine());
+				break;
+			case 2:
+				System.out.print("Nhập giới tính: ");
+				setGioiTinh(sc.nextLine());
+				break;
+			case 3:
+
+				System.out.print("Nhập số điện thoại: ");
+				setSoDt(sc.nextLine());
+				break;
+			case 4:
+				System.out.print("Nhập địa chỉ: ");
+				setDiaChi(sc.nextLine());
+				break;
+			case 5:
+
+				DSLop ds = new DSLop();
+				setMaLop(ds.suggest());
+				break;
+			case 6:
+				nhungMonHoc.suaPhanTu(1);
+				break;
+			default:
+				System.out.println("Lựa chọn không hợp lệ ! Hãy chọn lại");
+				break;
+			}
+		} while (chon > 6 && chon < 0);
+	}
+
+	public DSMon getNhungMonHoc() {
+		return nhungMonHoc;
+	}
+
+	public void setNhungMonHoc(DSMon nhungMonHoc) {
+		this.nhungMonHoc = nhungMonHoc;
+	}
+
+	public void xuatNhungMonSVRot() {
+		Mon listMon[] = nhungMonHoc.getDsMon();
+		for (Mon mon : listMon) {
+			if (mon == null)
+				continue;
+
+			if (mon.getDiem() < 5f) {
+				this.xuatThongTinMon(mon.getTenMH(), mon.getDiem());
+			}
+		}
+	}
+
+	private void xuatThongTinMon(String tenMon, float diem) {
+
+		String svNoMonToString = String.format("%-6s|%-20s|%-20s|%-4.2f", this.maSV, this.getHoTen(), tenMon, diem);
+		System.out.println(svNoMonToString);
 	}
 }

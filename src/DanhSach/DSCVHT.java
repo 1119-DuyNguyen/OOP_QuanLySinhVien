@@ -8,46 +8,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import Nguoi.CoVanHocTap;
 
 public class DSCVHT extends DanhSach {
 
 	private CoVanHocTap[] dsCVHT = new CoVanHocTap[2];
-
+	private static String formatHeader = String.format("%-20s|%-20s|%-5s|%-10s|%-40s", "mã cố vấn", "Họ và Tên", "GT",
+			"SĐT", "Địa chỉ");
 	private static final String urlFile = "data/CVHT.txt";
-	{
-
-	}
 
 	public DSCVHT() {
 //		System.out.println("%-20");
-
-		File file = new File("data/CVHT.txt");
-		if (!file.exists()) {
-			String[] tenCV = { "A", "B" };
-			String[] lopCV = { "DKP1211", "DKP1212" };
-			String[] lopCV2 = { "DKP1213", "DKP1214" };
-			try {
-				// khởi tạo mẫu
-				file.createNewFile();
-//public CoVanHocTap(String hoTen, String diaChi, String soDt, String gioiTinh, String maCVHT, String[] maLop) {
-				dsCVHT[0] = new CoVanHocTap("Duy 1", "273 An Dương Vương – Phường 3 – Quận 5", "123456789", "Nam",
-						"100", lopCV);
-				dsCVHT[1] = new CoVanHocTap("Duy 2", "273 An Dương Vương – Phường 3 – Quận 5", "123456789", "Nam",
-						"101", lopCV2);
-				ghiFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-
-			// ghiFile();
-			docFile();
-
-		}
-
+		khoiTaoFile();
 	}
 
 	public void docFile() {
@@ -62,22 +36,17 @@ public class DSCVHT extends DanhSach {
 			int i = 0;
 			while (line != null) {
 				String data[] = line.split("\\|");
-//			for (String d : data) {
-//				System.out.println(d);
-//			}
-				// xóa khoảng trắng
-				String[] maLopString = null;
 				for (int index = 0; index < data.length; ++index) {
 					data[index] = data[index].trim();
-					if (data[index].contains(",")) {
-						maLopString = data[index].split(",");
-					}
-
 				}
-				dsCVHT[i++] = new CoVanHocTap("Duy 1", "273 An Dương Vương – Phường 3 – Quận 5", "123456789", "Nam",
-						"0", maLopString);
+				if (i + 1 > dsCVHT.length) {
+
+					dsCVHT = Arrays.copyOf(dsCVHT, (i + 1) * 2);
+				}
+				dsCVHT[i++] = new CoVanHocTap(data[0], data[1], data[2], data[3], data[4]);
 				line = bufferreader.readLine();
 			}
+			size = i;
 			bufferreader.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -107,11 +76,6 @@ public class DSCVHT extends DanhSach {
 
 	}
 
-	public void xuatDS() {
-		for (CoVanHocTap i : dsCVHT)
-			i.xuatThongTin();
-	}
-
 	public int timKiemCVTheoMaSo(String maSo) {
 
 		for (int i = 0; i < dsCVHT.length; ++i) {
@@ -137,38 +101,53 @@ public class DSCVHT extends DanhSach {
 		}
 	}
 
-	public void timKiemCVTheoMaCV(String maSo) {
+	public int timKiemCVTheoMaCV(String maSo) {
 
 		for (int i = 0; i < dsCVHT.length; ++i) {
 
 			if (dsCVHT[i].getMaGV().equals(maSo)) {
-				// sắp xếp lại thứ tự mảng
-				System.out.println(dsCVHT[i]);
+
+				return i;
 			}
 
 		}
+		return -1;
 	}
 
 	@Override
 	public void them1PhanTu() {
-		boolean isRebuild = false;
-		int length = dsCVHT.length;
-		while (size + 1 >= length) {
-			length += 1;
-			isRebuild = true;
-		}
-		if (isRebuild) {
-			dsCVHT = Arrays.copyOf(dsCVHT, length);
-		}
-		dsCVHT[size++] = new CoVanHocTap();
-		// TODO Auto-generated method stub
+		if (size + 1 > dsCVHT.length)
+			dsCVHT = Arrays.copyOf(dsCVHT, (size + 1) * 2);
+
+		dsCVHT[size] = new CoVanHocTap();
+		System.out.println("Ngành đã nhập là :");
+		System.out.println(formatHeader);
+		System.out.println(dsCVHT[size++]);
+		ghiFile();
 
 	}
 
 	@Override
 	public void themNPhanTu(int n) {
 		// TODO Auto-generated method stub
+		int beforeAdd;
+		if (size == 0) {
+			beforeAdd = 0;
+		} else
+			beforeAdd = size;
 
+		for (int i = 0; i < n; ++i) {
+			if (size + 1 > dsCVHT.length)
+				dsCVHT = Arrays.copyOf(dsCVHT, (size + 1) * 2);
+			System.out.println("Nhập phần tử thứ " + Integer.toString(i + 1));
+			dsCVHT[size++] = new CoVanHocTap();
+		}
+		System.out.println("Thông tin đã nhập là :");
+		System.out.println(formatHeader);
+		while (beforeAdd < size) {
+			System.out.println(dsCVHT[beforeAdd++]);
+		}
+		ghiFile();
 	}
 
 	@Override
@@ -186,15 +165,14 @@ public class DSCVHT extends DanhSach {
 	}
 
 	@Override
-	public void xoaNPhanTu(int n) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void xuatDanhSach() {
-		// TODO Auto-generated method stub
 
+		System.out.println(formatHeader);
+		for (CoVanHocTap n : dsCVHT) {
+			if (n != null)
+				System.out.println(n);
+
+		}
 	}
 
 	@Override
@@ -210,13 +188,64 @@ public class DSCVHT extends DanhSach {
 	@Override
 	public void nhapNPhanTu(int n) {
 		// TODO Auto-generated method stub
+		dsCVHT = new CoVanHocTap[n];
+		size = 0;
+		themNPhanTu(n);
+	}
 
+	@Override
+	public void khoiTaoFile() {
+		File file = new File("data/CVHT.txt");
+		if (!file.exists()) {
+			try {
+				// khởi tạo mẫu
+				file.createNewFile();
+				dsCVHT[0] = new CoVanHocTap("0", "Nguyễn Thanh Duy", "Nam", "123456789",
+						"273 An Dương Vương – Phường 3 – Quận 5");
+				dsCVHT[1] = new CoVanHocTap("1", "Võ Khương Duy", "Nam", "123456789",
+						"273 An Dương Vương – Phường 3 – Quận 5");
+				ghiFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+
+			// ghiFile();
+			docFile();
+
+		}
 	}
 
 	public void xemLopQuanLy() {
-//		for (int i = 0; i < tenCV.length; i++) {
-//			System.out.println("Ten Co Van: " + tenCV[i]);
-//			System.out.println("Ma lop day: " + lopCV[i]);
-//		}
+		System.out.println("Nhập mã cố vấn cần xem lớp :");
+		String maCVInputString = sc.nextLine();
+		int index = timKiemCVTheoMaSo(maCVInputString);
+		if (index >= 0) {
+			dsCVHT[index].xemLop();
+		} else
+			System.out.println(maCVInputString + " không tồn tại!");
 	}
+
+	public String suggest() {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\n--------DANH SÁCH CVHT---------");
+		System.out.println(formatHeader);
+		for (int i = 0; i < size; ++i) {
+			System.out.println(i + ". " + dsCVHT[i]);
+		}
+		// System.out.println(size + "." + "Quay lại");
+		System.out.println("\n--------------------------");
+		System.out.println("Nhập lựa chọn:");
+		while (true) {
+			int choice = Integer.parseInt(sc.nextLine());
+			if (choice >= 0 && choice < size) {
+				return dsCVHT[choice].getMaGV();
+			} else {
+				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
+			}
+		}
+	}
+
 }
