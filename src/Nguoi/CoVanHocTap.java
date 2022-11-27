@@ -12,7 +12,7 @@ import DanhSach.DSLop;
 
 public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	private String maCVHT;
-	private static int createdMaCVHT = 2;// mặc định có 2 cvht
+	private static int createdMaCVHT = 1;// mặc định có 2 cvht
 	static {
 		// Khởi tạo data
 		File file = new File("data/maCVHT.txt");
@@ -20,19 +20,20 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 			try {
 				// khởi tạo mẫu
 				file.createNewFile();
-				CoVanHocTap.writeFileCurrentMaSV(createdMaCVHT);
+				CoVanHocTap.writeFileCurrentMaCVHT(createdMaCVHT);
 
 			} catch (IOException e) {
 
 				e.printStackTrace();
 			}
 		} else {
-			readFileCurrentMaSV();
+			readFileCurrentMaCVHT();
 		}
 	}
 
 	public CoVanHocTap() {
 		super();
+		CoVanHocTap.writeFileCurrentMaCVHT(createdMaCVHT);
 		this.maCVHT = Integer.toString(createdMaCVHT++);
 
 	}
@@ -63,7 +64,7 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	}
 
 	// đọc file
-	private static void readFileCurrentMaSV() {
+	private static void readFileCurrentMaCVHT() {
 		FileReader fReader;
 		try {
 			fReader = new FileReader("data/maCVHT.txt");
@@ -83,7 +84,7 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	}
 
 	// ghi file
-	public static void writeFileCurrentMaSV(int createdMaCVHT) {
+	public static void writeFileCurrentMaCVHT(int createdMaCVHT) {
 		CoVanHocTap.createdMaCVHT = createdMaCVHT;
 		FileWriter fw;
 		try {

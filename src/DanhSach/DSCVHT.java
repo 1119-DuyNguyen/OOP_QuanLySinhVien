@@ -95,7 +95,8 @@ public class DSCVHT extends DanhSach {
 			dsCVHT = Arrays.copyOf(dsCVHT, (size + 1) * 2);
 
 		dsCVHT[size] = new CoVanHocTap();
-		System.out.println("Ngành đã nhập là :");
+		// đã fix
+		System.out.println("Cố vấn đã nhập là :");
 		System.out.println(formatHeader);
 		System.out.println(dsCVHT[size++]);
 		ghiFile();
