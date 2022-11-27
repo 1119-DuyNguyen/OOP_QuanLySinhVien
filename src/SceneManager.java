@@ -88,8 +88,8 @@ public class SceneManager {
 		System.out.println("1. Xem DS lớp");
 		System.out.println("2. Thêm 1 lớp");
 		System.out.println("3. Thêm n lớp");
-		System.out.println("4. Sửa n lớp");
-		System.out.println("5. Xoá n lớp");
+		System.out.println("4. Sửa theo mã lớp");
+		System.out.println("5. Xoá theo mã lớp");
 		System.out.println("6. Nhập n phần tử mới đầu tiên");
 		System.out.println("---------------------------");
 
@@ -296,6 +296,7 @@ public class SceneManager {
 				SinhVien sVien = dsSV.getSV(position);
 				sVien.xemLop();
 			}
+			break;
 		case 13: {
 			while (showMenuMon()) {
 			}
@@ -420,7 +421,7 @@ public class SceneManager {
 
 		while (true) {
 			SinhVien sVien = dsSV.getSV(position);
-			System.out.println("Thông tin sinh viên được thao tác : ");
+			System.out.println("\n\nThông tin sinh viên được thao tác : ");
 			dsSV.xuatKQ1SV(position);
 			DSMon dsMon = sVien.getNhungMonHoc();
 			// SinhVien sinhVien = dsSV[position];
@@ -429,8 +430,8 @@ public class SceneManager {
 			System.out.println("1. Xem DS môn");
 			System.out.println("2. Thêm 1 môn");
 			System.out.println("3. Thêm n môn");
-			System.out.println("4. Sửa môn");
-			System.out.println("5. Xoá môn");
+			System.out.println("4. Sửa theo mã môn");
+			System.out.println("5. Xoá theo mã môn");
 			System.out.println("6. Thêm mới n môn");
 			System.out.println("7. Thao tác với sinh viên khác");
 			System.out.println("---------------------------");

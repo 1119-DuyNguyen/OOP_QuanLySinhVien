@@ -25,11 +25,9 @@ public class DSLop extends DanhSach implements suggestDS {
 	public int timKiemLopTheoMaLop(String MaLop) {
 
 		for (int i = 0; i < size; ++i) {
-			System.out.println(dsLop[i].getMaLop().length());
 			if (dsLop[i].getMaLop().equals(MaLop)) {
+				// System.out.println(dsLop[i].getMaLop());
 
-				System.out.println(dsLop[i].getMaLop());
-				// sắp xếp lại thứ tự mảng
 				return i;
 			}
 
@@ -74,7 +72,6 @@ public class DSLop extends DanhSach implements suggestDS {
 
 	@Override
 	public void xoaPhanTu(String MaMH) {
-		System.out.println(MaMH.length());
 		// TODO Auto-generated method stub
 		int index = timKiemLopTheoMaLop(MaMH);
 		if (index >= 0) {
@@ -82,6 +79,7 @@ public class DSLop extends DanhSach implements suggestDS {
 				dsLop[j - 1] = dsLop[j];
 			}
 			dsLop[--size] = null;
+
 		} else
 			System.out.println(MaMH + " không tồn tại!");
 
