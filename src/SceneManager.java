@@ -183,6 +183,7 @@ public class SceneManager {
 			System.out.println("Nhập n : ");
 			int n = Integer.parseInt(sc.nextLine());
 			dsCVHT.nhapNPhanTu(n);
+			break;
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
