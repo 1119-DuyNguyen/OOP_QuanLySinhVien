@@ -13,7 +13,7 @@ public class Khoa {
 	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	public Khoa() {
-		System.out.println("Nhập tên khoa: ");
+		System.out.print("Nhập tên khoa: ");
 		Scanner scanner = new Scanner(System.in);
 		this.tenKhoa = scanner.nextLine();
 		Date date = new Date();

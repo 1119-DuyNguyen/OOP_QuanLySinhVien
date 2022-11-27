@@ -168,7 +168,7 @@ public class DSLop extends DanhSach implements suggestDS {
 			System.out.println(i + "." + dsLop[i]);
 		}
 		System.out.println("\n--------------------------");
-		System.out.println("Nhập lựa chọn:");
+		System.out.print("Nhập lựa chọn:");
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice >= 0 && choice < size) {
@@ -249,6 +249,7 @@ public class DSLop extends DanhSach implements suggestDS {
 						dsLop[i] = new Lop(maLop[i], tenLop[i], "CNTT26112022183352", "0");
 				}
 				ghiFile();
+				this.size = tenLop.length;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

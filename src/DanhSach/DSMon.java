@@ -42,21 +42,6 @@ public class DSMon {
 
 	}
 
-//	public int timKiemMH(String tenMH) {
-//
-//		for (int i = 0; i < size; ++i) {
-//			System.out.println(dsMon[i].getMaMH().length());
-//			if (dsMon[i].getMaMH().equals(MaMH)) {
-//
-//				System.out.println(dsMon[i].getMaMH());
-//				// sắp xếp lại thứ tự mảng
-//				return i;
-//			}
-//
-//		}
-//		return -1;
-//	}
-
 	public void them1PhanTu() {
 		if (size + 1 > dsMon.length)
 			dsMon = Arrays.copyOf(dsMon, (size + 1) * 2);
@@ -147,7 +132,7 @@ public class DSMon {
 		}
 		// System.out.println(size + "." + "Quay lại");
 		System.out.println("\n--------------------------");
-		System.out.println("Nhập lựa chọn:");
+		System.out.print("Nhập lựa chọn:");
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice >= 0 && choice < size) {

@@ -205,6 +205,7 @@ public class DSCVHT extends DanhSach {
 				dsCVHT[1] = new CoVanHocTap("1", "Võ Khương Duy", "Nam", "123456789",
 						"273 An Dương Vương – Phường 3 – Quận 5");
 				ghiFile();
+				this.size = 2;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -218,7 +219,7 @@ public class DSCVHT extends DanhSach {
 	}
 
 	public void xemLopQuanLy() {
-		System.out.println("Nhập mã cố vấn cần xem lớp :");
+		System.out.print("Nhập mã cố vấn cần xem lớp :");
 		String maCVInputString = sc.nextLine();
 		int index = timKiemCVTheoMaSo(maCVInputString);
 		if (index >= 0) {
@@ -237,7 +238,7 @@ public class DSCVHT extends DanhSach {
 		}
 		// System.out.println(size + "." + "Quay lại");
 		System.out.println("\n--------------------------");
-		System.out.println("Nhập lựa chọn:");
+		System.out.print("Nhập lựa chọn:");
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice >= 0 && choice < size) {

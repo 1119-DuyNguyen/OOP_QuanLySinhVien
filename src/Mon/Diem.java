@@ -24,7 +24,7 @@ public class Diem {
 
 	public void nhapDiem() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Moi nhap Diem:");
+		System.out.print("Nhập điểm: ");
 		float choice = Float.parseFloat(sc.nextLine());
 		boolean isNotValid = true;
 		do {

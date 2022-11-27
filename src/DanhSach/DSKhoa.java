@@ -198,6 +198,7 @@ public class DSKhoa extends DanhSach implements suggestDS {
 					}
 				}
 				ghiFile();
+				this.size = stringTenKhoa.length;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -219,7 +220,7 @@ public class DSKhoa extends DanhSach implements suggestDS {
 		}
 		// System.out.println(size + "." + "Quay lại");
 		System.out.println("\n--------------------------");
-		System.out.println("Nhập lựa chọn:");
+		System.out.print("Nhập lựa chọn:");
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice >= 0 && choice < size) {

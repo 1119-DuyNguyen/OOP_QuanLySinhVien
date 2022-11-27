@@ -14,7 +14,7 @@ import LopHoc.Nganh;
 
 public class DSNganh extends DanhSach implements suggestDS {
 
-	private Nganh[] dsNganh = new Nganh[2];
+	private Nganh[] dsNganh = new Nganh[3];
 	private static final String urlFile = "data/nganh.txt";
 	private static String formatHeader = String.format("%-20s|%-20s|%-20s|%s", "Mã ngành", "Tên ngành", "Mã khoa",
 			"Ngày thành lập");
@@ -110,61 +110,6 @@ public class DSNganh extends DanhSach implements suggestDS {
 			dsNganh[index] = new Nganh();
 		} else
 			System.out.println(maSo + " không tồn tại!");
-
-//		String string;// 1,2
-//		String string2;// option1
-//		String string3;// option2
-//		String string4;// option2
-//		// nhập tên muốn tìm để thay(2 option)
-//		// phần này là phần option:
-//		System.out.println("\n-----------SỬA Nganh------------");
-//		System.out.println("1. Sửa tên Nganh");
-//		System.out.println("2. Nhập Nganh mới");
-//		System.out.println("---------------------------");
-//		System.out.print("Nhập lựa chọn: ");
-//		int choiceCV = sc.nextInt();
-//		switch (choiceCV) {
-//		case 1:
-//			// chỉ sửa tên Nganh, quy trình lấy string ở trên rồi tìm, nếu tìm
-//			// thấy thì thay cái tên đó bằng string2
-//			System.out.println("Hàm sửa tên Nganh");
-//			System.out.println("Nhập mã Nganh bạn muốn tìm để sửa:");
-//			string = sc.nextLine();
-//			System.out.println("Nhập tên Nganh mới:");
-//			string2 = sc.nextLine();
-//			int index = timKiemNganhTheoMaNganh(string);
-//			if (index >= 0) {
-//				dsNganh[index].setTenNganh(string2);
-//				System.out.println(
-//						"đã được thay đổi tên Nganh" + dsNganh[index].getTenNganh() + "bằng ten Nganh" + string2);
-//			} else
-//				System.out.println(string + " không tồn tại!");
-//			System.out.println("Hãy nhập tên Nganh mới");
-//			break;
-//		case 2:
-//			System.out.println("Hàm nhập mới Nganh");
-//			System.out.println("Nhập mã Nganh bạn muốn tìm để thay đổi:");
-//			string = sc.nextLine();
-//			// nhập tên và mã Nganh mới
-//			System.out.println("Hãy nhập tên Nganh mới");
-//			string3 = sc.nextLine();// tên mới
-//			System.out.println("Hãy nhập mã Nganh mới");
-//			string4 = sc.nextLine();// mã mới
-//			// thay đổi dữ liệu
-//			int index2 = timKiemNganhTheoMaNganh(string);
-//			if (index2 >= 0) {
-//				dsNganh[index2] = null;
-//				dsNganh[index2] = new Nganh();
-//				dsNganh[index2].setTenNganh(string3);
-//				dsNganh[index2].setMaNganh(string4);
-//				System.out.println("thông tin Nganh" + dsNganh[index2].getTenNganh() + "đã được thay đổi bằng Nganh"
-//						+ string3);
-//			} else
-//				System.out.println(string + " không tồn tại!");
-//			break;
-//		default:
-//			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
-//		}
 	}
 
 	@Override
@@ -236,7 +181,7 @@ public class DSNganh extends DanhSach implements suggestDS {
 			System.out.println(i + ". " + dsNganh[i]);
 		}
 		System.out.println("\n--------------------------");
-		System.out.println("Nhập lựa chọn:");
+		System.out.print("Nhập lựa chọn: ");
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice >= 0 && choice < size) {
@@ -249,8 +194,8 @@ public class DSNganh extends DanhSach implements suggestDS {
 
 	@Override
 	public void khoiTaoFile() {
-		String[] stringTenNganh = { "kỹ thuật phần mềm", "Công nghệ thông tin" };
-		String[] stringMaNganh = { "KTPM", "CNTT" };
+		String[] stringTenNganh = { "kỹ thuật phần mềm", "Công nghệ thông tin", "Quản trị kinh doanh" };
+		String[] stringMaNganh = { "KTPM", "CNTT", "QTKD" };
 
 		File file = new File("data/nganh.txt");
 		if (!file.exists()) {
@@ -263,8 +208,8 @@ public class DSNganh extends DanhSach implements suggestDS {
 						dsNganh[i] = new Nganh(stringMaNganh[i] + "26112022183352", stringTenNganh[i],
 								"CNTT26112022183352", "26/11/2022 18:33:52");
 				}
-
 				ghiFile();
+				this.size = stringTenNganh.length;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

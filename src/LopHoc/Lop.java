@@ -1,5 +1,7 @@
 package LopHoc;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import DanhSach.DSCVHT;
@@ -20,15 +22,36 @@ public class Lop {
 	}
 
 	public Lop() {
-		System.out.println("Nhập mã lớp: ");
-		this.maLop = sc.nextLine().trim();
 		System.out.print("Nhập tên lớp: ");
 		this.tenLop = sc.nextLine();
-		// generating maLop;
+		System.out.print("Lớp thứ mấy: ");
+		int numClassroom = Integer.parseInt(sc.nextLine());
+
 		DSNganh dsNganh = new DSNganh();
 		this.maNganh = dsNganh.suggest();
 		DSCVHT dsCVHT = new DSCVHT();
 		this.maCoVan = dsCVHT.suggest();
+		// generating maLop;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy");
+		String hashMaLopString = "";
+		boolean isSpace = true;
+		for (int i = 0; i < this.tenLop.length(); i++) {
+			char letter = this.tenLop.charAt(i);
+			if (letter == ' ') {
+				isSpace = true;
+				continue;
+			} else {
+				if (isSpace == true) {
+
+					hashMaLopString += Character.toUpperCase(letter);
+					isSpace = false;
+				}
+
+			}
+		}
+		hashMaLopString += df.format(new Date());
+		this.maLop = hashMaLopString + numClassroom;
+
 	}
 
 	public String getMaCoVan() {

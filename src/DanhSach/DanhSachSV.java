@@ -288,6 +288,7 @@ public class DanhSachSV extends DanhSach {
 						"273 An Dương Vương – Phường 3 – Quận 5", "DKP1212", mon);
 				dsSV[4] = new SinhVien("4", "Bùi Nguyên Minh Thư", "Nam", "123456789",
 						"273 An Dương Vương – Phường 3 – Quận 5", "DKP1212", mon1);
+				this.size = 5;
 				ghiFile();
 				// String formatString = String.format("%-4s|%s|%-20s|%s", maSV,
 				// super.toString(), maLop,

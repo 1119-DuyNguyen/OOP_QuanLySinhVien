@@ -16,14 +16,14 @@ public class Nganh {
 
 	public Nganh() {
 
-		System.out.println("Nhập tên ngành: ");
+		System.out.print("Nhập tên ngành: ");
 		Scanner scanner = new Scanner(System.in);
 		this.tenNganh = scanner.nextLine();
 		Date date = new Date();
 		this.ngayThanhLap = dateFormat.format(date);
 
 		// generating maNganh;
-		String hashMaKhoaString = "";
+		String hashMaNganhString = "";
 		boolean isSpace = true;
 		for (int i = 0; i < this.tenNganh.length(); i++) {
 			char letter = this.tenNganh.charAt(i);
@@ -33,14 +33,14 @@ public class Nganh {
 			} else {
 				if (isSpace == true) {
 
-					hashMaKhoaString += Character.toUpperCase(letter);
+					hashMaNganhString += Character.toUpperCase(letter);
 					isSpace = false;
 				}
 
 			}
 		}
-		hashMaKhoaString += new SimpleDateFormat("ddMMyyyyHHmmss").format(date);
-		this.maNganh = hashMaKhoaString;
+		hashMaNganhString += new SimpleDateFormat("ddMMyyyyHHmmss").format(date);
+		this.maNganh = hashMaNganhString;
 		DSKhoa dsKhoa = new DSKhoa();
 		this.maKhoa = dsKhoa.suggest();
 	}

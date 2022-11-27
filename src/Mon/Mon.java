@@ -7,10 +7,7 @@ public class Mon {
 	private String tenMH;
 	private Diem diem = new Diem(-1f);
 
-	// private String maMH;
 	public Mon() {
-//		System.out.print("Nhập mã môn: ");
-//		this.maMH = sc.nextLine();
 		System.out.print("Nhập tên môn: ");
 		this.tenMH = sc.nextLine();
 		diem.nhapDiem();
