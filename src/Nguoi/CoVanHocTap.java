@@ -33,8 +33,8 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 
 	public CoVanHocTap() {
 		super();
-		CoVanHocTap.writeFileCurrentMaCVHT(createdMaCVHT);
-		this.maCVHT = Integer.toString(createdMaCVHT++);
+		CoVanHocTap.writeFileCurrentMaCVHT(createdMaCVHT + 1);
+		this.maCVHT = Integer.toString(createdMaCVHT);
 
 	}
 
