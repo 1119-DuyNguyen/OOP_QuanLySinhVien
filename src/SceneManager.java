@@ -32,6 +32,7 @@ public class SceneManager {
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
+		System.out.println("Xem trước file README.txt để hiểu hơn về ứng dụng.");
 		boolean con = true;
 		while (con) {
 			showMenu();

@@ -17,7 +17,7 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 	private String maLop = "Chưa có";
 	// private Mon nhungMonHoc[];
 	private DSMon nhungMonHoc = new DSMon();
-	private static int currentMaSV = 5;// thêm cả ở class cvht
+	private static int currentMaSV = 4;// thêm cả ở class cvht
 	{
 		// Khởi tạo data
 		File file = new File("data/maSV.txt");
