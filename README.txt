@@ -10,7 +10,7 @@ Tên thành viên phát triển:
 
 - Toàn bộ các thành viên đều tham gia thực hiện xây dựng đồ án với thái độ tốt.
 - Nhóm đã làm việc tích cực để hoàn thiện sản phẩm, mong rằng sản phẩm sẽ được đón nhận.
-- Nhóm đã họp với nhau và kiểm thử và tìm các lỗi, trong tương lai có thể có lỗi mới phát sinh, nhóm sẽ phát hiện và sửa chữa kịp thời.
+- Nhóm đã họp với nhau để kiểm thử và tìm các lỗi, trong tương lai có thể có lỗi mới phát sinh, nhóm sẽ phát hiện và sửa chữa kịp thời.
 
 
 
