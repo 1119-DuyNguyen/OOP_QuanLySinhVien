@@ -39,13 +39,6 @@ public class Diem {
 
 	}
 
-	public boolean quaMon() {
-		if (diemHe10 >= 5)
-			return true;
-
-		return false;
-	}
-
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

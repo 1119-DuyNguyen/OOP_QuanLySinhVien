@@ -5,12 +5,8 @@ import java.util.Scanner;
 
 import Mon.Mon;
 
-public class DSMon {
-//	private String[] stringTenMon = { "hệ điều hành", "cơ sở dữ liệu", "đại số tuyến tính", "giải tích số" };
-//	private String[] stringMaMon = { "HDH", "CSDL", "DSTT", "GTS" };
+public class DSMon extends DanhSach {
 	private Mon[] dsMon = new Mon[1];
-//	private static final String urlFile = "data/Mon.txt";
-	private int size = 0;
 	private static String formatHeader = String.format("%-20s|%s", "Tên Môn", "Điểm");
 
 	public DSMon() {
@@ -51,8 +47,6 @@ public class DSMon {
 		System.out.println(formatHeader);
 		dsMon[size - 1].xuatThongTin();
 
-		// TODO Auto-generated method stub
-
 	}
 
 	public void themNPhanTu(int n) {
@@ -85,11 +79,6 @@ public class DSMon {
 			dsMon[--size] = null;
 		} else
 			System.out.println(index + " không hợp lệ!");
-
-	}
-
-	public void xoaNPhanTu(int n) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -130,7 +119,6 @@ public class DSMon {
 		for (int i = 0; i < size; ++i) {
 			System.out.println(i + ". " + dsMon[i]);
 		}
-		// System.out.println(size + "." + "Quay lại");
 		System.out.println("\n--------------------------");
 		System.out.print("Nhập lựa chọn:");
 		while (true) {
@@ -141,6 +129,24 @@ public class DSMon {
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}
 		}
+
+	}
+
+	@Override
+	public void xoaPhanTu(String maSo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void suaPhanTu(String maSo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void khoiTaoFile() {
+		// TODO Auto-generated method stub
 
 	}
 

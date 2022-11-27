@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import LopHoc.Lop;
 
-public class DSLop extends DanhSach implements suggestDS {
+public class DSLop extends DanhSach implements suggestMaDS {
 	private Lop[] dsLop = new Lop[20];
 	private static final String urlFile = "data/Lop.txt";
 	private static String formatHeader = String.format("%-20s|%-40s|%-20s|%s", "Mã Lớp", "Tên lớp", "Mã ngành",
@@ -156,7 +156,7 @@ public class DSLop extends DanhSach implements suggestDS {
 	}
 
 	@Override
-	public String suggest() {
+	public String suggestMa() {
 		// TODO Auto-generated method stub
 		System.out.println("\n--------DANH SÁCH LỚP---------");
 		// hai khoảng trống vì vì "i."

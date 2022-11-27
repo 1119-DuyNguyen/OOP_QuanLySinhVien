@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 import LopHoc.Nganh;
 
-public class DSNganh extends DanhSach implements suggestDS {
+public class DSNganh extends DanhSach implements suggestMaDS {
 
 	private Nganh[] dsNganh = new Nganh[3];
 	private static final String urlFile = "data/nganh.txt";
@@ -173,7 +173,7 @@ public class DSNganh extends DanhSach implements suggestDS {
 	}
 
 	@Override
-	public String suggest() {
+	public String suggestMa() {
 		// TODO Auto-generated method stub
 		System.out.println("\n--------DANH SÁCH NGÀNH---------");
 		System.out.println(formatHeader);

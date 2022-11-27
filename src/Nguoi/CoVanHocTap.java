@@ -12,8 +12,8 @@ import DanhSach.DSLop;
 
 public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	private String maCVHT;
-	private static int createdMaCVHT = 2;// thêm cả ở class cvht
-	{
+	private static int createdMaCVHT = 2;// mặc định có 2 cvht
+	static {
 		// Khởi tạo data
 		File file = new File("data/maCVHT.txt");
 		if (!file.exists()) {
@@ -27,9 +27,6 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 				e.printStackTrace();
 			}
 		} else {
-
-			// ghiFile();
-			// CoVanHocTap.readFileCurrentMaSV();
 			readFileCurrentMaSV();
 		}
 	}
@@ -37,7 +34,7 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	public CoVanHocTap() {
 		super();
 		this.maCVHT = Integer.toString(createdMaCVHT++);
-		// none
+
 	}
 
 	public CoVanHocTap(String maCVHT, String hoTen, String gioiTinh, String soDt, String diaChi) {
@@ -45,17 +42,8 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 		this.maCVHT = maCVHT;
 	}
 
-	public String getMaGV() {
+	public String getMaCVHT() {
 		return maCVHT;
-	}
-
-	public void xuatThongTin() {
-		System.out.println();
-		System.out.println("Cố vấn học tập");
-//		super.xuatTT();
-		System.out.println("Mã cố vấn: " + maCVHT);
-		System.out.println("Lớp dạy: ");
-
 	}
 
 	@Override

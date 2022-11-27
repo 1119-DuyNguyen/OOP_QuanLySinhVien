@@ -27,14 +27,8 @@ public class Mon {
 		return tenMH;
 	}
 
-	public void setTenMon(String string) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setMaMon(String string) {
-		// TODO Auto-generated method stub
-
+	public void setTenMH(String tenMH) {
+		this.tenMH = tenMH;
 	}
 
 	@Override
@@ -65,7 +59,7 @@ public class Mon {
 				break;
 			case 1:
 				System.out.print("Nhập tên môn: ");
-				setTenMon(sc.nextLine());
+				setTenMH(sc.nextLine());
 				break;
 			case 2:
 				System.out.print("Nhập điểm: ");

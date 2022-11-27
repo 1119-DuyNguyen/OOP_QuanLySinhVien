@@ -80,33 +80,8 @@ public class DSCVHT extends DanhSach {
 
 		for (int i = 0; i < dsCVHT.length; ++i) {
 
-			if (dsCVHT[i].getMaGV().equals(maSo)) {
+			if (dsCVHT[i].getMaCVHT().equals(maSo)) {
 				// sắp xếp lại thứ tự mảng
-				return i;
-			}
-
-		}
-		return -1;
-	}
-
-	public void timKiemCVTheoHoTen(String maSo) {
-
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getHoTen().equals(maSo)) {
-				// sắp xếp lại thứ tự mảng
-				System.out.println(dsCVHT[i]);
-			}
-
-		}
-	}
-
-	public int timKiemCVTheoMaCV(String maSo) {
-
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getMaGV().equals(maSo)) {
-
 				return i;
 			}
 
@@ -242,7 +217,7 @@ public class DSCVHT extends DanhSach {
 		while (true) {
 			int choice = Integer.parseInt(sc.nextLine());
 			if (choice >= 0 && choice < size) {
-				return dsCVHT[choice].getMaGV();
+				return dsCVHT[choice].getMaCVHT();
 			} else {
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}

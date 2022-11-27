@@ -15,17 +15,15 @@ import Mon.Mon;
 public class SinhVien extends Nguoi implements ActionMemberClassroom {
 	private String maSV;
 	private String maLop = "Chưa có";
-	// private Mon nhungMonHoc[];
 	private DSMon nhungMonHoc = new DSMon();
-	private static int currentMaSV = 4;// thêm cả ở class cvht
-	{
+	private static int createdMaSV = 4;
+	static {
 		// Khởi tạo data
 		File file = new File("data/maSV.txt");
 		if (!file.exists()) {
 			try {
-				// khởi tạo mẫu
 				file.createNewFile();
-				SinhVien.writeFileCurrentMaSV(currentMaSV);
+				SinhVien.writeFileCurrentMaSV(createdMaSV);
 
 			} catch (IOException e) {
 
@@ -42,9 +40,9 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 	public SinhVien() {
 		super();
 		DSLop ds = new DSLop();
-		this.maLop = ds.suggest();
-		SinhVien.writeFileCurrentMaSV(SinhVien.currentMaSV + 1);
-		this.maSV = Integer.toString(SinhVien.currentMaSV);
+		this.maLop = ds.suggestMa();
+		SinhVien.writeFileCurrentMaSV(SinhVien.createdMaSV + 1);
+		this.maSV = Integer.toString(SinhVien.createdMaSV);
 
 	}
 
@@ -62,15 +60,6 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 
 	public void setMaSV(String maSV) {
 		this.maSV = maSV;
-	}
-
-	public void DanhSachMH() {
-
-	}
-
-	public String timMonHoc(String maMH) {
-		return maMH;
-
 	}
 
 	public String toStringShow() {
@@ -162,7 +151,7 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 			fReader = new FileReader("data/maSV.txt");
 
 			BufferedReader bufferreader = new BufferedReader(fReader);
-			SinhVien.currentMaSV = Integer.parseInt(bufferreader.readLine());
+			SinhVien.createdMaSV = Integer.parseInt(bufferreader.readLine());
 
 			bufferreader.close();
 
@@ -177,7 +166,7 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 
 	// ghi file
 	public static void writeFileCurrentMaSV(int currentMaSV) {
-		SinhVien.currentMaSV = currentMaSV;
+		SinhVien.createdMaSV = currentMaSV;
 		FileWriter fw;
 		try {
 			fw = new FileWriter("data/maSV.txt");
@@ -229,7 +218,7 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 			case 5:
 
 				DSLop ds = new DSLop();
-				setMaLop(ds.suggest());
+				setMaLop(ds.suggestMa());
 				break;
 			case 6:
 				nhungMonHoc.suaPhanTu(1);

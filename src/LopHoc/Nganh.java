@@ -42,7 +42,7 @@ public class Nganh {
 		hashMaNganhString += new SimpleDateFormat("ddMMyyyyHHmmss").format(date);
 		this.maNganh = hashMaNganhString;
 		DSKhoa dsKhoa = new DSKhoa();
-		this.maKhoa = dsKhoa.suggest();
+		this.maKhoa = dsKhoa.suggestMa();
 	}
 
 	public Nganh(String maNganh, String tenNganh, String maKhoa, String ngayThanhLap) {
@@ -58,12 +58,6 @@ public class Nganh {
 
 	public void setMaNganh(String maNganh) {
 		this.maNganh = maNganh;
-	}
-
-	public Nganh(String maNganh, String tenNganh) {
-		super();
-		this.maNganh = maNganh;
-		this.tenNganh = tenNganh;
 	}
 
 	public String getTenNganh() {

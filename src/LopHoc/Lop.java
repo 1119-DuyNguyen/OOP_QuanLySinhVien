@@ -28,7 +28,7 @@ public class Lop {
 		int numClassroom = Integer.parseInt(sc.nextLine());
 
 		DSNganh dsNganh = new DSNganh();
-		this.maNganh = dsNganh.suggest();
+		this.maNganh = dsNganh.suggestMa();
 		DSCVHT dsCVHT = new DSCVHT();
 		this.maCoVan = dsCVHT.suggest();
 		// generating maLop;
@@ -60,15 +60,6 @@ public class Lop {
 
 	public void setMaCoVan(String maCoVan) {
 		this.maCoVan = maCoVan;
-	}
-
-	public Lop(String maLop, String tenLop) {
-		this.maLop = maLop;
-		this.tenLop = tenLop;
-	}
-
-	public Lop(String maLop) {
-		this.maLop = maLop;
 	}
 
 	public String getMaLop() {

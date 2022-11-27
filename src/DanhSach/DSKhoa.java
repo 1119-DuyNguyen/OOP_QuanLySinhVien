@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import LopHoc.Khoa;
 
-public class DSKhoa extends DanhSach implements suggestDS {
+public class DSKhoa extends DanhSach implements suggestMaDS {
 
 	static Khoa[] dsKhoa = new Khoa[1];
 	private static String formatHeader = String.format("%-20s|%-20s|%s", "Mã khoa", "Tên khoa", "Ngày thành lập");
@@ -210,7 +210,7 @@ public class DSKhoa extends DanhSach implements suggestDS {
 			docFile();
 	}
 
-	public String suggest() {
+	public String suggestMa() {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n--------DANH SÁCH KHOA---------");
