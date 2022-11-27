@@ -8,9 +8,9 @@ import Mon.Mon;
 public class DSMon {
 //	private String[] stringTenMon = { "hệ điều hành", "cơ sở dữ liệu", "đại số tuyến tính", "giải tích số" };
 //	private String[] stringMaMon = { "HDH", "CSDL", "DSTT", "GTS" };
-	private Mon[] dsMon = new Mon[20];
+	private Mon[] dsMon = new Mon[1];
 //	private static final String urlFile = "data/Mon.txt";
-	private int size = 4;
+	private int size = 0;
 	private static String formatHeader = String.format("%-20s|%s", "Tên Môn", "Điểm");
 
 	public DSMon() {

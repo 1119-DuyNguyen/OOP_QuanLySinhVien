@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Mon {
 	private static Scanner sc = new Scanner(System.in);
 	private String tenMH;
-	private Diem diem;
+	private Diem diem = new Diem(-1f);
 
 	// private String maMH;
 	public Mon() {

@@ -500,6 +500,7 @@ public class SceneManager {
 			default:
 				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 			}
+			dsSV.setMonSV(position, dsMon);
 		}
 
 	}

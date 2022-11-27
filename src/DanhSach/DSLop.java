@@ -14,9 +14,8 @@ import LopHoc.Lop;
 public class DSLop extends DanhSach implements suggestDS {
 	private Lop[] dsLop = new Lop[20];
 	private static final String urlFile = "data/Lop.txt";
-	private int size = 4;
 	private static String formatHeader = String.format("%-20s|%-40s|%-20s|%s", "Mã Lớp", "Tên lớp", "Mã ngành",
-			"mã cố vấn");
+			"Mã cố vấn");
 
 	public DSLop() {
 		khoiTaoFile();
@@ -162,9 +161,11 @@ public class DSLop extends DanhSach implements suggestDS {
 	public String suggest() {
 		// TODO Auto-generated method stub
 		System.out.println("\n--------DANH SÁCH LỚP---------");
+		// hai khoảng trống vì vì "i."
+		System.out.print("  ");
 		System.out.println(formatHeader);
 		for (int i = 0; i < size; ++i) {
-			System.out.println(i + ". " + dsLop[i]);
+			System.out.println(i + "." + dsLop[i]);
 		}
 		System.out.println("\n--------------------------");
 		System.out.println("Nhập lựa chọn:");
@@ -241,11 +242,11 @@ public class DSLop extends DanhSach implements suggestDS {
 			try {
 				// khởi tạo mẫu
 				file.createNewFile();
-				String[] tenLop = { "Kỹ thuật phần mềm lớp 1", "Kỹ thuật phần mềm lớp 2" };
-				String[] maLop = { "DKP1211", "DKP1212" };
+				String[] tenLop = { "Kỹ thuật phần mềm lớp 1", "Kỹ thuật phần mềm lớp 2", "Quản trị kinh doanh lớp 1" };
+				String[] maLop = { "DKP1211", "DKP1212", "DKQ1211" };
 				for (int i = 0; i < tenLop.length; i++) {
 					if (dsLop[i] == null)
-						dsLop[i] = new Lop(maLop[i], tenLop[i], "CNTT26112022183352", "Nguyễn Thanh Duy");
+						dsLop[i] = new Lop(maLop[i], tenLop[i], "CNTT26112022183352", "0");
 				}
 				ghiFile();
 			} catch (IOException e) {

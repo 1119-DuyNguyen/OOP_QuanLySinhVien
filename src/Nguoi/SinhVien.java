@@ -16,7 +16,7 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 	private String maSV;
 	private String maLop = "Chưa có";
 	// private Mon nhungMonHoc[];
-	private DSMon nhungMonHoc;
+	private DSMon nhungMonHoc = new DSMon();
 	private static int currentMaSV = 5;// thêm cả ở class cvht
 	{
 		// Khởi tạo data
@@ -93,7 +93,11 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 			for (int i = 0; i < listMon.length; ++i) {
 				if (listMon[i] != null)
 					joinMonString[i] = listMon[i].toString();
+				// xóa null của joinMon
+				else
+					joinMonString[i] = "";
 			}
+
 			toStringMonString = String.join(",", joinMonString);
 		}
 		String formatString = String.format("%-6s|%s|%-20s|%s", maSV, super.toString(), maLop, toStringMonString);
@@ -123,9 +127,6 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 
 	@Override
 	public void xemLop() {
-		// TODO Auto-generated method stub
-//		String formatString = String.format("%-4s|%-20s |%-20s |%-20s |%-20s", maSV, this.getHoTen(), maLop.getTenLop(),
-//		maNganh.getTenNganh());
 		System.out.println("Thông tin chi tiết lớp học :");
 		DSLop ds = new DSLop();
 		ds.xuatDSTheoMaLop(this.maLop);
@@ -144,10 +145,14 @@ public class SinhVien extends Nguoi implements ActionMemberClassroom {
 			}
 
 		}
-		if (index != 0) {
+		// Nếu môn bị null => chưa khởi tạo
+		if (index == 0) {
+			return -1f;
+		} else {
+
 			dtb /= index;
+			return dtb;
 		}
-		return dtb;
 	}
 
 	// đọc file

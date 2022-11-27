@@ -3,3 +3,5 @@
 2     |Lê Nguyễn Minh Huy  |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  |DKP1212             |kỹ thuật lập trình  #9.00,OOP                 #10.00
 3     |Nguyễn Hữu Đạt      |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  |DKP1212             |Cơ sở dữ liệu       #3.00,OOP                 #5.00
 4     |Bùi Nguyên Minh Thư |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  |DKP1212             |kỹ thuật lập trình  #9.00,OOP                 #10.00
+8     |Vũ Phương Quỳnh     |Nữ   |123456789 |123456                                  |DKP1211             |
+9     |Mỹ Duyên            |nữ   |123456789 |Quạn 7                                  |DKP1212             |

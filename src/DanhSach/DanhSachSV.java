@@ -58,7 +58,9 @@ public class DanhSachSV extends DanhSach {
 				for (int index = 0; index < data.length; ++index) {
 					data[index] = data[index].trim();
 					if (data[index].contains(",")) {
+
 						String listMonString[] = data[index].split(",");
+
 						listMon = new Mon[listMonString.length];
 
 						for (int iMon = 0; iMon < listMonString.length; ++iMon) {
@@ -342,13 +344,20 @@ public class DanhSachSV extends DanhSach {
 		for (Lop lop : dsLop) {
 			if (lop == null)
 				continue;
+			System.out.println("Lớp :" + lop.getTenLop() + "(" + lop.getMaLop() + ") ");
+			System.out.println("Mã cố vấn quản lý : " + lop.getMaCoVan());
+			System.out.println("Thành viên của lớp :");
+			int count = 0;
+			System.out.println(formatHeader);
 			for (SinhVien sVien : dsSV) {
 				if (sVien == null)
 					continue;
 				if (sVien.getMaLop().equals(lop.getMaLop())) {
 					sVien.xuatThongTin();
+					++count;
 				}
 			}
+			System.out.println("Tổng thành viên : " + count);
 		}
 
 	}
