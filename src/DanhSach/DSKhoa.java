@@ -221,13 +221,21 @@ public class DSKhoa extends DanhSach implements suggestMaDS {
 		// System.out.println(size + "." + "Quay lại");
 		System.out.println("\n--------------------------");
 		System.out.print("Nhập lựa chọn:");
-		while (true) {
-			int choice = Integer.parseInt(sc.nextLine());
-			if (choice >= 0 && choice < size) {
-				return dsKhoa[choice].getMaKhoa();
+		while(true)
+		{
+		String choice = sc.nextLine();
+		if(choice.matches("\\d+"))
+		{
+			int choiceNum= Integer.parseInt(choice);
+
+			if (choiceNum >= 0 && choiceNum < size) {
+				return dsKhoa[choiceNum].getMaKhoa();
 			} else {
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}
+
 		}
+		}
+		
 	}
 }

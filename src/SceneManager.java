@@ -79,6 +79,8 @@ public class SceneManager {
 				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 			}
 			}
+
+		
 		}
 	}
 
@@ -95,8 +97,8 @@ public class SceneManager {
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
-		int choiceCV = Integer.parseInt(sc.nextLine());
-		switch (choiceCV) {
+		int choiceLop = Integer.parseInt(sc.nextLine());
+		switch (choiceLop) {
 		case 0:
 			return false;
 		case 1:
@@ -130,6 +132,7 @@ public class SceneManager {
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 
 		}
+		dsLop.ghiFile();
 		return true;
 
 	}
@@ -187,6 +190,9 @@ public class SceneManager {
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+	
+		dsCVHT.ghiFile();
+
 		return true;
 	}
 
@@ -307,6 +313,8 @@ public class SceneManager {
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+		dsSV.ghiFile();
+		
 		return true;
 	}
 
@@ -358,6 +366,8 @@ public class SceneManager {
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 
 		}
+		dsKhoa.ghiFile();
+		
 		return true;
 
 	}
@@ -403,12 +413,21 @@ public class SceneManager {
 		}
 		case 6:
 			System.out.println("Nhập số lượng cần thêm");
-			int n = Integer.parseInt(sc.nextLine());
-			dsNganh.nhapNPhanTu(n);
+			String choice = sc.nextLine();	
+			while(true)
+			{
+			if(choice.matches("\\d+"))
+			{
+				int choiceNum= Integer.parseInt(choice);
+				if(choiceNum>=0)
+				{dsNganh.nhapNPhanTu(choiceNum);}
+				break;
+			}}
 			break;
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+		dsNganh.ghiFile();
 		return true;
 	}
 
@@ -481,6 +500,7 @@ public class SceneManager {
 				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 			}
 			dsSV.setMonSV(position, dsMon);
+			
 		}
 
 	}

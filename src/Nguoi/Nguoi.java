@@ -19,11 +19,50 @@ public class Nguoi {
 
 	public Nguoi() {
 		System.out.print("Nhập họ tên: ");
+		while(true)
+		{
+		String regexLetter= "(\\p{L}|\\s)+";
 		this.hoTen = sc.nextLine();
-		System.out.print("Nhập giới tính: ");
-		this.gioiTinh = sc.nextLine();
+		if(this.hoTen.matches(regexLetter))
+			break;
+		else { System.out.println("Nhập không hợp lệ ");}
+		}
+		System.out.println("Nhập giới tính: ");
+		while(true)
+		{
+		String gioiTinh[]= {"","Nam","Nữ"};
+			System.out.println("1. Nam");
+		System.out.println("2. Nữ");
+		String choice = sc.nextLine();
+		if(choice.matches("\\d+"))
+		{
+			int choiceNum= Integer.parseInt(choice);
+			boolean isValid=false;
+			switch(choiceNum)
+			{
+			case 1,2: {
+				this.gioiTinh =  gioiTinh[choiceNum];	
+				isValid=true;
+				break;
+			}
+			default: {
+				System.out.println("Nhập không hợp lệ");
+			}
+			}
+			if(isValid) break;
+
+		}
+		else { System.out.println("Nhập không hợp lệ ");}
+		}
 		System.out.print("Nhập SĐT: ");
-		this.soDt = sc.nextLine();
+		while(true)
+		{
+			this.soDt = sc.nextLine();
+			if(this.soDt.matches("0[0-9]{9}")) {
+			break;
+			}
+			else { System.out.println("Nhập không hợp lệ ");}
+		}
 		System.out.print("Nhập địa chỉ: ");
 		this.diaChi = sc.nextLine();
 

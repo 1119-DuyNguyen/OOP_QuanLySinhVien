@@ -21,7 +21,14 @@ public class Nganh {
 		this.tenNganh = scanner.nextLine();
 		Date date = new Date();
 		this.ngayThanhLap = dateFormat.format(date);
-
+		while(true)
+		{
+		String regexLetter= "(\\p{L}|\\s)+";
+		this.tenNganh = scanner.nextLine();
+		if(this.tenNganh.matches(regexLetter))
+		break;
+		else { System.out.println("Nhập không hợp lệ ");}
+		}
 		// generating maNganh;
 		String hashMaNganhString = "";
 		boolean isSpace = true;
@@ -84,7 +91,7 @@ public class Nganh {
 
 	public void xuatThongTin() {
 		System.out.println("Mã ngành: " + this.maNganh);
-		System.out.println("Tên ngành: " + this.maNganh);
+		System.out.println("Tên ngành: " + this.tenNganh);
 		System.out.println("Ngày ngành thành lập :" + this.ngayThanhLap);
 	}
 }

@@ -310,6 +310,7 @@ public class DanhSachSV extends DanhSach {
 
 	public void setMonSV(int index, DSMon dsMon) {
 		dsSV[index].setNhungMonHoc(dsMon);
+		ghiFile();
 	}
 
 	public void thongKeDuDieuKienHocBong() {
