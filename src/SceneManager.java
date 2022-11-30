@@ -37,6 +37,7 @@ public class SceneManager {
 		while (con) {
 			showMenu();
 			System.out.print("Nhập lựa chọn: ");
+			try {
 			int choice = Integer.parseInt(sc.nextLine());
 			switch (choice) {
 			case 1:
@@ -79,8 +80,10 @@ public class SceneManager {
 				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 			}
 			}
-
-		
+			}
+			catch(Exception e) {
+				System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+			}
 		}
 	}
 
@@ -97,6 +100,7 @@ public class SceneManager {
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
+		try {
 		int choiceLop = Integer.parseInt(sc.nextLine());
 		switch (choiceLop) {
 		case 0:
@@ -132,9 +136,12 @@ public class SceneManager {
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 
 		}
+		}
+		catch(Exception e) {
+			System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+		}
 		dsLop.ghiFile();
 		return true;
-
 	}
 
 	private static boolean showMenuCVHT() {
@@ -151,6 +158,7 @@ public class SceneManager {
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
+		try {
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
 		case 0:
@@ -190,7 +198,9 @@ public class SceneManager {
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
-	
+		}catch(Exception e) {
+			System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+		}
 		dsCVHT.ghiFile();
 
 		return true;
@@ -215,6 +225,7 @@ public class SceneManager {
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
+		try {
 		int choiceSV = Integer.parseInt(sc.nextLine());
 		switch (choiceSV) {
 		case 0:
@@ -313,6 +324,9 @@ public class SceneManager {
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+		}catch(Exception e) {
+			System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+		}
 		dsSV.ghiFile();
 		
 		return true;
@@ -330,6 +344,7 @@ public class SceneManager {
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
+		try {
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
 		case 0:
@@ -366,8 +381,10 @@ public class SceneManager {
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 
 		}
+		}catch(Exception e) {
+			System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+		}
 		dsKhoa.ghiFile();
-		
 		return true;
 
 	}
@@ -384,6 +401,7 @@ public class SceneManager {
 		System.out.println("---------------------------");
 
 		System.out.print("Nhập lựa chọn: ");
+		try {
 		int choiceCV = Integer.parseInt(sc.nextLine());
 		switch (choiceCV) {
 		case 0:
@@ -427,6 +445,9 @@ public class SceneManager {
 		default:
 			System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 		}
+		}catch(Exception e) {
+			System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+		}
 		dsNganh.ghiFile();
 		return true;
 	}
@@ -458,6 +479,7 @@ public class SceneManager {
 			System.out.println("---------------------------");
 
 			System.out.print("Nhập lựa chọn: ");
+			try {
 			int choiceCV = Integer.parseInt(sc.nextLine());
 			switch (choiceCV) {
 			case 0:
@@ -499,8 +521,10 @@ public class SceneManager {
 			default:
 				System.out.println("Vui lòng nhập chính xác lựa chọn!!");
 			}
+			}catch(Exception e) {
+					System.out.println("\nVui lòng nhập chính xác lựa chọn!!");
+			}
 			dsSV.setMonSV(position, dsMon);
-			
 		}
 
 	}

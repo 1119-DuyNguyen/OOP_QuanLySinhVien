@@ -15,7 +15,7 @@ import Nguoi.CoVanHocTap;
 public class DSCVHT extends DanhSach {
 
 	private CoVanHocTap[] dsCVHT = new CoVanHocTap[2];
-	private static String formatHeader = String.format("%-20s|%-20s|%-5s|%-10s|%-40s", "mã cố vấn", "Họ và Tên", "GT",
+	private static String formatHeader = String.format("%-20s|%-20s|%-5s|%-10s|%-40s", "Mã cố vấn", "Họ và Tên", "GT",
 			"SĐT", "Địa chỉ");
 	private static final String urlFile = "data/CVHT.txt";
 
@@ -156,9 +156,14 @@ public class DSCVHT extends DanhSach {
 		// TODO Auto-generated method stub
 		int index = timKiemCVTheoMaSo(maSo);
 		if (index >= 0) {
-			dsCVHT[index] = new CoVanHocTap();
+			System.out.println("Thông tin cố vấn trước khi sửa:");
+			System.out.println(formatHeader);
+			dsCVHT[index].xuatThongTin();
+			dsCVHT[index].suaThongTin();
+
+			ghiFile();
 		} else
-			System.out.println(maSo + " không tồn tại!");
+			System.out.println("Không tồn tại mã số " + maSo);
 	}
 
 	@Override

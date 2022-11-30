@@ -103,7 +103,6 @@ public class Nguoi {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-
 		return String.format("%-20s|%-5s|%-10s|%-40s", this.hoTen, this.gioiTinh, this.soDt, this.diaChi);
 	}
 
