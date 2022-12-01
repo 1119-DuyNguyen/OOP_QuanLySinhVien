@@ -13,9 +13,18 @@ public class Khoa {
 	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	public Khoa() {
-		System.out.print("Nhập tên khoa: ");
 		Scanner scanner = new Scanner(System.in);
+		System.out.print("Nhập tên khoa: ");
+		while(true)
+		{
+		String regexLetter= "(\\p{L}|\\s)+";
 		this.tenKhoa = scanner.nextLine();
+		if(this.tenKhoa.matches(regexLetter))
+		break;
+		else { System.out.println("Nhập không hợp lệ ");}
+		}
+		
+		
 		Date date = new Date();
 		this.ngayThanhLap = dateFormat.format(date);
 		// generating maKhoa;

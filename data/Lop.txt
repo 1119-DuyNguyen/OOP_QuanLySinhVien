@@ -1,2 +1,3 @@
-DKP1212             |Kỹ thuật phần mềm lớp 2                 |CNTT26112022183352  |0
-DKQ1211             |Quản trị kinh doanh lớp 1               |CNTT26112022183352  |0
+KTPM20221           |Kỹ thuật phần mềm lớp 1                 |CNTT26112022183352  |0
+KTPM20222           |Kỹ thuật phần mềm lớp 2                 |CNTT26112022183352  |0
+QTKD20221           |Quản trị kinh doanh lớp 1               |CNTT26112022183352  |0

@@ -15,7 +15,7 @@ import Nguoi.CoVanHocTap;
 public class DSCVHT extends DanhSach {
 
 	private CoVanHocTap[] dsCVHT = new CoVanHocTap[2];
-	private static String formatHeader = String.format("%-20s|%-20s|%-5s|%-10s|%-40s", "mã cố vấn", "Họ và Tên", "GT",
+	private static String formatHeader = String.format("%-20s|%-20s|%-5s|%-10s|%-40s", "Mã cố vấn", "Họ và Tên", "GT",
 			"SĐT", "Địa chỉ");
 	private static final String urlFile = "data/CVHT.txt";
 
@@ -80,33 +80,8 @@ public class DSCVHT extends DanhSach {
 
 		for (int i = 0; i < dsCVHT.length; ++i) {
 
-			if (dsCVHT[i].getMaGV().equals(maSo)) {
+			if (dsCVHT[i].getMaCVHT().equals(maSo)) {
 				// sắp xếp lại thứ tự mảng
-				return i;
-			}
-
-		}
-		return -1;
-	}
-
-	public void timKiemCVTheoHoTen(String maSo) {
-
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getHoTen().equals(maSo)) {
-				// sắp xếp lại thứ tự mảng
-				System.out.println(dsCVHT[i]);
-			}
-
-		}
-	}
-
-	public int timKiemCVTheoMaCV(String maSo) {
-
-		for (int i = 0; i < dsCVHT.length; ++i) {
-
-			if (dsCVHT[i].getMaGV().equals(maSo)) {
-
 				return i;
 			}
 
@@ -120,7 +95,8 @@ public class DSCVHT extends DanhSach {
 			dsCVHT = Arrays.copyOf(dsCVHT, (size + 1) * 2);
 
 		dsCVHT[size] = new CoVanHocTap();
-		System.out.println("Ngành đã nhập là :");
+		// đã fix
+		System.out.println("Cố vấn đã nhập là :");
 		System.out.println(formatHeader);
 		System.out.println(dsCVHT[size++]);
 		ghiFile();
@@ -180,9 +156,14 @@ public class DSCVHT extends DanhSach {
 		// TODO Auto-generated method stub
 		int index = timKiemCVTheoMaSo(maSo);
 		if (index >= 0) {
-			dsCVHT[index] = new CoVanHocTap();
+			System.out.println("Thông tin cố vấn trước khi sửa:");
+			System.out.println(formatHeader);
+			dsCVHT[index].xuatThongTin();
+			dsCVHT[index].suaThongTin();
+
+			ghiFile();
 		} else
-			System.out.println(maSo + " không tồn tại!");
+			System.out.println("Không tồn tại mã số " + maSo);
 	}
 
 	@Override
@@ -240,13 +221,19 @@ public class DSCVHT extends DanhSach {
 		System.out.println("\n--------------------------");
 		System.out.print("Nhập lựa chọn:");
 		while (true) {
-			int choice = Integer.parseInt(sc.nextLine());
-			if (choice >= 0 && choice < size) {
-				return dsCVHT[choice].getMaGV();
-			} else {
+			try {
+				int choice = Integer.parseInt(sc.nextLine());
+				if (choice >= 0 && choice < size) {
+					return dsCVHT[choice].getMaCVHT();
+				} else {
+					System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}
 		}
+
 	}
 
 }

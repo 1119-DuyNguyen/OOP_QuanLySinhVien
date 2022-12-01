@@ -21,7 +21,14 @@ public class Nganh {
 		this.tenNganh = scanner.nextLine();
 		Date date = new Date();
 		this.ngayThanhLap = dateFormat.format(date);
-
+		while(true)
+		{
+		String regexLetter= "(\\p{L}|\\s)+";
+		this.tenNganh = scanner.nextLine();
+		if(this.tenNganh.matches(regexLetter))
+		break;
+		else { System.out.println("Nhập không hợp lệ ");}
+		}
 		// generating maNganh;
 		String hashMaNganhString = "";
 		boolean isSpace = true;
@@ -42,7 +49,7 @@ public class Nganh {
 		hashMaNganhString += new SimpleDateFormat("ddMMyyyyHHmmss").format(date);
 		this.maNganh = hashMaNganhString;
 		DSKhoa dsKhoa = new DSKhoa();
-		this.maKhoa = dsKhoa.suggest();
+		this.maKhoa = dsKhoa.suggestMa();
 	}
 
 	public Nganh(String maNganh, String tenNganh, String maKhoa, String ngayThanhLap) {
@@ -58,12 +65,6 @@ public class Nganh {
 
 	public void setMaNganh(String maNganh) {
 		this.maNganh = maNganh;
-	}
-
-	public Nganh(String maNganh, String tenNganh) {
-		super();
-		this.maNganh = maNganh;
-		this.tenNganh = tenNganh;
 	}
 
 	public String getTenNganh() {
@@ -90,7 +91,7 @@ public class Nganh {
 
 	public void xuatThongTin() {
 		System.out.println("Mã ngành: " + this.maNganh);
-		System.out.println("Tên ngành: " + this.maNganh);
+		System.out.println("Tên ngành: " + this.tenNganh);
 		System.out.println("Ngày ngành thành lập :" + this.ngayThanhLap);
 	}
 }

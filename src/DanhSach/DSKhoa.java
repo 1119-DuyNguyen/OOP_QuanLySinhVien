@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import LopHoc.Khoa;
 
-public class DSKhoa extends DanhSach implements suggestDS {
+public class DSKhoa extends DanhSach implements suggestMaDS {
 
 	static Khoa[] dsKhoa = new Khoa[1];
 	private static String formatHeader = String.format("%-20s|%-20s|%s", "Mã khoa", "Tên khoa", "Ngày thành lập");
@@ -210,7 +210,7 @@ public class DSKhoa extends DanhSach implements suggestDS {
 			docFile();
 	}
 
-	public String suggest() {
+	public String suggestMa() {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n--------DANH SÁCH KHOA---------");
@@ -221,13 +221,21 @@ public class DSKhoa extends DanhSach implements suggestDS {
 		// System.out.println(size + "." + "Quay lại");
 		System.out.println("\n--------------------------");
 		System.out.print("Nhập lựa chọn:");
-		while (true) {
-			int choice = Integer.parseInt(sc.nextLine());
-			if (choice >= 0 && choice < size) {
-				return dsKhoa[choice].getMaKhoa();
+		while(true)
+		{
+		String choice = sc.nextLine();
+		if(choice.matches("\\d+"))
+		{
+			int choiceNum= Integer.parseInt(choice);
+
+			if (choiceNum >= 0 && choiceNum < size) {
+				return dsKhoa[choiceNum].getMaKhoa();
 			} else {
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}
+
 		}
+		}
+		
 	}
 }

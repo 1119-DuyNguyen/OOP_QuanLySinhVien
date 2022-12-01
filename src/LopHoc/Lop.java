@@ -23,12 +23,27 @@ public class Lop {
 
 	public Lop() {
 		System.out.print("Nhập tên lớp: ");
+		while(true)
+		{
 		this.tenLop = sc.nextLine();
+		String regexLetter= "(\\p{L}|\\s)+";
+		if(this.tenLop.matches(regexLetter))
+		break;
+		else { System.out.println("Nhập không hợp lệ ");}
+		}
 		System.out.print("Lớp thứ mấy: ");
-		int numClassroom = Integer.parseInt(sc.nextLine());
+		String regexNum= "\\d+";
+		String numClassroom;
+		while(true)
+		{
+			numClassroom = sc.nextLine();
+			if(numClassroom.matches(regexNum)) break;
+			else { System.out.println("Nhập không hợp lệ ");}
+		}
+		
 
 		DSNganh dsNganh = new DSNganh();
-		this.maNganh = dsNganh.suggest();
+		this.maNganh = dsNganh.suggestMa();
 		DSCVHT dsCVHT = new DSCVHT();
 		this.maCoVan = dsCVHT.suggest();
 		// generating maLop;
@@ -62,15 +77,6 @@ public class Lop {
 		this.maCoVan = maCoVan;
 	}
 
-	public Lop(String maLop, String tenLop) {
-		this.maLop = maLop;
-		this.tenLop = tenLop;
-	}
-
-	public Lop(String maLop) {
-		this.maLop = maLop;
-	}
-
 	public String getMaLop() {
 		return maLop;
 	}
@@ -93,10 +99,14 @@ public class Lop {
 	}
 
 	public void thongtinLop() {
+		//lấy thông tin của ngành ra
 		DSNganh dsNganh = new DSNganh();
 		int position = dsNganh.timKiemNganhTheoMaNganh(this.maNganh);
+		//tìm kiếm vị trị của ngành và gán
 		Nganh nganh = dsNganh.getNganh(position);
+		//trả về vị trí của ngành
 		nganh.thongTinNganh();
+		//in ra
 		System.out.println("Mã lớp :" + this.maLop);
 		System.out.println("Tên lớp :" + this.tenLop);
 		System.out.println("Mã cố vấn :" + this.maCoVan);

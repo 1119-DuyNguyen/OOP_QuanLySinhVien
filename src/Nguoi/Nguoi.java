@@ -19,18 +19,29 @@ public class Nguoi {
 
 	public Nguoi() {
 		System.out.print("Nhập họ tên: ");
-		this.hoTen = sc.nextLine();
-		System.out.print("Nhập giới tính: ");
-		this.gioiTinh = sc.nextLine();
+		setHoTen(sc.nextLine());
+		System.out.println("Nhập giới tính: ");
+		setGioiTinh();
 		System.out.print("Nhập SĐT: ");
-		this.soDt = sc.nextLine();
+		setSoDt(sc.nextLine());
 		System.out.print("Nhập địa chỉ: ");
-		this.diaChi = sc.nextLine();
+		setDiaChi(sc.nextLine());
 
 	}
 
 	public void setHoTen(String hoTen) {
 		this.hoTen = hoTen;
+
+		while (true) {
+			String regexLetter = "(\\p{L}|\\s)+";
+			if (this.hoTen.matches(regexLetter))
+				break;
+			else {
+				System.out.println("Nhập không hợp lệ ");
+			}
+			this.hoTen = sc.nextLine();
+
+		}
 	}
 
 	public String getHoTen() {
@@ -53,18 +64,58 @@ public class Nguoi {
 		return soDt;
 	}
 
-	public void setGioiTinh(String gioiTinh) {
-		this.gioiTinh = gioiTinh;
+	public void setGioiTinh() {
+		String listGioiTinh[] = { "", "Nam", "Nữ" };
+
+		System.out.println("1. Nam");
+		System.out.println("2. Nữ");
+		while (true) {
+			try {
+				String choice = sc.nextLine();
+				if (choice.matches("\\d+")) {
+					int choiceNum = Integer.parseInt(choice);
+					boolean isValid = false;
+					switch (choiceNum) {
+					case 1, 2: {
+						this.gioiTinh = listGioiTinh[choiceNum];
+						isValid = true;
+						break;
+					}
+					default: {
+						System.out.println("Nhập không hợp lệ");
+					}
+					}
+					if (isValid)
+						break;
+
+				} else {
+					System.out.println("Nhập không hợp lệ ");
+				}
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
 	}
 
 	public void setSoDt(String soDt) {
 		this.soDt = soDt;
+		while (true) {
+
+			if (this.soDt.matches("0[0-9]{9}")) {
+				break;
+			} else {
+				System.out.println("Nhập không hợp lệ ");
+			}
+			this.soDt = sc.nextLine();
+		}
+
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-
 		return String.format("%-20s|%-5s|%-10s|%-40s", this.hoTen, this.gioiTinh, this.soDt, this.diaChi);
 	}
 

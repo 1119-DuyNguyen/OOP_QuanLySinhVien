@@ -11,9 +11,11 @@ import java.util.Arrays;
 
 import LopHoc.Lop;
 
-public class DSLop extends DanhSach implements suggestDS {
+public class DSLop extends DanhSach implements suggestMaDS {
+	//implement giống abstract nó sẽ có size của suggestMaDS trong danh sach
 	private Lop[] dsLop = new Lop[20];
 	private static final String urlFile = "data/Lop.txt";
+	//
 	private static String formatHeader = String.format("%-20s|%-40s|%-20s|%s", "Mã Lớp", "Tên lớp", "Mã ngành",
 			"Mã cố vấn");
 
@@ -26,6 +28,9 @@ public class DSLop extends DanhSach implements suggestDS {
 
 		for (int i = 0; i < size; ++i) {
 			if (dsLop[i].getMaLop().equals(MaLop)) {
+				//dsLop[i]== MaLop
+				//thì nó sẽ so sánh địa chỉ của dsLop i với giá trị của Mã lớp
+				//nên dùng equals để so sánh giá trị của dsLop với giá trị mã lớp
 				// System.out.println(dsLop[i].getMaLop());
 
 				return i;
@@ -39,7 +44,7 @@ public class DSLop extends DanhSach implements suggestDS {
 	public void them1PhanTu() {
 		if (size + 1 > dsLop.length)
 			dsLop = Arrays.copyOf(dsLop, (size + 1) * 2);
-
+		//nếu mà hết bộ nhớ thì hai dòng trên sẽ cấp phát lại
 		dsLop[size] = new Lop();
 		System.out.println("Lớp đã nhập là :");
 		System.out.println(formatHeader);
@@ -86,6 +91,7 @@ public class DSLop extends DanhSach implements suggestDS {
 		ghiFile();
 
 	}
+	//insertshort
 
 	@Override
 	public void xuatDanhSach() {
@@ -104,6 +110,7 @@ public class DSLop extends DanhSach implements suggestDS {
 		for (int i = 0; i < dsLop.length; ++i) {
 			if (dsLop[i] == null) {
 				continue;
+				//nếu mà vậy thì bên lên vòng lặp
 			}
 			if (dsLop[i].getMaCoVan().equals(maCV)) {
 
@@ -146,6 +153,7 @@ public class DSLop extends DanhSach implements suggestDS {
 		ghiFile();
 
 	}
+	//tìm thấy vị trí của nó , nhập lại mới lun cái mình đã tìm
 
 	@Override
 	public void nhapNPhanTu(int n) {
@@ -153,10 +161,13 @@ public class DSLop extends DanhSach implements suggestDS {
 		dsLop = new Lop[n];
 		size = 0;
 		themNPhanTu(n);
+		// nhập lại nguyên mảng mới lun, bỏ mảng cũ đi
 	}
 
 	@Override
-	public String suggest() {
+	// nhập lựa chọn thì nó trả về string mã lớp của lựa chọn và in ra( khác với tìm kiếm chỉ trả 
+	//về vị trí
+	public String suggestMa() {
 		// TODO Auto-generated method stub
 		System.out.println("\n--------DANH SÁCH LỚP---------");
 		// hai khoảng trống vì vì "i."
@@ -167,14 +178,22 @@ public class DSLop extends DanhSach implements suggestDS {
 		}
 		System.out.println("\n--------------------------");
 		System.out.print("Nhập lựa chọn:");
-		while (true) {
-			int choice = Integer.parseInt(sc.nextLine());
-			if (choice >= 0 && choice < size) {
-				return dsLop[choice].getMaLop();
+		while(true)
+		{
+		String choice = sc.nextLine();
+		if(choice.matches("\\d+"))
+		{
+			int choiceNum= Integer.parseInt(choice);
+
+			if (choiceNum >= 0 && choiceNum < size) {
+				return dsLop[choiceNum].getMaLop();
 			} else {
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}
+
 		}
+		}
+
 
 	}
 
@@ -241,7 +260,7 @@ public class DSLop extends DanhSach implements suggestDS {
 				// khởi tạo mẫu
 				file.createNewFile();
 				String[] tenLop = { "Kỹ thuật phần mềm lớp 1", "Kỹ thuật phần mềm lớp 2", "Quản trị kinh doanh lớp 1" };
-				String[] maLop = { "DKP1211", "DKP1212", "DKQ1211" };
+				String[] maLop = { "KTPM20221", "KTPM20222", "QTKD20221" };
 				for (int i = 0; i < tenLop.length; i++) {
 					if (dsLop[i] == null)
 						dsLop[i] = new Lop(maLop[i], tenLop[i], "CNTT26112022183352", "0");

@@ -12,32 +12,30 @@ import DanhSach.DSLop;
 
 public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	private String maCVHT;
-	private static int createdMaCVHT = 2;// thêm cả ở class cvht
-	{
+	private static int createdMaCVHT = 1;// mặc định có 2 cvht
+	static {
 		// Khởi tạo data
 		File file = new File("data/maCVHT.txt");
 		if (!file.exists()) {
 			try {
 				// khởi tạo mẫu
 				file.createNewFile();
-				CoVanHocTap.writeFileCurrentMaSV(createdMaCVHT);
+				CoVanHocTap.writeFileCurrentMaCVHT(createdMaCVHT);
 
 			} catch (IOException e) {
 
 				e.printStackTrace();
 			}
 		} else {
-
-			// ghiFile();
-			// CoVanHocTap.readFileCurrentMaSV();
-			readFileCurrentMaSV();
+			readFileCurrentMaCVHT();
 		}
 	}
 
 	public CoVanHocTap() {
 		super();
-		this.maCVHT = Integer.toString(createdMaCVHT++);
-		// none
+		CoVanHocTap.writeFileCurrentMaCVHT(createdMaCVHT + 1);
+		this.maCVHT = Integer.toString(createdMaCVHT);
+
 	}
 
 	public CoVanHocTap(String maCVHT, String hoTen, String gioiTinh, String soDt, String diaChi) {
@@ -45,17 +43,8 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 		this.maCVHT = maCVHT;
 	}
 
-	public String getMaGV() {
+	public String getMaCVHT() {
 		return maCVHT;
-	}
-
-	public void xuatThongTin() {
-		System.out.println();
-		System.out.println("Cố vấn học tập");
-//		super.xuatTT();
-		System.out.println("Mã cố vấn: " + maCVHT);
-		System.out.println("Lớp dạy: ");
-
 	}
 
 	@Override
@@ -74,8 +63,72 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 		return String.format("%-20s|%s", this.maCVHT, parentString);
 	}
 
+	public static void showMenu() {
+		System.out.println("\n-----------Sửa thông tin-----------");
+		System.out.println("0. Quay lại");
+		System.out.println("1. Sửa họ tên");
+		System.out.println("2. Sửa giới tính");
+		System.out.println("3. Sửa số điện thoại");
+		System.out.println("4. Sửa địa chỉ");
+		System.out.println("5. Sửa tất cả thông tin");
+		System.out.println("---------------------------");
+	}
+
+	public void suaThongTin() {
+		int chon = 0;
+		do {
+			showMenu();
+			System.out.print("Nhập lựa chọn: ");
+			try {
+				chon = Integer.parseInt(sc.nextLine());
+				switch (chon) {
+				case 0:
+					break;
+				case 1:
+					System.out.print("Nhập họ tên: ");
+					setHoTen(sc.nextLine());
+					break;
+				case 2:
+					System.out.print("Nhập giới tính: ");
+					setGioiTinh();
+					break;
+				case 3:
+
+					System.out.print("Nhập số điện thoại: ");
+					setSoDt(sc.nextLine());
+					break;
+				case 4:
+					System.out.print("Nhập địa chỉ: ");
+					setDiaChi(sc.nextLine());
+					break;
+				case 5:
+					System.out.print("Nhập họ tên: ");
+					setHoTen(sc.nextLine());
+					System.out.print("Nhập giới tính: ");
+					setGioiTinh();
+					System.out.print("Nhập số điện thoại: ");
+					setSoDt(sc.nextLine());
+					System.out.print("Nhập địa chỉ: ");
+					setDiaChi(sc.nextLine());
+					break;
+				default:
+					System.out.println("Lựa chọn không hợp lệ ! Hãy chọn lại");
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println("Lựa chọn không hợp lệ ! Hãy chọn lại");
+			}
+		} while (chon <= 5 && chon > 0);
+
+	}
+
+	public void xuatThongTin() {
+		String formatString = String.format("%-20s|%s", maCVHT, super.toString());
+		System.out.println(formatString);
+	}
+
 	// đọc file
-	private static void readFileCurrentMaSV() {
+	private static void readFileCurrentMaCVHT() {
 		FileReader fReader;
 		try {
 			fReader = new FileReader("data/maCVHT.txt");
@@ -95,7 +148,7 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 	}
 
 	// ghi file
-	public static void writeFileCurrentMaSV(int createdMaCVHT) {
+	public static void writeFileCurrentMaCVHT(int createdMaCVHT) {
 		CoVanHocTap.createdMaCVHT = createdMaCVHT;
 		FileWriter fw;
 		try {

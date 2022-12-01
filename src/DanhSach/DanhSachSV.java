@@ -167,6 +167,7 @@ public class DanhSachSV extends DanhSach {
 			dsSV = Arrays.copyOf(dsSV, (size + 1) * 2);
 
 		dsSV[size++] = new SinhVien();
+		System.out.println("here");
 		System.out.println("Sinh viên đã nhập là :");
 		System.out.println(formatHeader);
 		dsSV[size - 1].xuatThongTin();
@@ -310,6 +311,7 @@ public class DanhSachSV extends DanhSach {
 
 	public void setMonSV(int index, DSMon dsMon) {
 		dsSV[index].setNhungMonHoc(dsMon);
+		ghiFile();
 	}
 
 	public void thongKeDuDieuKienHocBong() {
