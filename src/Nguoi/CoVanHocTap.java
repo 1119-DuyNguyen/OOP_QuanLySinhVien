@@ -73,60 +73,60 @@ public class CoVanHocTap extends Nguoi implements ActionMemberClassroom {
 		System.out.println("5. Sửa tất cả thông tin");
 		System.out.println("---------------------------");
 	}
-	
+
 	public void suaThongTin() {
 		int chon = 0;
 		do {
 			showMenu();
 			System.out.print("Nhập lựa chọn: ");
 			try {
-			chon = Integer.parseInt(sc.nextLine());
-			switch (chon) {
-			case 0:
-				break;
-			case 1:
-				System.out.print("Nhập họ tên: ");
-				setHoTen(sc.nextLine());
-				break;
-			case 2:
-				System.out.print("Nhập giới tính: ");
-				setGioiTinh(sc.nextLine());
-				break;
-			case 3:
+				chon = Integer.parseInt(sc.nextLine());
+				switch (chon) {
+				case 0:
+					break;
+				case 1:
+					System.out.print("Nhập họ tên: ");
+					setHoTen(sc.nextLine());
+					break;
+				case 2:
+					System.out.print("Nhập giới tính: ");
+					setGioiTinh();
+					break;
+				case 3:
 
-				System.out.print("Nhập số điện thoại: ");
-				setSoDt(sc.nextLine());
-				break;
-			case 4:
-				System.out.print("Nhập địa chỉ: ");
-				setDiaChi(sc.nextLine());
-				break;
-			case 5:
-				System.out.print("Nhập họ tên: ");
-				setHoTen(sc.nextLine());
-				System.out.print("Nhập giới tính: ");
-				setGioiTinh(sc.nextLine());
-				System.out.print("Nhập số điện thoại: ");
-				setSoDt(sc.nextLine());
-				System.out.print("Nhập địa chỉ: ");
-				setDiaChi(sc.nextLine());
-				break;
-			default:
+					System.out.print("Nhập số điện thoại: ");
+					setSoDt(sc.nextLine());
+					break;
+				case 4:
+					System.out.print("Nhập địa chỉ: ");
+					setDiaChi(sc.nextLine());
+					break;
+				case 5:
+					System.out.print("Nhập họ tên: ");
+					setHoTen(sc.nextLine());
+					System.out.print("Nhập giới tính: ");
+					setGioiTinh();
+					System.out.print("Nhập số điện thoại: ");
+					setSoDt(sc.nextLine());
+					System.out.print("Nhập địa chỉ: ");
+					setDiaChi(sc.nextLine());
+					break;
+				default:
+					System.out.println("Lựa chọn không hợp lệ ! Hãy chọn lại");
+					break;
+				}
+			} catch (Exception e) {
 				System.out.println("Lựa chọn không hợp lệ ! Hãy chọn lại");
-				break;
 			}
-			}catch (Exception e) {
-				System.out.println("Lựa chọn không hợp lệ ! Hãy chọn lại");
-			}
-			} while (chon <= 5 && chon > 0);
-		
+		} while (chon <= 5 && chon > 0);
+
 	}
-	
+
 	public void xuatThongTin() {
 		String formatString = String.format("%-20s|%s", maCVHT, super.toString());
 		System.out.println(formatString);
 	}
-	
+
 	// đọc file
 	private static void readFileCurrentMaCVHT() {
 		FileReader fReader;

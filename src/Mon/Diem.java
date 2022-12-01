@@ -25,14 +25,20 @@ public class Diem {
 	public void nhapDiem() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Nhập điểm: ");
-		float choice = Float.parseFloat(sc.nextLine());
+
 		boolean isNotValid = true;
 		do {
-			if (choice < 0f && choice > 10f) {
+			try {
+				float choice = Float.parseFloat(sc.nextLine());
+				if (choice < 0f || choice > 10f) {
+					System.out.println("Giá trị không hợp lệ! Vui lòng nhập lại");
+				} else {
+					isNotValid = false;
+					this.diemHe10 = choice;
+				}
+			} catch (Exception e) {
 				System.out.println("Giá trị không hợp lệ! Vui lòng nhập lại");
-			} else {
-				isNotValid = false;
-				this.diemHe10 = choice;
+				// TODO: handle exception
 			}
 
 		} while (isNotValid);

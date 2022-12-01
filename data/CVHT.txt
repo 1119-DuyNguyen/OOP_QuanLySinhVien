@@ -1,3 +1,2 @@
-0                   |Nguyễn Thanh Di     |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  
-1                   |Võ Khương Di        |Nam  |0123456788|273 An Dương Vương – Phường 3 – Quận 5  
-2                   |Nguyễn Hữu Đạt      |Nam  |0123456789|273 An Dương Vương – Phường 3 – Quận 5  
+0                   |Nguyễn Thanh Duy    |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  
+1                   |Võ Khương Duy       |Nam  |123456789 |273 An Dương Vương – Phường 3 – Quận 5  

@@ -221,13 +221,19 @@ public class DSCVHT extends DanhSach {
 		System.out.println("\n--------------------------");
 		System.out.print("Nhập lựa chọn:");
 		while (true) {
-			int choice = Integer.parseInt(sc.nextLine());
-			if (choice >= 0 && choice < size) {
-				return dsCVHT[choice].getMaCVHT();
-			} else {
+			try {
+				int choice = Integer.parseInt(sc.nextLine());
+				if (choice >= 0 && choice < size) {
+					return dsCVHT[choice].getMaCVHT();
+				} else {
+					System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 				System.out.println("Lựa chọn không hợp lệ ! Vui lòng nhập lại");
 			}
 		}
+
 	}
 
 }
