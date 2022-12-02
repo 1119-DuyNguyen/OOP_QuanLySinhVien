@@ -23,24 +23,26 @@ public class Lop {
 
 	public Lop() {
 		System.out.print("Nhập tên lớp: ");
-		while(true)
-		{
-		this.tenLop = sc.nextLine();
-		String regexLetter= "(\\p{L}|\\s)+";
-		if(this.tenLop.matches(regexLetter))
-		break;
-		else { System.out.println("Nhập không hợp lệ ");}
+		while (true) {
+			this.tenLop = sc.nextLine();
+			String regexLetter = "\\p{L}+";
+			if (this.tenLop.matches(regexLetter))
+				break;
+			else {
+				System.out.println("Nhập không hợp lệ ");
+			}
 		}
 		System.out.print("Lớp thứ mấy: ");
-		String regexNum= "\\d+";
+		String regexNum = "\\d+";
 		String numClassroom;
-		while(true)
-		{
+		while (true) {
 			numClassroom = sc.nextLine();
-			if(numClassroom.matches(regexNum)) break;
-			else { System.out.println("Nhập không hợp lệ ");}
+			if (numClassroom.matches(regexNum))
+				break;
+			else {
+				System.out.println("Nhập không hợp lệ ");
+			}
 		}
-		
 
 		DSNganh dsNganh = new DSNganh();
 		this.maNganh = dsNganh.suggestMa();
@@ -99,14 +101,14 @@ public class Lop {
 	}
 
 	public void thongtinLop() {
-		//lấy thông tin của ngành ra
+		// lấy thông tin của ngành ra
 		DSNganh dsNganh = new DSNganh();
 		int position = dsNganh.timKiemNganhTheoMaNganh(this.maNganh);
-		//tìm kiếm vị trị của ngành và gán
+		// tìm kiếm vị trị của ngành và gán
 		Nganh nganh = dsNganh.getNganh(position);
-		//trả về vị trí của ngành
+		// trả về vị trí của ngành
 		nganh.thongTinNganh();
-		//in ra
+		// in ra
 		System.out.println("Mã lớp :" + this.maLop);
 		System.out.println("Tên lớp :" + this.tenLop);
 		System.out.println("Mã cố vấn :" + this.maCoVan);
